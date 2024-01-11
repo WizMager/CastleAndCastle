@@ -1,5 +1,6 @@
 ﻿using Ecs.Core.Bootstrap;
 using Ecs.Extensions;
+using Ecs.Game.Systems.Initialize;
 using Ecs.Installers.Game.Feature;
 using Ecs.Utils.Groups.Impl;
 using JCMG.EntitasRedux.Commands;
@@ -39,7 +40,7 @@ namespace Ecs.Installers.Game
 
 		private void BindSystems()
 		{
-			
+			Container.BindInterfacesTo<GameInitializeSystem>().AsSingle();
 		}
 		
 		private void BindEventSystems()

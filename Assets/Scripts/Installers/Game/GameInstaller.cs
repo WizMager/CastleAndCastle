@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using Game.Ui;
+using Zenject;
 
 namespace Installers.Game
 {
@@ -6,28 +7,22 @@ namespace Installers.Game
     {
         public override void InstallBindings()
         {
-            BindInitializeSystems();
+            DeclareSignals();
             BindWindows();
-            BindSystems();
             BindServices();
         }
 
-        private void BindInitializeSystems()
+        private void DeclareSignals()
         {
-            
-        }
-        
-        private void BindSystems()
-        {
-            
-        }
-        
-        private void BindServices()
-        {
-            
+            Container.DeclareSignal<GameWindow>();
         }
 
         private void BindWindows()
+        {
+            Container.BindInterfacesAndSelfTo<GameWindow>().AsSingle();
+        }
+        
+        private void BindServices()
         {
             
         }
