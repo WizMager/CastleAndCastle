@@ -9,10 +9,7 @@ namespace Installers.Splash
         {
             MainThreadDispatcher.Initialize();
 
-            Container.Bind<SplashManager>()
-                .FromNewComponentOnNewGameObject()
-                .AsSingle()
-                .NonLazy();
+            Container.BindInterfacesAndSelfTo<SplashManager>().AsSingle().NonLazy();
         }
     }
 }

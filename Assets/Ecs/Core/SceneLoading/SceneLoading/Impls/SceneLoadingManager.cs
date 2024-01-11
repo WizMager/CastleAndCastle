@@ -45,7 +45,7 @@ namespace Ecs.Core.SceneLoading.SceneLoading.Impls
             _processor
                 .AddProcess(new OpenLoadingWindowProcess(_signalBus))
                 .AddProcess(new LoadingProcess(ELevelName.GAME, LoadSceneMode.Additive))
-                .AddProcess(new LoadingProcess(ELevelName.FirstLevel, LoadSceneMode.Additive))
+                //.AddProcess(new LoadingProcess(ELevelName.FirstLevel, LoadSceneMode.Additive))
                 .AddProcess(new SetActiveSceneProcess(ELevelName.GAME))
                 .AddProcess(new UnloadProcess(ELevelName.SPLASH))
                 .AddProcess(new RunContextProcess("GameContext"))
