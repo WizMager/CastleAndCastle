@@ -1,4 +1,4 @@
-﻿using Core.SceneLoading;
+﻿using Ecs.Core.SceneLoading.SceneLoadingManager;
 
 namespace Ecs.Core.SceneLoading.SceneLoading
 {

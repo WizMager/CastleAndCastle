@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Core.SceneLoading;
+using Ecs.Core.SceneLoading.SceneLoadingManager;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,12 +11,18 @@ namespace Core.LoadingProcessor.Impls
     {
         public float Progress => _operation?.progress ?? 0;
 
-        private readonly ELevelName _levelName;
+        private readonly string _levelName;
         private readonly LoadSceneMode _mode;
         private AsyncOperation _operation;
         private Action _complete;
 
         public LoadingProcess(ELevelName levelName, LoadSceneMode mode)
+        {
+            _levelName = levelName.ToString();
+            _mode = mode;
+        }
+        
+        public LoadingProcess(string levelName, LoadSceneMode mode)
         {
             _levelName = levelName;
             _mode = mode;
@@ -25,7 +31,7 @@ namespace Core.LoadingProcessor.Impls
         public override void Do(Action complete)
         {
             _complete = complete;
-            _operation = SceneManager.LoadSceneAsync(_levelName.ToString(), _mode);
+            _operation = SceneManager.LoadSceneAsync(_levelName, _mode);
             Observable.FromCoroutine(() => VerifySceneLoad(_operation))
                 .Subscribe(_ => _complete());
         }

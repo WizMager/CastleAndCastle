@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.SceneLoading;
+using Ecs.Core.SceneLoading.SceneLoadingManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +7,15 @@ namespace Core.LoadingProcessor.Impls
 {
     public class UnloadProcess : Process
     {
-        private readonly ELevelName _levelName;
+        private readonly string _levelName;
         private Action _complete;
 
         public UnloadProcess(ELevelName levelName)
+        {
+            _levelName = levelName.ToString();
+        }
+        
+        public UnloadProcess(string levelName)
         {
             _levelName = levelName;
         }
@@ -18,7 +23,7 @@ namespace Core.LoadingProcessor.Impls
         public override void Do(Action complete)
         {
             _complete = complete;
-            var unloadSceneAsync = SceneManager.UnloadSceneAsync(_levelName.ToString());
+            var unloadSceneAsync = SceneManager.UnloadSceneAsync(_levelName);
             unloadSceneAsync.completed += OnUnloadSceneCompleted;
         }
 

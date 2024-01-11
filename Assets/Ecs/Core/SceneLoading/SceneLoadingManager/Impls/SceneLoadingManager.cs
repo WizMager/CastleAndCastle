@@ -1,23 +1,30 @@
 ﻿using Core.LoadingProcessor.Impls;
-using Core.SceneLoading;
+using Ecs.Core.SceneLoading.SceneLoading;
+using Game.Services.LevelService;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Ecs.Core.SceneLoading.SceneLoading.Impls
+namespace Ecs.Core.SceneLoading.SceneLoadingManager.Impls
 {
     public class SceneLoadingManager : ISceneLoadingManager
     {
         private readonly SignalBus _signalBus;
         private LoadingProcessor _processor;
-        private ELevelName _currentLevel;
+        private readonly ILevelService _levelService;
 
-        public SceneLoadingManager(SignalBus signalBus)
+        public SceneLoadingManager(
+            SignalBus signalBus,
+            ILevelService levelService
+        )
         {
             _signalBus = signalBus;
+            _levelService = levelService;
         }
 
         public void LoadGameLevel(ELevelName levelName)
         {
+            var currentLevel = _levelService.GetCurrentLevel();
+            
             _processor = new LoadingProcessor();
             _processor
                 .AddProcess(new OpenLoadingWindowProcess(_signalBus))
@@ -25,12 +32,12 @@ namespace Ecs.Core.SceneLoading.SceneLoading.Impls
                 .AddProcess(new LoadingProcess(levelName, LoadSceneMode.Additive))
                 .AddProcess(new SetActiveSceneProcess(ELevelName.GAME))
                 .AddProcess(new UnloadProcess(ELevelName.GAME));
-                
-            if (!string.IsNullOrWhiteSpace(_currentLevel.ToString()))
+            
+            if (!string.IsNullOrWhiteSpace(currentLevel))
             {
-                var lastScene = SceneManager.GetSceneByName(_currentLevel.ToString());
+                var lastScene = SceneManager.GetSceneByName(currentLevel);
                 if(lastScene.IsValid() && lastScene.isLoaded)
-                    _processor.AddProcess(new UnloadProcess(_currentLevel));
+                    _processor.AddProcess(new UnloadProcess(currentLevel));
             }
             
             _processor.AddProcess(new RunContextProcess("LevelContext"))
@@ -41,18 +48,19 @@ namespace Ecs.Core.SceneLoading.SceneLoading.Impls
 
         public void LoadGameFromSplash()
         {
+            var currentLevel = _levelService.GetCurrentLevel();
+            
             _processor = new LoadingProcessor();
             _processor
                 .AddProcess(new OpenLoadingWindowProcess(_signalBus))
                 .AddProcess(new LoadingProcess(ELevelName.GAME, LoadSceneMode.Additive))
-                //.AddProcess(new LoadingProcess(ELevelName.FirstLevel, LoadSceneMode.Additive))
+                .AddProcess(new LoadingProcess(currentLevel, LoadSceneMode.Additive))
                 .AddProcess(new SetActiveSceneProcess(ELevelName.GAME))
                 .AddProcess(new UnloadProcess(ELevelName.SPLASH))
                 .AddProcess(new RunContextProcess("GameContext"))
                 .AddProcess(new WaitUpdateProcess(4))
                 .AddProcess(new ProjectWindowBack(_signalBus))
                 .DoProcess();
-            _currentLevel = ELevelName.FirstLevel;
         }
 
         public float GetProgress()
