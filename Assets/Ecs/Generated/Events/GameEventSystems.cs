@@ -14,5 +14,7 @@ public sealed class GameEventSystems : Feature
 	public GameEventSystems(IContext<GameEntity> context)
 	{
 		Add(new GameDestroyedEventSystem(context)); // priority: 0
+		Add(new PositionEventSystem(context)); // priority: 0
+		Add(new RotationEventSystem(context)); // priority: 0
 	}
 }

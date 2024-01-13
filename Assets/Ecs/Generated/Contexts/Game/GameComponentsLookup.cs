@@ -15,29 +15,65 @@ public static class GameComponentsLookup
 {
 	public const int Destroyed = 0;
 	public const int Uid = 1;
-	public const int GameDestroyedListener = 2;
+	public const int Instantiate = 2;
+	public const int Position = 3;
+	public const int Prefab = 4;
+	public const int Rotation = 5;
+	public const int Transform = 6;
+	public const int PlayerUnit = 7;
+	public const int UnitData = 8;
+	public const int GameDestroyedListener = 9;
+	public const int PositionListener = 10;
+	public const int RotationListener = 11;
 
-	public const int TotalComponents = 3;
+	public const int TotalComponents = 12;
 
 	public static readonly string[] ComponentNames =
 	{
 		"Destroyed",
 		"Uid",
-		"GameDestroyedListener"
+		"Instantiate",
+		"Position",
+		"Prefab",
+		"Rotation",
+		"Transform",
+		"PlayerUnit",
+		"UnitData",
+		"GameDestroyedListener",
+		"PositionListener",
+		"RotationListener"
 	};
 
 	public static readonly System.Type[] ComponentTypes =
 	{
 		typeof(Ecs.Common.Components.DestroyedComponent),
 		typeof(Ecs.Common.Components.UidComponent),
-		typeof(GameDestroyedListenerComponent)
+		typeof(Ecs.Game.Components.InstantiateComponent),
+		typeof(Ecs.Game.Components.PositionComponent),
+		typeof(Ecs.Game.Components.PrefabComponent),
+		typeof(Ecs.Game.Components.RotationComponent),
+		typeof(Ecs.Game.Components.TransformComponent),
+		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
+		typeof(Ecs.Game.Components.Units.UnitDataComponent),
+		typeof(GameDestroyedListenerComponent),
+		typeof(PositionListenerComponent),
+		typeof(RotationListenerComponent)
 	};
 
 	public static readonly Dictionary<Type, int> ComponentTypeToIndex = new Dictionary<Type, int>
 	{
 		{ typeof(Ecs.Common.Components.DestroyedComponent), 0 },
 		{ typeof(Ecs.Common.Components.UidComponent), 1 },
-		{ typeof(GameDestroyedListenerComponent), 2 }
+		{ typeof(Ecs.Game.Components.InstantiateComponent), 2 },
+		{ typeof(Ecs.Game.Components.PositionComponent), 3 },
+		{ typeof(Ecs.Game.Components.PrefabComponent), 4 },
+		{ typeof(Ecs.Game.Components.RotationComponent), 5 },
+		{ typeof(Ecs.Game.Components.TransformComponent), 6 },
+		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 7 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 8 },
+		{ typeof(GameDestroyedListenerComponent), 9 },
+		{ typeof(PositionListenerComponent), 10 },
+		{ typeof(RotationListenerComponent), 11 }
 	};
 
 	/// <summary>

@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.alelievr.node-graph-processor": "https://github.com/alelievr/NodeGraphProcessor.git#upm",
+    "com.elestrago.simpleui": "https://gitlab.com/elestrago63/simpleui.git#upm",
+    "com.generator.common": "https://gitlab.com/elestrago63/generator-common.git#upm",
+    "com.jeffcampbellmakesgames.entitasredux": "https://gitlab.com/nazgull30/pdentitasredux.git#upm-2.2.9",
+    "com.jeffcampbellmakesgames.genesis": "https://gitlab.com/nazgull30/pdgenesis.git#upm-1.2.0",
+    "com.playdarium.unirx": "https://gitlab.com/nazgull30/unirxplaydarium.git#upm",
+    "com.playdarium.zenject": "https://gitlab.com/nazgull30/zenjectplaydarium.git#upm",
+    "com.unity.ai.navigation": "1.0.0-exp.4",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.ide.rider": "3.0.27",
@@ -40,13 +48,6 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.playdarium.zenject": "https://gitlab.com/nazgull30/zenjectplaydarium.git#upm",
-    "com.playdarium.unirx": "https://gitlab.com/nazgull30/unirxplaydarium.git#upm",
-    "com.jeffcampbellmakesgames.entitasredux": "https://gitlab.com/nazgull30/pdentitasredux.git#upm-2.2.9",
-    "com.jeffcampbellmakesgames.genesis": "https://gitlab.com/nazgull30/pdgenesis.git#upm-1.2.0",
-    "com.elestrago.simpleui": "https://gitlab.com/elestrago63/simpleui.git#upm",
-    "com.alelievr.node-graph-processor": "https://github.com/alelievr/NodeGraphProcessor.git#upm",
-    "com.generator.common": "https://gitlab.com/elestrago63/generator-common.git#upm"
+    "com.unity.modules.xr": "1.0.0"
   }
 }
