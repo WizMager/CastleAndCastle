@@ -1,4 +1,5 @@
-﻿using Ecs.Core.Bootstrap;
+﻿using Ecs.Commands.Systems;
+using Ecs.Core.Bootstrap;
 using Ecs.Extensions;
 using Ecs.Game.Systems;
 using Ecs.Game.Systems.Initialize;
@@ -48,6 +49,7 @@ namespace Ecs.Installers.Game
 			//Other
 			Container.BindInterfacesTo<InstantiateSystem>().AsSingle();
 			Container.BindInterfacesTo<SearchTargetSystem>().AsSingle();
+			Container.BindInterfacesTo<SpawnUnitSystem>().AsSingle();
 		}
 		
 		private void BindEventSystems()
