@@ -478,6 +478,7 @@ MonoBehaviour:
   damage: 2
   attackSpeed: 1
   attackRange: 5
+  aggroRadius: 10
   navMeshAgent: {fileID: 7045404726589612845}
 --- !u!195 &7045404726589612845
 NavMeshAgent:

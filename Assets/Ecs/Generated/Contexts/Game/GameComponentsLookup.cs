@@ -20,15 +20,18 @@ public static class GameComponentsLookup
 	public const int Position = 4;
 	public const int Rotation = 5;
 	public const int Transform = 6;
-	public const int DestinationPoint = 7;
-	public const int PlayerUnit = 8;
-	public const int UnitData = 9;
-	public const int UnitType = 10;
-	public const int GameDestroyedListener = 11;
-	public const int PositionListener = 12;
-	public const int RotationListener = 13;
+	public const int AggroRadius = 7;
+	public const int DestinationPoint = 8;
+	public const int PlayerUnit = 9;
+	public const int Target = 10;
+	public const int UnitData = 11;
+	public const int UnitType = 12;
+	public const int GameDestroyedListener = 13;
+	public const int PositionListener = 14;
+	public const int RotationListener = 15;
+	public const int TargetListener = 16;
 
-	public const int TotalComponents = 14;
+	public const int TotalComponents = 17;
 
 	public static readonly string[] ComponentNames =
 	{
@@ -39,13 +42,16 @@ public static class GameComponentsLookup
 		"Position",
 		"Rotation",
 		"Transform",
+		"AggroRadius",
 		"DestinationPoint",
 		"PlayerUnit",
+		"Target",
 		"UnitData",
 		"UnitType",
 		"GameDestroyedListener",
 		"PositionListener",
-		"RotationListener"
+		"RotationListener",
+		"TargetListener"
 	};
 
 	public static readonly System.Type[] ComponentTypes =
@@ -57,13 +63,16 @@ public static class GameComponentsLookup
 		typeof(Ecs.Game.Components.PositionComponent),
 		typeof(Ecs.Game.Components.RotationComponent),
 		typeof(Ecs.Game.Components.TransformComponent),
+		typeof(Ecs.Game.Components.Units.AggroRadiusComponent),
 		typeof(Ecs.Game.Components.Units.DestinationPointComponent),
 		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
+		typeof(Ecs.Game.Components.Units.TargetComponent),
 		typeof(Ecs.Game.Components.Units.UnitDataComponent),
 		typeof(Ecs.Game.Components.UnitTypeComponent),
 		typeof(GameDestroyedListenerComponent),
 		typeof(PositionListenerComponent),
-		typeof(RotationListenerComponent)
+		typeof(RotationListenerComponent),
+		typeof(TargetListenerComponent)
 	};
 
 	public static readonly Dictionary<Type, int> ComponentTypeToIndex = new Dictionary<Type, int>
@@ -75,13 +84,16 @@ public static class GameComponentsLookup
 		{ typeof(Ecs.Game.Components.PositionComponent), 4 },
 		{ typeof(Ecs.Game.Components.RotationComponent), 5 },
 		{ typeof(Ecs.Game.Components.TransformComponent), 6 },
-		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 7 },
-		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 8 },
-		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 9 },
-		{ typeof(Ecs.Game.Components.UnitTypeComponent), 10 },
-		{ typeof(GameDestroyedListenerComponent), 11 },
-		{ typeof(PositionListenerComponent), 12 },
-		{ typeof(RotationListenerComponent), 13 }
+		{ typeof(Ecs.Game.Components.Units.AggroRadiusComponent), 7 },
+		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 8 },
+		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 9 },
+		{ typeof(Ecs.Game.Components.Units.TargetComponent), 10 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 11 },
+		{ typeof(Ecs.Game.Components.UnitTypeComponent), 12 },
+		{ typeof(GameDestroyedListenerComponent), 13 },
+		{ typeof(PositionListenerComponent), 14 },
+		{ typeof(RotationListenerComponent), 15 },
+		{ typeof(TargetListenerComponent), 16 }
 	};
 
 	/// <summary>

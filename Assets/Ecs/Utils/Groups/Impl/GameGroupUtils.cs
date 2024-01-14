@@ -36,7 +36,7 @@ namespace Ecs.Utils.Groups.Impl
         {
             Func<GameEntity, bool> baseFilter = isPlayerUnits
                 ? e => e.IsPlayerUnit && e.HasUnitData && e.HasUnitType && !e.IsDestroyed
-                : e => e.HasUnitData && e.HasUnitType && !e.IsDestroyed;
+                : e => e.IsPlayerUnit && e.HasUnitData && e.HasUnitType && !e.IsDestroyed;
             
             return GetEntities(out buffer, _units, baseFilter, filter);
         }

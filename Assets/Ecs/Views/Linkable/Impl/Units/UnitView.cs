@@ -13,6 +13,7 @@ namespace Ecs.Views.Linkable.Impl.Units
         [SerializeField] private float damage;
         [SerializeField] private float attackSpeed;
         [SerializeField] private float attackRange;
+        [SerializeField] private float aggroRadius;
 
         [Space] 
         [Header("Components")] 
@@ -23,6 +24,7 @@ namespace Ecs.Views.Linkable.Impl.Units
             base.Subscribe(entity, unsubscribe);
             
             SelfEntity.AddUnitData(new UnitData(health, damage, attackSpeed, attackRange));
+            SelfEntity.AddAggroRadius(aggroRadius);
 
             SelfEntity.SubscribeDestinationPoint(OnDestinationPoint).AddTo(unsubscribe);
         }

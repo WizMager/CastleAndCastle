@@ -58,6 +58,14 @@ public partial class GameEntity
 		{
 			IsPlayerUnit = true;
 		}
+		else if (component is Ecs.Game.Components.Units.TargetComponent Target)
+		{
+			CopyTargetTo(Target);
+		}
+		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
+		{
+			CopyAggroRadiusTo(AggroRadius);
+		}
 
 		#endif
 	}

@@ -2,6 +2,7 @@
 using Ecs.Extensions;
 using Ecs.Game.Systems;
 using Ecs.Game.Systems.Initialize;
+using Ecs.Game.Systems.Units;
 using Ecs.Installers.Game.Feature;
 using Ecs.Utils.Groups.Impl;
 using JCMG.EntitasRedux.Commands;
@@ -46,6 +47,7 @@ namespace Ecs.Installers.Game
 			
 			//Other
 			Container.BindInterfacesTo<InstantiateSystem>().AsSingle();
+			Container.BindInterfacesTo<SearchTargetSystem>().AsSingle();
 		}
 		
 		private void BindEventSystems()
