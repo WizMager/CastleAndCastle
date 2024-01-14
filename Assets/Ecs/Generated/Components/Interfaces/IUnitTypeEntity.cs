@@ -7,15 +7,12 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using JCMG.EntitasRedux;
-
-public sealed class GameEventSystems : Feature
+public partial interface IUnitTypeEntity
 {
-	public GameEventSystems(IContext<GameEntity> context)
-	{
-		Add(new DestinationPointEventSystem(context)); // priority: 0
-		Add(new GameDestroyedEventSystem(context)); // priority: 0
-		Add(new PositionEventSystem(context)); // priority: 0
-		Add(new RotationEventSystem(context)); // priority: 0
-	}
+	Ecs.Game.Components.UnitTypeComponent UnitType { get; }
+	bool HasUnitType { get; }
+
+	void AddUnitType(Game.Utils.Units.EUnitType newValue);
+	void ReplaceUnitType(Game.Utils.Units.EUnitType newValue);
+	void RemoveUnitType();
 }

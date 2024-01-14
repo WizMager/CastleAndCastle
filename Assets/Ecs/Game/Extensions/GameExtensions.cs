@@ -16,7 +16,7 @@ namespace Ecs.Game.Extensions
         {
             var entity = game.CreateEntity();
             entity.AddUid(UidGenerator.Next());
-            entity.AddPrefab(unitType.ToString());
+            entity.AddUnitType(unitType);
             entity.AddPosition(position);
             entity.AddRotation(rotation);
             entity.IsInstantiate = true;

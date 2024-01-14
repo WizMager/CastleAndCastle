@@ -18,41 +18,45 @@ public partial class GameEntity
 	public void CopyComponentTo(IComponent component)
 	{
 		#if !ENTITAS_REDUX_NO_IMPL
-		if (component is Ecs.Game.Components.PrefabComponent Prefab)
-		{
-			CopyPrefabTo(Prefab);
-		}
-		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
-		{
-			IsInstantiate = true;
-		}
-		else if (component is Ecs.Game.Components.TransformComponent Transform)
-		{
-			CopyTransformTo(Transform);
-		}
-		else if (component is Ecs.Game.Components.RotationComponent Rotation)
-		{
-			CopyRotationTo(Rotation);
-		}
-		else if (component is Ecs.Game.Components.PositionComponent Position)
-		{
-			CopyPositionTo(Position);
-		}
-		else if (component is Ecs.Game.Components.Units.PlayerUnitComponent PlayerUnit)
-		{
-			IsPlayerUnit = true;
-		}
-		else if (component is Ecs.Game.Components.Units.UnitDataComponent UnitData)
-		{
-			CopyUnitDataTo(UnitData);
-		}
-		else if (component is Ecs.Common.Components.UidComponent Uid)
+		if (component is Ecs.Common.Components.UidComponent Uid)
 		{
 			CopyUidTo(Uid);
 		}
 		else if (component is Ecs.Common.Components.DestroyedComponent Destroyed)
 		{
 			IsDestroyed = true;
+		}
+		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
+		{
+			IsInstantiate = true;
+		}
+		else if (component is Ecs.Game.Components.PositionComponent Position)
+		{
+			CopyPositionTo(Position);
+		}
+		else if (component is Ecs.Game.Components.UnitTypeComponent UnitType)
+		{
+			CopyUnitTypeTo(UnitType);
+		}
+		else if (component is Ecs.Game.Components.RotationComponent Rotation)
+		{
+			CopyRotationTo(Rotation);
+		}
+		else if (component is Ecs.Game.Components.TransformComponent Transform)
+		{
+			CopyTransformTo(Transform);
+		}
+		else if (component is Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint)
+		{
+			CopyDestinationPointTo(DestinationPoint);
+		}
+		else if (component is Ecs.Game.Components.Units.UnitDataComponent UnitData)
+		{
+			CopyUnitDataTo(UnitData);
+		}
+		else if (component is Ecs.Game.Components.Units.PlayerUnitComponent PlayerUnit)
+		{
+			IsPlayerUnit = true;
 		}
 
 		#endif

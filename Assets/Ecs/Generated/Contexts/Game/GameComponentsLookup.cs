@@ -13,32 +13,36 @@ using JCMG.EntitasRedux;
 
 public static class GameComponentsLookup
 {
-	public const int Destroyed = 0;
-	public const int Uid = 1;
-	public const int Instantiate = 2;
-	public const int Position = 3;
-	public const int Prefab = 4;
+	public const int DestinationPointListener = 0;
+	public const int Destroyed = 1;
+	public const int Uid = 2;
+	public const int Instantiate = 3;
+	public const int Position = 4;
 	public const int Rotation = 5;
 	public const int Transform = 6;
-	public const int PlayerUnit = 7;
-	public const int UnitData = 8;
-	public const int GameDestroyedListener = 9;
-	public const int PositionListener = 10;
-	public const int RotationListener = 11;
+	public const int DestinationPoint = 7;
+	public const int PlayerUnit = 8;
+	public const int UnitData = 9;
+	public const int UnitType = 10;
+	public const int GameDestroyedListener = 11;
+	public const int PositionListener = 12;
+	public const int RotationListener = 13;
 
-	public const int TotalComponents = 12;
+	public const int TotalComponents = 14;
 
 	public static readonly string[] ComponentNames =
 	{
+		"DestinationPointListener",
 		"Destroyed",
 		"Uid",
 		"Instantiate",
 		"Position",
-		"Prefab",
 		"Rotation",
 		"Transform",
+		"DestinationPoint",
 		"PlayerUnit",
 		"UnitData",
+		"UnitType",
 		"GameDestroyedListener",
 		"PositionListener",
 		"RotationListener"
@@ -46,15 +50,17 @@ public static class GameComponentsLookup
 
 	public static readonly System.Type[] ComponentTypes =
 	{
+		typeof(DestinationPointListenerComponent),
 		typeof(Ecs.Common.Components.DestroyedComponent),
 		typeof(Ecs.Common.Components.UidComponent),
 		typeof(Ecs.Game.Components.InstantiateComponent),
 		typeof(Ecs.Game.Components.PositionComponent),
-		typeof(Ecs.Game.Components.PrefabComponent),
 		typeof(Ecs.Game.Components.RotationComponent),
 		typeof(Ecs.Game.Components.TransformComponent),
+		typeof(Ecs.Game.Components.Units.DestinationPointComponent),
 		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
 		typeof(Ecs.Game.Components.Units.UnitDataComponent),
+		typeof(Ecs.Game.Components.UnitTypeComponent),
 		typeof(GameDestroyedListenerComponent),
 		typeof(PositionListenerComponent),
 		typeof(RotationListenerComponent)
@@ -62,18 +68,20 @@ public static class GameComponentsLookup
 
 	public static readonly Dictionary<Type, int> ComponentTypeToIndex = new Dictionary<Type, int>
 	{
-		{ typeof(Ecs.Common.Components.DestroyedComponent), 0 },
-		{ typeof(Ecs.Common.Components.UidComponent), 1 },
-		{ typeof(Ecs.Game.Components.InstantiateComponent), 2 },
-		{ typeof(Ecs.Game.Components.PositionComponent), 3 },
-		{ typeof(Ecs.Game.Components.PrefabComponent), 4 },
+		{ typeof(DestinationPointListenerComponent), 0 },
+		{ typeof(Ecs.Common.Components.DestroyedComponent), 1 },
+		{ typeof(Ecs.Common.Components.UidComponent), 2 },
+		{ typeof(Ecs.Game.Components.InstantiateComponent), 3 },
+		{ typeof(Ecs.Game.Components.PositionComponent), 4 },
 		{ typeof(Ecs.Game.Components.RotationComponent), 5 },
 		{ typeof(Ecs.Game.Components.TransformComponent), 6 },
-		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 7 },
-		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 8 },
-		{ typeof(GameDestroyedListenerComponent), 9 },
-		{ typeof(PositionListenerComponent), 10 },
-		{ typeof(RotationListenerComponent), 11 }
+		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 7 },
+		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 8 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 9 },
+		{ typeof(Ecs.Game.Components.UnitTypeComponent), 10 },
+		{ typeof(GameDestroyedListenerComponent), 11 },
+		{ typeof(PositionListenerComponent), 12 },
+		{ typeof(RotationListenerComponent), 13 }
 	};
 
 	/// <summary>

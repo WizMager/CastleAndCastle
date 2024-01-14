@@ -7,12 +7,12 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface IPrefabEntity
+public partial interface IDestinationPointEntity
 {
-	Ecs.Game.Components.PrefabComponent Prefab { get; }
-	bool HasPrefab { get; }
+	Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint { get; }
+	bool HasDestinationPoint { get; }
 
-	void AddPrefab(string newValue);
-	void ReplacePrefab(string newValue);
-	void RemovePrefab();
+	void AddDestinationPoint(UnityEngine.Vector3 newValue);
+	void ReplaceDestinationPoint(UnityEngine.Vector3 newValue);
+	void RemoveDestinationPoint();
 }

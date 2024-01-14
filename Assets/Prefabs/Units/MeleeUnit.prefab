@@ -278,6 +278,7 @@ MonoBehaviour:
   damage: 1
   attackSpeed: 1
   attackRange: 1
+  navMeshAgent: {fileID: 2049047249301953146}
 --- !u!195 &2049047249301953146
 NavMeshAgent:
   m_ObjectHideFlags: 0
