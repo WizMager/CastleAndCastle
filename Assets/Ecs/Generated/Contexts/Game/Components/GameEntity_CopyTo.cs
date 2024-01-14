@@ -46,9 +46,17 @@ public partial class GameEntity
 		{
 			CopyTransformTo(Transform);
 		}
+		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
+		{
+			CopyAggroRadiusTo(AggroRadius);
+		}
 		else if (component is Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint)
 		{
 			CopyDestinationPointTo(DestinationPoint);
+		}
+		else if (component is Ecs.Game.Components.Units.TargetComponent Target)
+		{
+			CopyTargetTo(Target);
 		}
 		else if (component is Ecs.Game.Components.Units.UnitDataComponent UnitData)
 		{
@@ -57,14 +65,6 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Units.PlayerUnitComponent PlayerUnit)
 		{
 			IsPlayerUnit = true;
-		}
-		else if (component is Ecs.Game.Components.Units.TargetComponent Target)
-		{
-			CopyTargetTo(Target);
-		}
-		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
-		{
-			CopyAggroRadiusTo(AggroRadius);
 		}
 
 		#endif

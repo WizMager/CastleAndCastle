@@ -13,21 +13,14 @@ namespace Ecs.Utils.Groups.Impl
 
         public GameGroupUtils(GameContext game)
         {
-            _units = game.GetGroup(GameMatcher.AllOf(GameMatcher.UnitData));
+            _units = game.GetGroup(GameMatcher.AllOf(GameMatcher.UnitData, GameMatcher.UnitType));
         }
 
         public IDisposable GetUnits(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null, bool nonDestroyed = true)
         {
             Func<GameEntity, bool> baseFilter = nonDestroyed
-                ? e => e.HasUnitData && e.HasUnitType && !e.IsDestroyed
-                : e => e.HasUnitData && e.HasUnitType;
-            
-            return GetEntities(out buffer, _units, baseFilter, filter);
-        }
-        
-        public IDisposable GetUnitsWithType(out List<GameEntity> buffer, EUnitType unitType, Func<GameEntity, bool> filter = null)
-        {
-            Func<GameEntity, bool> baseFilter = e => e.HasUnitData && e.HasUnitType && e.UnitType.Value == unitType && !e.IsDestroyed;
+                ? e => !e.IsDestroyed
+                : e => e.IsDestroyed;
             
             return GetEntities(out buffer, _units, baseFilter, filter);
         }
@@ -35,8 +28,8 @@ namespace Ecs.Utils.Groups.Impl
         public IDisposable GetOwnerUnits(out List<GameEntity> buffer, bool isPlayerUnits, Func<GameEntity, bool> filter = null)
         {
             Func<GameEntity, bool> baseFilter = isPlayerUnits
-                ? e => e.IsPlayerUnit && e.HasUnitData && e.HasUnitType && !e.IsDestroyed
-                : e => e.IsPlayerUnit && e.HasUnitData && e.HasUnitType && !e.IsDestroyed;
+                ? e => e.IsPlayerUnit && !e.IsDestroyed
+                : e => !e.IsPlayerUnit && !e.IsDestroyed;
             
             return GetEntities(out buffer, _units, baseFilter, filter);
         }

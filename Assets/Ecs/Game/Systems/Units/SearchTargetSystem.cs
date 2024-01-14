@@ -18,8 +18,9 @@ namespace Ecs.Game.Systems.Units
         {
             using var group1 = _gameGroupUtils.GetOwnerUnits(out var playerUnits, true, e => !e.HasTarget);
             using var group2 = _gameGroupUtils.GetOwnerUnits(out var enemyUnits, false, e => !e.HasTarget);
-
+            
             CheckUnitsTarget(playerUnits, enemyUnits);
+            
             CheckUnitsTarget(enemyUnits, playerUnits);
         }
 
@@ -52,15 +53,17 @@ namespace Ecs.Game.Systems.Units
         
         private static int CheckNearestUnit(IReadOnlyDictionary<int, float> unitIndexesWithRange)
         {
-            var nearestUnitIndex = 0;
-            var range = unitIndexesWithRange[0];
+            var nearestUnitIndex = -1;
+            var range = 10000f;
 
-            for (var i = 1; i < unitIndexesWithRange.Count; i++)
+            Debug.Log("--------------------------------------" + unitIndexesWithRange.Count);
+            foreach (var unit in unitIndexesWithRange)
             {
-                if (unitIndexesWithRange[i] > range) continue;
+                if (unit.Value > range) continue;
 
-                nearestUnitIndex = i;
-                range = unitIndexesWithRange[i];
+                nearestUnitIndex = unit.Key;
+                range = unit.Value;
+                Debug.Log($"near: {nearestUnitIndex}| range: {range}");
             }
 
             return nearestUnitIndex;

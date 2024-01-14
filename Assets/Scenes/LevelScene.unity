@@ -5829,6 +5829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a47aaa58da42abbd07ba36f53568fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCastlePosition: {fileID: 321278677}
+  enemyCastlePosition: {fileID: 1027578372}
 --- !u!4 &865660130
 Transform:
   m_ObjectHideFlags: 0

@@ -4,10 +4,10 @@ namespace Game.Utils
 {
     public class GameField : MonoBehaviour
     {
-        [SerializeField] private Vector3 playerCastlePosition;
-        [SerializeField] private Vector3 enemyCastlePosition;
+        [SerializeField] private Transform playerCastlePosition;
+        [SerializeField] private Transform enemyCastlePosition;
 
-        public Vector3 PlayerCastlePosition => playerCastlePosition;
-        public Vector3 EnemyCastlePosition => enemyCastlePosition;
+        public Vector3 PlayerCastlePosition => playerCastlePosition.position;
+        public Vector3 EnemyCastlePosition => enemyCastlePosition.position;
     }
 }

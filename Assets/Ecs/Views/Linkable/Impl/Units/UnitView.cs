@@ -1,6 +1,7 @@
 ﻿using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Core.Utils;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,11 +28,22 @@ namespace Ecs.Views.Linkable.Impl.Units
             SelfEntity.AddAggroRadius(aggroRadius);
 
             SelfEntity.SubscribeDestinationPoint(OnDestinationPoint).AddTo(unsubscribe);
+
+            Observable.EveryLateUpdate().Subscribe(_ => OnLateUpdate()).AddTo(gameObject);
+        }
+
+        protected override void OnPosition(GameEntity entity, Vector3 value)
+        {
         }
 
         private void OnDestinationPoint(GameEntity entity, Vector3 value)
         {
             navMeshAgent.destination = value;
+        }
+        
+        private void OnLateUpdate()
+        {
+            SelfEntity.ReplacePosition(transform.position);
         }
     }
 }
