@@ -1,6 +1,5 @@
 ﻿using Ecs.Commands.Systems;
 using Ecs.Core.Bootstrap;
-using Ecs.Extensions;
 using Ecs.Game.Systems;
 using Ecs.Game.Systems.Initialize;
 using Ecs.Game.Systems.Units;
