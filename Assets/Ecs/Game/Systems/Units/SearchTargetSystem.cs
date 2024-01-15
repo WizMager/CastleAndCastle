@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ecs.Utils.Groups;
+using Game.Utils.Units;
 using JCMG.EntitasRedux;
-using UnityEngine;
 
 namespace Ecs.Game.Systems.Units
 {
@@ -16,25 +16,49 @@ namespace Ecs.Game.Systems.Units
         
         public void Update()
         {
-            using var group1 = _gameGroupUtils.GetOwnerUnits(out var playerUnits, true, e => !e.HasTarget);
-            using var group2 = _gameGroupUtils.GetOwnerUnits(out var enemyUnits, false, e => !e.HasTarget);
+            CheckMeleeUnits(_gameGroupUtils, true);
+            CheckMeleeUnits(_gameGroupUtils, false);
             
-            CheckUnitsTarget(playerUnits, enemyUnits);
-            
-            CheckUnitsTarget(enemyUnits, playerUnits);
+            CheckRangeUnits(_gameGroupUtils, true);
+            CheckRangeUnits(_gameGroupUtils, false);
+        }
+        
+        private static void CheckMeleeUnits(IGameGroupUtils gameGroupUtils, bool isPlayerUnit)
+        {
+            using var group1 = gameGroupUtils.GetOwnerUnitsWithType(out var enemyUnits, isPlayerUnit, EUnitType.MeleeUnit, e => !e.HasTarget);
+            using var group2 = gameGroupUtils.GetOwnerUnitsWithType(out var notTargetedPlayer, !isPlayerUnit, EUnitType.MeleeUnit, e => !e.IsInTarget);
+
+            if (notTargetedPlayer.Count == 0)
+            {
+                using var group3 = gameGroupUtils.GetOwnerUnits(out var targetedPlayerUnits, !isPlayerUnit);
+                
+                CheckAggroRadius(enemyUnits, targetedPlayerUnits);
+            }
+            else
+            {
+                CheckAggroRadius(enemyUnits, notTargetedPlayer);
+            }
+        }
+        
+        private static void CheckRangeUnits(IGameGroupUtils gameGroupUtils, bool isPlayerUnit)
+        {
+            using var group1 = gameGroupUtils.GetOwnerUnitsWithType(out var seekerUnits, isPlayerUnit, EUnitType.RangeUnit, e => !e.HasTarget);
+            using var group2 = gameGroupUtils.GetOwnerUnits(out var checkedUnits, !isPlayerUnit);
+
+            CheckAggroRadius(seekerUnits, checkedUnits);
         }
 
-        private static void CheckUnitsTarget(List<GameEntity> checkUnits, IReadOnlyList<GameEntity> targetUnits)
+        private static void CheckAggroRadius(List<GameEntity> seekerUnits, IReadOnlyList<GameEntity> checkedUnits)
         {
-            foreach (var checkUnit in checkUnits)
+            foreach (var seekerUnit in seekerUnits)
             {
-                var aggroRadius = checkUnit.AggroRadius.Value;
-                var playerPosition = checkUnit.Position.Value;
+                var aggroRadius = seekerUnit.AggroRadius.Value;
+                var playerPosition = seekerUnit.Position.Value;
                 var enemiesInRange = new Dictionary<int, float>();
 
-                for (var i = 0; i < targetUnits.Count; i++)
+                for (var i = 0; i < checkedUnits.Count; i++)
                 {
-                    var enemyPosition = targetUnits[i].Position.Value;
+                    var enemyPosition = checkedUnits[i].Position.Value;
                     var distanceToEnemy = (enemyPosition - playerPosition).sqrMagnitude;
                     
                     if (distanceToEnemy > aggroRadius * aggroRadius) continue;
@@ -45,9 +69,10 @@ namespace Ecs.Game.Systems.Units
                 if (enemiesInRange.Count == 0) continue;
 
                 var nearestUnitIndex = CheckNearestUnit(enemiesInRange);
-                var nearestUnit = targetUnits[nearestUnitIndex];
+                var nearestUnit = checkedUnits[nearestUnitIndex];
+                nearestUnit.IsInTarget = true;
                 
-                checkUnit.ReplaceTarget(nearestUnit);
+                seekerUnit.ReplaceTarget(nearestUnit);
             }
         }
         
@@ -55,15 +80,13 @@ namespace Ecs.Game.Systems.Units
         {
             var nearestUnitIndex = -1;
             var range = 10000f;
-
-            Debug.Log("--------------------------------------" + unitIndexesWithRange.Count);
+            
             foreach (var unit in unitIndexesWithRange)
             {
                 if (unit.Value > range) continue;
 
                 nearestUnitIndex = unit.Key;
                 range = unit.Value;
-                Debug.Log($"near: {nearestUnitIndex}| range: {range}");
             }
 
             return nearestUnitIndex;

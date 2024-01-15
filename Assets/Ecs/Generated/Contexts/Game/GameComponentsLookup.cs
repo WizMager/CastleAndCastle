@@ -22,16 +22,17 @@ public static class GameComponentsLookup
 	public const int Transform = 6;
 	public const int AggroRadius = 7;
 	public const int DestinationPoint = 8;
-	public const int PlayerUnit = 9;
-	public const int Target = 10;
-	public const int UnitData = 11;
-	public const int UnitType = 12;
-	public const int GameDestroyedListener = 13;
-	public const int PositionListener = 14;
-	public const int RotationListener = 15;
-	public const int TargetListener = 16;
+	public const int InTarget = 9;
+	public const int PlayerUnit = 10;
+	public const int Target = 11;
+	public const int UnitData = 12;
+	public const int UnitType = 13;
+	public const int GameDestroyedListener = 14;
+	public const int PositionListener = 15;
+	public const int RotationListener = 16;
+	public const int TargetListener = 17;
 
-	public const int TotalComponents = 17;
+	public const int TotalComponents = 18;
 
 	public static readonly string[] ComponentNames =
 	{
@@ -44,6 +45,7 @@ public static class GameComponentsLookup
 		"Transform",
 		"AggroRadius",
 		"DestinationPoint",
+		"InTarget",
 		"PlayerUnit",
 		"Target",
 		"UnitData",
@@ -65,6 +67,7 @@ public static class GameComponentsLookup
 		typeof(Ecs.Game.Components.TransformComponent),
 		typeof(Ecs.Game.Components.Units.AggroRadiusComponent),
 		typeof(Ecs.Game.Components.Units.DestinationPointComponent),
+		typeof(Ecs.Game.Components.Units.InTargetComponent),
 		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
 		typeof(Ecs.Game.Components.Units.TargetComponent),
 		typeof(Ecs.Game.Components.Units.UnitDataComponent),
@@ -86,14 +89,15 @@ public static class GameComponentsLookup
 		{ typeof(Ecs.Game.Components.TransformComponent), 6 },
 		{ typeof(Ecs.Game.Components.Units.AggroRadiusComponent), 7 },
 		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 8 },
-		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 9 },
-		{ typeof(Ecs.Game.Components.Units.TargetComponent), 10 },
-		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 11 },
-		{ typeof(Ecs.Game.Components.UnitTypeComponent), 12 },
-		{ typeof(GameDestroyedListenerComponent), 13 },
-		{ typeof(PositionListenerComponent), 14 },
-		{ typeof(RotationListenerComponent), 15 },
-		{ typeof(TargetListenerComponent), 16 }
+		{ typeof(Ecs.Game.Components.Units.InTargetComponent), 9 },
+		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 10 },
+		{ typeof(Ecs.Game.Components.Units.TargetComponent), 11 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 12 },
+		{ typeof(Ecs.Game.Components.UnitTypeComponent), 13 },
+		{ typeof(GameDestroyedListenerComponent), 14 },
+		{ typeof(PositionListenerComponent), 15 },
+		{ typeof(RotationListenerComponent), 16 },
+		{ typeof(TargetListenerComponent), 17 }
 	};
 
 	/// <summary>

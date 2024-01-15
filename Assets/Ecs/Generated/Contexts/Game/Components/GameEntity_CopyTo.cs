@@ -46,6 +46,10 @@ public partial class GameEntity
 		{
 			CopyTransformTo(Transform);
 		}
+		else if (component is Ecs.Game.Components.Units.InTargetComponent InTarget)
+		{
+			IsInTarget = true;
+		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{
 			CopyAggroRadiusTo(AggroRadius);

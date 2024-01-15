@@ -1,4 +1,5 @@
-﻿using Game.Utils.Units;
+﻿using System;
+using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Core.Utils;
 using UniRx;
@@ -44,6 +45,19 @@ namespace Ecs.Views.Linkable.Impl.Units
         private void OnLateUpdate()
         {
             SelfEntity.ReplacePosition(transform.position);
+            
+#if UNITY_EDITOR
+            var corners = navMeshAgent.path.corners;
+            
+            for (int i = 0; i < corners.Length; i++)
+            {
+                if (i > corners.Length - 2) return;
+
+                var color = SelfEntity.IsPlayerUnit ? Color.red : Color.green;
+                
+                Debug.DrawLine(corners[i], corners[i + 1], color );
+            }
+#endif
         }
     }
 }

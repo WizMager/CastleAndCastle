@@ -1,6 +1,5 @@
 ﻿using Ecs.Utils.Groups;
 using JCMG.EntitasRedux;
-using UnityEngine;
 
 namespace Ecs.Game.Systems.Units
 {

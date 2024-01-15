@@ -34,6 +34,15 @@ namespace Ecs.Utils.Groups.Impl
             return GetEntities(out buffer, _units, baseFilter, filter);
         }
 
+        public IDisposable GetOwnerUnitsWithType(out List<GameEntity> buffer, bool isPlayerUnits, EUnitType unitType, Func<GameEntity, bool> filter = null)
+        {
+            Func<GameEntity, bool> baseFilter = isPlayerUnits
+                ? e => e.IsPlayerUnit && e.UnitType.Value == unitType && !e.IsDestroyed
+                : e => !e.IsPlayerUnit && e.UnitType.Value == unitType && !e.IsDestroyed;
+            
+            return GetEntities(out buffer, _units, baseFilter, filter);
+        }
+
         private IDisposable GetEntities(
             out List<GameEntity> buffer,  
             IGroup<GameEntity> group,

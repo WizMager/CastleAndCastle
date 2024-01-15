@@ -36,7 +36,7 @@ namespace Ecs.Game.Systems.Initialize
 
         private void DebugSpawnUnits()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 _commandBuffer.SpawnUnit(new Vector3(-40 + i, 0.5f, 0), Quaternion.identity, EUnitType.MeleeUnit, false);
             }
