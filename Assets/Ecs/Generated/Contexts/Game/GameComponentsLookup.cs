@@ -21,18 +21,21 @@ public static class GameComponentsLookup
 	public const int Rotation = 5;
 	public const int Transform = 6;
 	public const int AggroRadius = 7;
-	public const int DestinationPoint = 8;
-	public const int InTarget = 9;
-	public const int PlayerUnit = 10;
-	public const int Target = 11;
-	public const int UnitData = 12;
-	public const int UnitType = 13;
-	public const int GameDestroyedListener = 14;
-	public const int PositionListener = 15;
-	public const int RotationListener = 16;
-	public const int TargetListener = 17;
+	public const int AttackCooldown = 8;
+	public const int DestinationPoint = 9;
+	public const int Health = 10;
+	public const int InAttackRange = 11;
+	public const int InTarget = 12;
+	public const int PlayerUnit = 13;
+	public const int Target = 14;
+	public const int UnitData = 15;
+	public const int UnitType = 16;
+	public const int GameDestroyedListener = 17;
+	public const int PositionListener = 18;
+	public const int RotationListener = 19;
+	public const int TargetListener = 20;
 
-	public const int TotalComponents = 18;
+	public const int TotalComponents = 21;
 
 	public static readonly string[] ComponentNames =
 	{
@@ -44,7 +47,10 @@ public static class GameComponentsLookup
 		"Rotation",
 		"Transform",
 		"AggroRadius",
+		"AttackCooldown",
 		"DestinationPoint",
+		"Health",
+		"InAttackRange",
 		"InTarget",
 		"PlayerUnit",
 		"Target",
@@ -66,7 +72,10 @@ public static class GameComponentsLookup
 		typeof(Ecs.Game.Components.RotationComponent),
 		typeof(Ecs.Game.Components.TransformComponent),
 		typeof(Ecs.Game.Components.Units.AggroRadiusComponent),
+		typeof(Ecs.Game.Components.Units.AttackCooldownComponent),
 		typeof(Ecs.Game.Components.Units.DestinationPointComponent),
+		typeof(Ecs.Game.Components.Units.HealthComponent),
+		typeof(Ecs.Game.Components.Units.InAttackRangeComponent),
 		typeof(Ecs.Game.Components.Units.InTargetComponent),
 		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
 		typeof(Ecs.Game.Components.Units.TargetComponent),
@@ -88,16 +97,19 @@ public static class GameComponentsLookup
 		{ typeof(Ecs.Game.Components.RotationComponent), 5 },
 		{ typeof(Ecs.Game.Components.TransformComponent), 6 },
 		{ typeof(Ecs.Game.Components.Units.AggroRadiusComponent), 7 },
-		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 8 },
-		{ typeof(Ecs.Game.Components.Units.InTargetComponent), 9 },
-		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 10 },
-		{ typeof(Ecs.Game.Components.Units.TargetComponent), 11 },
-		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 12 },
-		{ typeof(Ecs.Game.Components.UnitTypeComponent), 13 },
-		{ typeof(GameDestroyedListenerComponent), 14 },
-		{ typeof(PositionListenerComponent), 15 },
-		{ typeof(RotationListenerComponent), 16 },
-		{ typeof(TargetListenerComponent), 17 }
+		{ typeof(Ecs.Game.Components.Units.AttackCooldownComponent), 8 },
+		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 9 },
+		{ typeof(Ecs.Game.Components.Units.HealthComponent), 10 },
+		{ typeof(Ecs.Game.Components.Units.InAttackRangeComponent), 11 },
+		{ typeof(Ecs.Game.Components.Units.InTargetComponent), 12 },
+		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 13 },
+		{ typeof(Ecs.Game.Components.Units.TargetComponent), 14 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 15 },
+		{ typeof(Ecs.Game.Components.UnitTypeComponent), 16 },
+		{ typeof(GameDestroyedListenerComponent), 17 },
+		{ typeof(PositionListenerComponent), 18 },
+		{ typeof(RotationListenerComponent), 19 },
+		{ typeof(TargetListenerComponent), 20 }
 	};
 
 	/// <summary>

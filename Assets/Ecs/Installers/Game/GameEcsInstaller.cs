@@ -50,6 +50,9 @@ namespace Ecs.Installers.Game
 			Container.BindInterfacesTo<SearchTargetSystem>().AsSingle();
 			Container.BindInterfacesTo<SpawnUnitSystem>().AsSingle();
 			Container.BindInterfacesTo<MoveToTargetSystem>().AsSingle();
+			Container.BindInterfacesTo<AttackSystem>().AsSingle();
+			Container.BindInterfacesTo<ReceiveDamageSystem>().AsSingle();
+			Container.BindInterfacesTo<AttackCooldownSystem>().AsSingle();
 		}
 		
 		private void BindEventSystems()

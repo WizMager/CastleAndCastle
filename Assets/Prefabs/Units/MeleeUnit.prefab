@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityLink: {fileID: 8772840853596199567}
-  health: 5
+  maxHealth: 5
   damage: 1
   attackSpeed: 1
   attackRange: 1.5

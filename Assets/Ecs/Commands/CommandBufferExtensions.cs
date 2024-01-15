@@ -16,6 +16,13 @@ namespace Ecs.Commands
 {
     public static partial class CommandBufferExtensions
     {
+        public static void ReceiveDamage(this ICommandBuffer commandBuffer, GameEntity target, float damage)
+        {
+            ref var command = ref commandBuffer.Create<ReceiveDamageCommand>();
+            command.Target = target;
+            command.Damage = damage;
+        }
+        
         public static void SpawnUnit(this ICommandBuffer commandBuffer, Vector3 position, Quaternion rotation, EUnitType unitType, Boolean isPlayerUnit)
         {
             ref var command = ref commandBuffer.Create<SpawnUnitCommand>();

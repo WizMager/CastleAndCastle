@@ -11,7 +11,7 @@ namespace Ecs.Views.Linkable.Impl.Units
     public class UnitView : ObjectView
     {
         [Header("Unit parameters:")]
-        [SerializeField] private float health;
+        [SerializeField] private float maxHealth;
         [SerializeField] private float damage;
         [SerializeField] private float attackSpeed;
         [SerializeField] private float attackRange;
@@ -25,7 +25,8 @@ namespace Ecs.Views.Linkable.Impl.Units
         {
             base.Subscribe(entity, unsubscribe);
             
-            SelfEntity.AddUnitData(new UnitData(health, damage, attackSpeed, attackRange));
+            SelfEntity.AddUnitData(new UnitData(maxHealth, damage, attackSpeed, attackRange));
+            SelfEntity.AddHealth(maxHealth);
             SelfEntity.AddAggroRadius(aggroRadius);
 
             SelfEntity.SubscribeDestinationPoint(OnDestinationPoint).AddTo(unsubscribe);

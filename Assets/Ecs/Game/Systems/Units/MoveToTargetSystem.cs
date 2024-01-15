@@ -1,5 +1,6 @@
 ﻿using Ecs.Utils.Groups;
 using JCMG.EntitasRedux;
+using UnityEngine;
 
 namespace Ecs.Game.Systems.Units
 {
@@ -20,6 +21,9 @@ namespace Ecs.Game.Systems.Units
             {
                 var selfPosition = unit.Position.Value;
                 var target = unit.Target.Value;
+                
+                if (!target.HasPosition) continue;
+                
                 var targetPosition = target.Position.Value;
                 var attackRange = unit.UnitData.Value.AttackRange;
 
@@ -27,10 +31,14 @@ namespace Ecs.Game.Systems.Units
                 
                 if (distanceSqr > attackRange * attackRange)
                 {
+                    ChangeIsAttackRange(unit, false);
+                    
                     unit.ReplaceDestinationPoint(targetPosition);
                 }
                 else
                 {
+                    ChangeIsAttackRange(unit, true);
+                    
                     var destinationPoint = unit.DestinationPoint.Value;
 
                     if (destinationPoint == selfPosition) continue;
@@ -38,6 +46,13 @@ namespace Ecs.Game.Systems.Units
                     unit.ReplaceDestinationPoint(selfPosition);
                 }
             }
+        }
+
+        private static void ChangeIsAttackRange(GameEntity unit, bool isInAttackRange)
+        {
+            if (unit.IsInAttackRange == isInAttackRange) return;
+
+            unit.IsInAttackRange = isInAttackRange;
         }
     }
 }

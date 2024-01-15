@@ -5,19 +5,19 @@ namespace Game.Utils.Units
     [Serializable]
     public readonly struct UnitData
     {
-        public readonly float Health;
+        public readonly float MaxHealth;
         public readonly float Damage;
         public readonly float AttackSpeed;
         public readonly float AttackRange;
 
         public UnitData(
-            float health, 
+            float maxHealth, 
             float damage, 
             float attackSpeed, 
             float attackRange
         )
         {
-            Health = health;
+            MaxHealth = maxHealth;
             Damage = damage;
             AttackSpeed = attackSpeed;
             AttackRange = attackRange;
