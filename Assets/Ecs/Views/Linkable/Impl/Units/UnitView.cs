@@ -60,5 +60,13 @@ namespace Ecs.Views.Linkable.Impl.Units
             }
 #endif
         }
+
+        protected override void OnClear()
+        {
+            var targetEntity = SelfEntity.Target.Value;
+            targetEntity.IsInTarget = false;
+            
+            base.OnClear();
+        }
     }
 }

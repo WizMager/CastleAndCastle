@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ecs.Utils.Groups;
+using Game.Providers.GameFieldProvider;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
 
@@ -8,10 +9,15 @@ namespace Ecs.Game.Systems.Units
     public class SearchTargetSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;
+        private readonly IGameFieldProvider _gameFieldProvider;
 
-        public SearchTargetSystem(IGameGroupUtils gameGroupUtils)
+        public SearchTargetSystem(
+            IGameGroupUtils gameGroupUtils,
+            IGameFieldProvider gameFieldProvider
+        )
         {
             _gameGroupUtils = gameGroupUtils;
+            _gameFieldProvider = gameFieldProvider;
         }
         
         public void Update()
@@ -23,7 +29,7 @@ namespace Ecs.Game.Systems.Units
             CheckRangeUnits(_gameGroupUtils, false);
         }
         
-        private static void CheckMeleeUnits(IGameGroupUtils gameGroupUtils, bool isPlayerUnit)
+        private void CheckMeleeUnits(IGameGroupUtils gameGroupUtils, bool isPlayerUnit)
         {
             using var group1 = gameGroupUtils.GetOwnerUnitsWithType(out var enemyUnits, isPlayerUnit, EUnitType.MeleeUnit, e => !e.HasTarget);
             using var group2 = gameGroupUtils.GetOwnerUnitsWithType(out var notTargetedPlayer, !isPlayerUnit, EUnitType.MeleeUnit, e => !e.IsInTarget);
@@ -32,23 +38,23 @@ namespace Ecs.Game.Systems.Units
             {
                 using var group3 = gameGroupUtils.GetOwnerUnits(out var targetedPlayerUnits, !isPlayerUnit);
                 
-                CheckAggroRadius(enemyUnits, targetedPlayerUnits);
+                CheckAggroRadius(enemyUnits, targetedPlayerUnits, isPlayerUnit);
             }
             else
             {
-                CheckAggroRadius(enemyUnits, notTargetedPlayer);
+                CheckAggroRadius(enemyUnits, notTargetedPlayer, isPlayerUnit);
             }
         }
         
-        private static void CheckRangeUnits(IGameGroupUtils gameGroupUtils, bool isPlayerUnit)
+        private void CheckRangeUnits(IGameGroupUtils gameGroupUtils, bool isPlayerUnit)
         {
             using var group1 = gameGroupUtils.GetOwnerUnitsWithType(out var seekerUnits, isPlayerUnit, EUnitType.RangeUnit, e => !e.HasTarget);
             using var group2 = gameGroupUtils.GetOwnerUnits(out var checkedUnits, !isPlayerUnit);
 
-            CheckAggroRadius(seekerUnits, checkedUnits);
+            CheckAggroRadius(seekerUnits, checkedUnits, isPlayerUnit);
         }
 
-        private static void CheckAggroRadius(List<GameEntity> seekerUnits, IReadOnlyList<GameEntity> checkedUnits)
+        private void CheckAggroRadius(List<GameEntity> seekerUnits, IReadOnlyList<GameEntity> checkedUnits, bool isPlayerSeeker)
         {
             foreach (var seekerUnit in seekerUnits)
             {
@@ -66,13 +72,21 @@ namespace Ecs.Game.Systems.Units
                     enemiesInRange.Add(i, distanceToEnemy);
                 }
                 
-                if (enemiesInRange.Count == 0) continue;
-
-                var nearestUnitIndex = CheckNearestUnit(enemiesInRange);
-                var nearestUnit = checkedUnits[nearestUnitIndex];
-                nearestUnit.IsInTarget = true;
-                
-                seekerUnit.ReplaceTarget(nearestUnit);
+                if (enemiesInRange.Count == 0)
+                {
+                    var gameField = _gameFieldProvider.GameField;
+                    var destinationPosition = isPlayerSeeker 
+                        ? gameField.EnemyCastlePosition 
+                        : gameField.PlayerCastlePosition;
+                    seekerUnit.ReplaceDestinationPoint(destinationPosition);
+                }
+                else
+                {
+                    var nearestUnitIndex = CheckNearestUnit(enemiesInRange);
+                    var nearestUnit = checkedUnits[nearestUnitIndex];
+                    nearestUnit.IsInTarget = true;
+                    seekerUnit.ReplaceTarget(nearestUnit);
+                }
             }
         }
         

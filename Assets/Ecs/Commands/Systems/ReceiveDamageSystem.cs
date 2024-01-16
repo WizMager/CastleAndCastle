@@ -12,11 +12,20 @@ namespace Ecs.Commands.Systems
         protected override void Execute(ref ReceiveDamageCommand command)
         {
             var unitEntity = command.Target;
+
+            if (!unitEntity.HasTarget)
+            {
+                unitEntity.IsInAttackRange = false;
+                
+                return;
+            }
+            
             var targetEntity = unitEntity.Target.Value;
 
             if (!targetEntity.HasHealth)
             {
                 unitEntity.RemoveTarget();
+                
                 return;
             }
             var health = targetEntity.Health.Value;

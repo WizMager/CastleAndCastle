@@ -21,8 +21,13 @@ namespace Ecs.Game.Systems.Units
             {
                 var selfPosition = unit.Position.Value;
                 var target = unit.Target.Value;
-                
-                if (!target.HasPosition) continue;
+
+                if (!target.HasPosition)
+                {
+                    unit.RemoveTarget();
+                    
+                    continue;
+                }
                 
                 var targetPosition = target.Position.Value;
                 var attackRange = unit.UnitData.Value.AttackRange;
