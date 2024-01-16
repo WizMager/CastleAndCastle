@@ -3,9 +3,12 @@ using Ecs.Utils.Groups;
 using Game.Providers.GameFieldProvider;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 
 namespace Ecs.Game.Systems.Units
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 300, nameof(EFeatures.Units))]
     public class SearchTargetSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;

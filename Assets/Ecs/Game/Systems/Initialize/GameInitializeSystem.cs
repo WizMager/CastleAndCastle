@@ -3,6 +3,8 @@ using Game.Ui;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 using SimpleUi.Signals;
 using UniRx;
 using UnityEngine;
@@ -10,6 +12,7 @@ using Zenject;
 
 namespace Ecs.Game.Systems.Initialize
 {
+    [Install(ExecutionType.Game, ExecutionPriority.High, 50, nameof(EFeatures.Initialization))]
     public class GameInitializeSystem : IInitializeSystem
     {
         private readonly SignalBus _signalBus;

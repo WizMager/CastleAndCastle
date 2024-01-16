@@ -1,9 +1,12 @@
 ﻿using Ecs.Utils.Groups;
 using JCMG.EntitasRedux;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 using UnityEngine;
 
 namespace Ecs.Game.Systems.Units
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 400, nameof(EFeatures.Units))]
     public class AttackCooldownSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;

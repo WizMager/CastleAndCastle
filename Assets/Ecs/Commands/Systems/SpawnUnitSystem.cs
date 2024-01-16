@@ -2,9 +2,12 @@
 using Ecs.Game.Extensions;
 using Game.Providers.GameFieldProvider;
 using JCMG.EntitasRedux.Commands;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 
 namespace Ecs.Commands.Systems
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 100, nameof(EFeatures.Units))]
     public class SpawnUnitSystem : ForEachCommandUpdateSystem<SpawnUnitCommand>
     {
         private readonly GameContext _game;

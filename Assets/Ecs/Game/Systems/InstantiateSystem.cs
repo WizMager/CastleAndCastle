@@ -3,9 +3,12 @@ using Ecs.Utils.LinkedEntityRepository;
 using Ecs.Utils.SpawnService;
 using Ecs.Views.Linkable;
 using JCMG.EntitasRedux;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 
 namespace Ecs.Game.Systems
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 100, nameof(EFeatures.Common))]
     public class InstantiateSystem : ReactiveSystem<GameEntity>
     {
         private readonly ILinkedEntityRepository _linkedEntityRepository;

@@ -2,9 +2,12 @@
 using Ecs.Utils.Groups;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 
 namespace Ecs.Game.Systems.Units
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 500, nameof(EFeatures.Units))]
     public class AttackSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;

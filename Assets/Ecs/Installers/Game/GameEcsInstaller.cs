@@ -1,8 +1,4 @@
-﻿using Ecs.Commands.Systems;
-using Ecs.Core.Bootstrap;
-using Ecs.Game.Systems;
-using Ecs.Game.Systems.Initialize;
-using Ecs.Game.Systems.Units;
+﻿using Ecs.Core.Bootstrap;
 using Ecs.Installers.Game.Feature;
 using Ecs.Utils.Groups.Impl;
 using JCMG.EntitasRedux.Commands;
@@ -19,7 +15,7 @@ namespace Ecs.Installers.Game
 			
 			BindContexts();
             
-			BindSystems();
+			GameEcsSystems.Install(Container);
 
 			BindEventSystems();
 
@@ -38,21 +34,6 @@ namespace Ecs.Installers.Game
 		{
 			BindContext<GameContext>();
 			BindContext<InputContext>();
-		}
-
-		private void BindSystems()
-		{
-			//Initialize
-			Container.BindInterfacesTo<GameInitializeSystem>().AsSingle();
-			
-			//Other
-			Container.BindInterfacesTo<InstantiateSystem>().AsSingle();
-			Container.BindInterfacesTo<SearchTargetSystem>().AsSingle();
-			Container.BindInterfacesTo<SpawnUnitSystem>().AsSingle();
-			Container.BindInterfacesTo<MoveToTargetSystem>().AsSingle();
-			Container.BindInterfacesTo<AttackSystem>().AsSingle();
-			Container.BindInterfacesTo<ReceiveDamageSystem>().AsSingle();
-			Container.BindInterfacesTo<AttackCooldownSystem>().AsSingle();
 		}
 		
 		private void BindEventSystems()

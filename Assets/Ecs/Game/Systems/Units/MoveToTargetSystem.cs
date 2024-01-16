@@ -1,9 +1,11 @@
 ﻿using Ecs.Utils.Groups;
 using JCMG.EntitasRedux;
-using UnityEngine;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 
 namespace Ecs.Game.Systems.Units
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 350, nameof(EFeatures.Units))]
     public class MoveToTargetSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;
