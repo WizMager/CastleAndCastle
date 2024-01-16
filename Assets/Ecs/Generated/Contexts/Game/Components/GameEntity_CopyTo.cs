@@ -26,6 +26,62 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
+		{
+			IsInstantiate = true;
+		}
+		else if (component is Ecs.Game.Components.PositionComponent Position)
+		{
+			CopyPositionTo(Position);
+		}
+		else if (component is Ecs.Game.Components.UnitTypeComponent UnitType)
+		{
+			CopyUnitTypeTo(UnitType);
+		}
+		else if (component is Ecs.Game.Components.RotationComponent Rotation)
+		{
+			CopyRotationTo(Rotation);
+		}
+		else if (component is Ecs.Game.Components.TransformComponent Transform)
+		{
+			CopyTransformTo(Transform);
+		}
+		else if (component is Ecs.Game.Components.Units.InAttackRangeComponent InAttackRange)
+		{
+			IsInAttackRange = true;
+		}
+		else if (component is Ecs.Game.Components.Units.HealthComponent Health)
+		{
+			CopyHealthTo(Health);
+		}
+		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
+		{
+			CopyAggroRadiusTo(AggroRadius);
+		}
+		else if (component is Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint)
+		{
+			CopyDestinationPointTo(DestinationPoint);
+		}
+		else if (component is Ecs.Game.Components.Units.TargetComponent Target)
+		{
+			CopyTargetTo(Target);
+		}
+		else if (component is Ecs.Game.Components.Units.UnitDataComponent UnitData)
+		{
+			CopyUnitDataTo(UnitData);
+		}
+		else if (component is Ecs.Game.Components.Units.PlayerUnitComponent PlayerUnit)
+		{
+			IsPlayerUnit = true;
+		}
+		else if (component is Ecs.Game.Components.Units.InTargetComponent InTarget)
+		{
+			IsInTarget = true;
+		}
+		else if (component is Ecs.Game.Components.Units.AttackCooldownComponent AttackCooldown)
+		{
+			CopyAttackCooldownTo(AttackCooldown);
+		}
 
 		#endif
 	}

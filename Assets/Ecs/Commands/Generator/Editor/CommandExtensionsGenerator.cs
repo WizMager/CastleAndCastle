@@ -61,7 +61,6 @@ namespace Ecs.Commands.Generator.Editor
 			var autoPropRegex = new Regex(@"\s*\{\s*get;\s*set;\s*}\s");
 			initialCode = autoPropRegex.Replace(initialCode, " { get; set; }");
 			var code = GetComment();
-			code += "using Range = PdUtils.Range;\n";
 			code += initialCode;
 			code = AddRefs(code);
 			

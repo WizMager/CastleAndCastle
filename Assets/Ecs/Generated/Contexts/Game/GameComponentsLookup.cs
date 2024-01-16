@@ -13,31 +13,103 @@ using JCMG.EntitasRedux;
 
 public static class GameComponentsLookup
 {
-	public const int Destroyed = 0;
-	public const int Uid = 1;
-	public const int GameDestroyedListener = 2;
+	public const int DestinationPointListener = 0;
+	public const int Destroyed = 1;
+	public const int Uid = 2;
+	public const int Instantiate = 3;
+	public const int Position = 4;
+	public const int Rotation = 5;
+	public const int Transform = 6;
+	public const int AggroRadius = 7;
+	public const int AttackCooldown = 8;
+	public const int DestinationPoint = 9;
+	public const int Health = 10;
+	public const int InAttackRange = 11;
+	public const int InTarget = 12;
+	public const int PlayerUnit = 13;
+	public const int Target = 14;
+	public const int UnitData = 15;
+	public const int UnitType = 16;
+	public const int GameDestroyedListener = 17;
+	public const int PositionListener = 18;
+	public const int RotationListener = 19;
+	public const int TargetListener = 20;
 
-	public const int TotalComponents = 3;
+	public const int TotalComponents = 21;
 
 	public static readonly string[] ComponentNames =
 	{
+		"DestinationPointListener",
 		"Destroyed",
 		"Uid",
-		"GameDestroyedListener"
+		"Instantiate",
+		"Position",
+		"Rotation",
+		"Transform",
+		"AggroRadius",
+		"AttackCooldown",
+		"DestinationPoint",
+		"Health",
+		"InAttackRange",
+		"InTarget",
+		"PlayerUnit",
+		"Target",
+		"UnitData",
+		"UnitType",
+		"GameDestroyedListener",
+		"PositionListener",
+		"RotationListener",
+		"TargetListener"
 	};
 
 	public static readonly System.Type[] ComponentTypes =
 	{
+		typeof(DestinationPointListenerComponent),
 		typeof(Ecs.Common.Components.DestroyedComponent),
 		typeof(Ecs.Common.Components.UidComponent),
-		typeof(GameDestroyedListenerComponent)
+		typeof(Ecs.Game.Components.InstantiateComponent),
+		typeof(Ecs.Game.Components.PositionComponent),
+		typeof(Ecs.Game.Components.RotationComponent),
+		typeof(Ecs.Game.Components.TransformComponent),
+		typeof(Ecs.Game.Components.Units.AggroRadiusComponent),
+		typeof(Ecs.Game.Components.Units.AttackCooldownComponent),
+		typeof(Ecs.Game.Components.Units.DestinationPointComponent),
+		typeof(Ecs.Game.Components.Units.HealthComponent),
+		typeof(Ecs.Game.Components.Units.InAttackRangeComponent),
+		typeof(Ecs.Game.Components.Units.InTargetComponent),
+		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
+		typeof(Ecs.Game.Components.Units.TargetComponent),
+		typeof(Ecs.Game.Components.Units.UnitDataComponent),
+		typeof(Ecs.Game.Components.UnitTypeComponent),
+		typeof(GameDestroyedListenerComponent),
+		typeof(PositionListenerComponent),
+		typeof(RotationListenerComponent),
+		typeof(TargetListenerComponent)
 	};
 
 	public static readonly Dictionary<Type, int> ComponentTypeToIndex = new Dictionary<Type, int>
 	{
-		{ typeof(Ecs.Common.Components.DestroyedComponent), 0 },
-		{ typeof(Ecs.Common.Components.UidComponent), 1 },
-		{ typeof(GameDestroyedListenerComponent), 2 }
+		{ typeof(DestinationPointListenerComponent), 0 },
+		{ typeof(Ecs.Common.Components.DestroyedComponent), 1 },
+		{ typeof(Ecs.Common.Components.UidComponent), 2 },
+		{ typeof(Ecs.Game.Components.InstantiateComponent), 3 },
+		{ typeof(Ecs.Game.Components.PositionComponent), 4 },
+		{ typeof(Ecs.Game.Components.RotationComponent), 5 },
+		{ typeof(Ecs.Game.Components.TransformComponent), 6 },
+		{ typeof(Ecs.Game.Components.Units.AggroRadiusComponent), 7 },
+		{ typeof(Ecs.Game.Components.Units.AttackCooldownComponent), 8 },
+		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 9 },
+		{ typeof(Ecs.Game.Components.Units.HealthComponent), 10 },
+		{ typeof(Ecs.Game.Components.Units.InAttackRangeComponent), 11 },
+		{ typeof(Ecs.Game.Components.Units.InTargetComponent), 12 },
+		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 13 },
+		{ typeof(Ecs.Game.Components.Units.TargetComponent), 14 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 15 },
+		{ typeof(Ecs.Game.Components.UnitTypeComponent), 16 },
+		{ typeof(GameDestroyedListenerComponent), 17 },
+		{ typeof(PositionListenerComponent), 18 },
+		{ typeof(RotationListenerComponent), 19 },
+		{ typeof(TargetListenerComponent), 20 }
 	};
 
 	/// <summary>
