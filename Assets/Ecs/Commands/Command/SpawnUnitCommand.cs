@@ -2,7 +2,7 @@
 using Game.Utils.Units;
 using UnityEngine;
 
-namespace Ecs.Commands.Commands
+namespace Ecs.Commands.Command
 {
     [Command]
     public struct SpawnUnitCommand

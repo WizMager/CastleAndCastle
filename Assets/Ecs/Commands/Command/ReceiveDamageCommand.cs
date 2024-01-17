@@ -1,11 +1,12 @@
 ﻿using Ecs.Commands.Generator;
+using Ecs.Extensions.UidGenerator;
 
-namespace Ecs.Commands.Commands
+namespace Ecs.Commands.Command
 {
     [Command]
     public struct ReceiveDamageCommand
     {
-        public GameEntity Target;
+        public Uid TargetUid;
         public float Damage;
     }
 }

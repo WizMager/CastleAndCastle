@@ -1,4 +1,4 @@
-﻿using Ecs.Commands.Commands;
+﻿using Ecs.Commands.Command;
 using Ecs.Game.Extensions;
 using Game.Providers.GameFieldProvider;
 using JCMG.EntitasRedux.Commands;

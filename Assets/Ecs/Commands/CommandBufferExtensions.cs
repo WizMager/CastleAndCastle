@@ -7,22 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using JCMG.EntitasRedux.Commands;
-using Ecs.Commands.Commands;
+using Ecs.Commands.Command;
+using Ecs.Extensions.UidGenerator;
+using System;
 using UnityEngine;
 using Game.Utils.Units;
-using System;
+using Ecs.Commands.Command.Input;
 
 namespace Ecs.Commands
 {
     public static partial class CommandBufferExtensions
     {
-        public static void ReceiveDamage(this ICommandBuffer commandBuffer, GameEntity target, float damage)
+        public static void ReceiveDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
         {
             ref var command = ref commandBuffer.Create<ReceiveDamageCommand>();
-            command.Target = target;
+            command.TargetUid = targetUid;
             command.Damage = damage;
         }
-        
+
         public static void SpawnUnit(this ICommandBuffer commandBuffer, Vector3 position, Quaternion rotation, EUnitType unitType, Boolean isPlayerUnit)
         {
             ref var command = ref commandBuffer.Create<SpawnUnitCommand>();
@@ -30,6 +32,28 @@ namespace Ecs.Commands
             command.Rotation = rotation;
             command.UnitType = unitType;
             command.IsPlayerUnit = isPlayerUnit;
+        }
+
+        public static void PointerDown(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 position)
+        {
+            ref var command = ref commandBuffer.Create<PointerDownCommand>();
+            command.TouchId = touchId;
+            command.Position = position;
+        }
+
+        public static void PointerDrag(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 position, Vector3 delta)
+        {
+            ref var command = ref commandBuffer.Create<PointerDragCommand>();
+            command.TouchId = touchId;
+            command.Position = position;
+            command.Delta = delta;
+        }
+
+        public static void PointerUp(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 position)
+        {
+            ref var command = ref commandBuffer.Create<PointerUpCommand>();
+            command.TouchId = touchId;
+            command.Position = position;
         }
     }
 }

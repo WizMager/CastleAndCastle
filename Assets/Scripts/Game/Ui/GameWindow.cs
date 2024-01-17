@@ -1,4 +1,5 @@
-﻿using Game.Ui.StartGame;
+﻿using Game.Ui.Input;
+using Game.Ui.StartGame;
 using SimpleUi;
 
 namespace Game.Ui
@@ -9,6 +10,7 @@ namespace Game.Ui
         
         protected override void AddControllers()
         {
+            AddController<InputController>();
             AddController<StartGameController>();
         }
     }

@@ -1,4 +1,5 @@
-﻿using Game.Ui.StartGame;
+﻿using Game.Ui.Input;
+using Game.Ui.StartGame;
 using SimpleUi;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,7 @@ namespace Installers.Game
         [SerializeField] private Canvas canvas;
         
         [SerializeField] private StartGameView startGameView;
+        [SerializeField] private InputView inputView;
         
         public override void InstallBindings()
         {
@@ -18,6 +20,7 @@ namespace Installers.Game
             var canvasTransform = canvasView.transform;
             
             Container.BindUiView<StartGameController, StartGameView>(startGameView, canvasTransform);
+            Container.BindUiView<InputController, InputView>(inputView, canvasTransform);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Ecs.Game.Systems.Units
                 
                 unit.ReplaceAttackCooldown(attackSpeed);
                 
-                _commandBuffer.ReceiveDamage(unit, damage);
+                _commandBuffer.ReceiveDamage(unit.Uid.Value, damage);
             }
         }
     }

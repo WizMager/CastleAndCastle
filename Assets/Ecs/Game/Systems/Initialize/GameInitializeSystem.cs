@@ -1,4 +1,6 @@
-﻿using Ecs.Commands;
+﻿using System.Collections.Generic;
+using Ecs.Commands;
+using Ecs.Utils.Interfaces;
 using Game.Ui;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
@@ -17,24 +19,36 @@ namespace Ecs.Game.Systems.Initialize
     {
         private readonly SignalBus _signalBus;
         private readonly ICommandBuffer _commandBuffer;
+        private readonly List<IUiInitialize> _uiInitializes;
 
         public GameInitializeSystem(
             SignalBus signalBus,
-            ICommandBuffer commandBuffer
-        )
+            ICommandBuffer commandBuffer,
+            List<IUiInitialize> uiInitializes)
         {
             _signalBus = signalBus;
             _commandBuffer = commandBuffer;
+            _uiInitializes = uiInitializes;
         }
         
         public void Initialize()
         {
+            InitializeUi(_uiInitializes);
+            
             Observable.TimerFrame(100).Subscribe(_ =>
             {
                 _signalBus.OpenWindow<GameWindow>();
             });
             
             DebugSpawnUnits();
+        }
+
+        private void InitializeUi(List<IUiInitialize> uiInitializes)
+        {
+            foreach (var ui in uiInitializes)
+            {
+                ui.Initialize();
+            }
         }
 
         private void DebugSpawnUnits()
