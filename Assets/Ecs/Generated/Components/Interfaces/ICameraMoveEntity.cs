@@ -7,12 +7,12 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface IUnitTypeEntity
+public partial interface ICameraMoveEntity
 {
-	Ecs.Game.Components.Units.UnitTypeComponent UnitType { get; }
-	bool HasUnitType { get; }
+	Ecs.Game.Components.Camera.CameraMoveComponent CameraMove { get; }
+	bool HasCameraMove { get; }
 
-	void AddUnitType(Game.Utils.Units.EUnitType newValue);
-	void ReplaceUnitType(Game.Utils.Units.EUnitType newValue);
-	void RemoveUnitType();
+	void AddCameraMove(UnityEngine.Vector3 newStartTouchPosition);
+	void ReplaceCameraMove(UnityEngine.Vector3 newStartTouchPosition);
+	void RemoveCameraMove();
 }

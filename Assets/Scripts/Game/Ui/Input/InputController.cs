@@ -30,12 +30,12 @@ namespace Game.Ui.Input
 
         private void OnPointerUp(PointerEventData eventData)
         {
-            _commandBuffer.PointerUp(eventData.pointerId, eventData.position);
+            _commandBuffer.PointerUp(eventData.pointerId);
         }
         
         private void OnDrag(PointerEventData eventData)
         {
-            _commandBuffer.PointerDrag(eventData.pointerId, eventData.position, eventData.delta);
+            _commandBuffer.PointerDrag(eventData.pointerId, eventData.delta);
         }
     }
 }

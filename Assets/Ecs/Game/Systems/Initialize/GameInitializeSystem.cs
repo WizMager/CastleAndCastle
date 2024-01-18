@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Ecs.Commands;
+using Ecs.Game.Extensions;
 using Ecs.Utils.Interfaces;
+using Game.Providers.GameFieldProvider;
 using Game.Ui;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
@@ -17,23 +19,33 @@ namespace Ecs.Game.Systems.Initialize
     [Install(ExecutionType.Game, ExecutionPriority.High, 50, nameof(EFeatures.Initialization))]
     public class GameInitializeSystem : IInitializeSystem
     {
+        private readonly GameContext _game;
         private readonly SignalBus _signalBus;
         private readonly ICommandBuffer _commandBuffer;
         private readonly List<IUiInitialize> _uiInitializes;
+        private readonly IGameFieldProvider _gameFieldProvider;
 
         public GameInitializeSystem(
+            GameContext game,
             SignalBus signalBus,
             ICommandBuffer commandBuffer,
-            List<IUiInitialize> uiInitializes)
+            List<IUiInitialize> uiInitializes,
+            IGameFieldProvider gameFieldProvider)
         {
+            _game = game;
             _signalBus = signalBus;
             _commandBuffer = commandBuffer;
             _uiInitializes = uiInitializes;
+            _gameFieldProvider = gameFieldProvider;
         }
         
         public void Initialize()
         {
+            var gameField = _gameFieldProvider.GameField;
+            
             InitializeUi(_uiInitializes);
+
+            _game.CreateCamera(gameField.StartCameraPosition);
             
             Observable.TimerFrame(100).Subscribe(_ =>
             {

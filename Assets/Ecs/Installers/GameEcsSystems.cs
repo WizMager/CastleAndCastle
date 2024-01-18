@@ -2,6 +2,7 @@ using Ecs.Game.Systems;
 using Ecs.Game.Systems.Units;
 using Ecs.Game.Systems.Initialize;
 using Ecs.Commands.Systems;
+using Ecs.Commands.Systems.Input;
 
 using Zenject; 
 using Plugins.Extensions.InstallerGenerator.Utils;
@@ -32,6 +33,13 @@ namespace Ecs.Installers {
 			// Common 0100
 			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
 			SystemInstallHelper.Install<SpawnUnitSystem>(container);	// 0100 Units
+
+			// Input 0150
+			SystemInstallHelper.Install<PointerDownSystem>(container);	// 0150 Input
+			SystemInstallHelper.Install<PointerDragSystem>(container);	// 0150 Input
+
+			// Input 0170
+			SystemInstallHelper.Install<PointerUpSystem>(container);	// 0170 Input
 
 			// Units 0300
 			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units

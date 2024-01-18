@@ -7,6 +7,5 @@ namespace Ecs.Commands.Command.Input
     public struct PointerUpCommand
     {
         public int TouchId;
-        public Vector3 Position;
     }
 }

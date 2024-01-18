@@ -26,10 +26,10 @@ namespace Ecs.Utils.SpawnService.Impl
 
         public IObjectLinkable Spawn(GameEntity entity)
         {
-            if (!entity.HasUnitType) 
+            if (!entity.HasPrefab) 
                 throw new Exception($"[{typeof(SpawnService)}]: Can't instantiate entity: " + entity);
             
-            var prefabName = entity.UnitType.Value.ToString();
+            var prefabName = entity.Prefab.Value;
             var position = entity.HasPosition ? entity.Position.Value : Vector3.zero;
             
             return _prefabPoolService.Spawn(prefabName, position, Quaternion.identity, out var linkable)

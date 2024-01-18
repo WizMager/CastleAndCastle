@@ -2359,6 +2359,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04f504d50c0c54e47a5add4fc7a98928, type: 3}
   m_PrefabInstance: {fileID: 281029203}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &282549169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 282549170}
+  m_Layer: 0
+  m_Name: StartCameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &282549170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282549169}
+  m_LocalRotation: {x: -0.1150751, y: 0.8811196, z: -0.36497167, w: -0.27781588}
+  m_LocalPosition: {x: 87, y: 84, z: 66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 45, y: 215, z: 0}
 --- !u!1 &288188043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5831,6 +5862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCastlePosition: {fileID: 321278677}
   enemyCastlePosition: {fileID: 1027578372}
+  startCameraPosition: {fileID: 282549170}
 --- !u!4 &865660130
 Transform:
   m_ObjectHideFlags: 0

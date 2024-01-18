@@ -7,7 +7,6 @@ namespace Ecs.Commands.Command.Input
     public struct PointerDragCommand
     {
         public int TouchId;
-        public Vector3 Position;
         public Vector3 Delta;
     }
 }

@@ -41,19 +41,17 @@ namespace Ecs.Commands
             command.Position = position;
         }
 
-        public static void PointerDrag(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 position, Vector3 delta)
+        public static void PointerDrag(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 delta)
         {
             ref var command = ref commandBuffer.Create<PointerDragCommand>();
             command.TouchId = touchId;
-            command.Position = position;
             command.Delta = delta;
         }
 
-        public static void PointerUp(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 position)
+        public static void PointerUp(this ICommandBuffer commandBuffer, Int32 touchId)
         {
             ref var command = ref commandBuffer.Create<PointerUpCommand>();
             command.TouchId = touchId;
-            command.Position = position;
         }
     }
 }

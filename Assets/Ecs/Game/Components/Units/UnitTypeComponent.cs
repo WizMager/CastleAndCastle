@@ -1,7 +1,7 @@
 ﻿using Game.Utils.Units;
 using JCMG.EntitasRedux;
 
-namespace Ecs.Game.Components
+namespace Ecs.Game.Components.Units
 {
     [Game]
     public class UnitTypeComponent : IComponent

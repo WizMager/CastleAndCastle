@@ -7,12 +7,7 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface IUnitTypeEntity
+public partial interface ICameraEntity
 {
-	Ecs.Game.Components.Units.UnitTypeComponent UnitType { get; }
-	bool HasUnitType { get; }
-
-	void AddUnitType(Game.Utils.Units.EUnitType newValue);
-	void ReplaceUnitType(Game.Utils.Units.EUnitType newValue);
-	void RemoveUnitType();
+	bool IsCamera { get; set; }
 }
