@@ -22,7 +22,7 @@ namespace Ecs.Commands.Systems.Input
         {
             var camera = _game.CameraEntity;
 
-            camera.AddCameraMove(command.Position);
+            camera.IsCameraMove = true;
         }
     }
 }

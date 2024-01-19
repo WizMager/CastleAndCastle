@@ -1,5 +1,4 @@
 ﻿using Ecs.Commands.Generator;
-using UnityEngine;
 
 namespace Ecs.Commands.Command.Input
 {

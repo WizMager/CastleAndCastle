@@ -34,11 +34,10 @@ namespace Ecs.Commands
             command.IsPlayerUnit = isPlayerUnit;
         }
 
-        public static void PointerDown(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 position)
+        public static void PointerDown(this ICommandBuffer commandBuffer, Int32 touchId)
         {
             ref var command = ref commandBuffer.Create<PointerDownCommand>();
             command.TouchId = touchId;
-            command.Position = position;
         }
 
         public static void PointerDrag(this ICommandBuffer commandBuffer, Int32 touchId, Vector3 delta)

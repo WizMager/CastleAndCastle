@@ -9,10 +9,5 @@
 //------------------------------------------------------------------------------
 public partial interface ICameraMoveEntity
 {
-	Ecs.Game.Components.Camera.CameraMoveComponent CameraMove { get; }
-	bool HasCameraMove { get; }
-
-	void AddCameraMove(UnityEngine.Vector3 newStartTouchPosition);
-	void ReplaceCameraMove(UnityEngine.Vector3 newStartTouchPosition);
-	void RemoveCameraMove();
+	bool IsCameraMove { get; set; }
 }

@@ -9,42 +9,31 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity
 {
-	public Ecs.Game.Components.Camera.CameraMoveComponent CameraMove { get { return (Ecs.Game.Components.Camera.CameraMoveComponent)GetComponent(GameComponentsLookup.CameraMove); } }
-	public bool HasCameraMove { get { return HasComponent(GameComponentsLookup.CameraMove); } }
+	static readonly Ecs.Game.Components.Camera.CameraMoveComponent CameraMoveComponent = new Ecs.Game.Components.Camera.CameraMoveComponent();
 
-	public void AddCameraMove(UnityEngine.Vector3 newStartTouchPosition)
+	public bool IsCameraMove
 	{
-		var index = GameComponentsLookup.CameraMove;
-		var component = (Ecs.Game.Components.Camera.CameraMoveComponent)CreateComponent(index, typeof(Ecs.Game.Components.Camera.CameraMoveComponent));
-		#if !ENTITAS_REDUX_NO_IMPL
-		component.StartTouchPosition = newStartTouchPosition;
-		#endif
-		AddComponent(index, component);
-	}
+		get { return HasComponent(GameComponentsLookup.CameraMove); }
+		set
+		{
+			if (value != IsCameraMove)
+			{
+				var index = GameComponentsLookup.CameraMove;
+				if (value)
+				{
+					var componentPool = GetComponentPool(index);
+					var component = componentPool.Count > 0
+							? componentPool.Pop()
+							: CameraMoveComponent;
 
-	public void ReplaceCameraMove(UnityEngine.Vector3 newStartTouchPosition)
-	{
-		var index = GameComponentsLookup.CameraMove;
-		var component = (Ecs.Game.Components.Camera.CameraMoveComponent)CreateComponent(index, typeof(Ecs.Game.Components.Camera.CameraMoveComponent));
-		#if !ENTITAS_REDUX_NO_IMPL
-		component.StartTouchPosition = newStartTouchPosition;
-		#endif
-		ReplaceComponent(index, component);
-	}
-
-	public void CopyCameraMoveTo(Ecs.Game.Components.Camera.CameraMoveComponent copyComponent)
-	{
-		var index = GameComponentsLookup.CameraMove;
-		var component = (Ecs.Game.Components.Camera.CameraMoveComponent)CreateComponent(index, typeof(Ecs.Game.Components.Camera.CameraMoveComponent));
-		#if !ENTITAS_REDUX_NO_IMPL
-		component.StartTouchPosition = copyComponent.StartTouchPosition;
-		#endif
-		ReplaceComponent(index, component);
-	}
-
-	public void RemoveCameraMove()
-	{
-		RemoveComponent(GameComponentsLookup.CameraMove);
+					AddComponent(index, component);
+				}
+				else
+				{
+					RemoveComponent(index);
+				}
+			}
+		}
 	}
 }
 

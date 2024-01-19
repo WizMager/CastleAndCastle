@@ -26,10 +26,6 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
-		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
-		{
-			CopyPrefabTo(Prefab);
-		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
@@ -46,13 +42,17 @@ public partial class GameEntity
 		{
 			CopyTransformTo(Transform);
 		}
-		else if (component is Ecs.Game.Components.Camera.CameraComponent Camera)
+		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
 		{
-			IsCamera = true;
+			CopyPrefabTo(Prefab);
 		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{
-			CopyCameraMoveTo(CameraMove);
+			IsCameraMove = true;
+		}
+		else if (component is Ecs.Game.Components.Camera.CameraComponent Camera)
+		{
+			IsCamera = true;
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{

@@ -10,6 +10,7 @@ namespace Ecs.Commands.Systems.Input
     public class PointerDragSystem : ForEachCommandUpdateSystem<PointerDragCommand>
     {
         private const float DRAG_THRESHOLD = 0.0001f;
+        private const float SENSITIVE = 0.7f;
 
         private readonly GameContext _game;
         
@@ -25,27 +26,30 @@ namespace Ecs.Commands.Systems.Input
         {
             var camera = _game.CameraEntity;
 
-            if (!camera.HasCameraMove) return;
-
-            var startPosition = camera.CameraMove.StartTouchPosition;
+            if (!camera.IsCameraMove) return;
+            
             var dragDelta = command.Delta;
             
             if(Mathf.Abs(dragDelta.sqrMagnitude) <= DRAG_THRESHOLD)
                 return;
             
-            var pinPosition = startPosition;
-            pinPosition = NormalizeScreenPosition(pinPosition);
+            var moveDelta = command.Delta;
+            moveDelta *= SENSITIVE;
 
-
-            var currentPosition = command.Delta;
-            currentPosition = NormalizeScreenPosition(currentPosition);
-
-            var diff = pinPosition - currentPosition;
+            var result = Convert(camera, moveDelta);
+            
+            Debug.Log($"DRAG: {moveDelta} | {result}");
+            var cameraPosition = camera.Position.Value;
+            cameraPosition.x += result.x;
+            cameraPosition.z -= result.y;
+            camera.ReplacePosition(cameraPosition);
         }
-        
-        private Vector2 NormalizeScreenPosition(Vector2 screenPosition)
+
+        private Vector3 Convert(IRotationEntity camera, Vector3 moveDelta)
         {
-            return new Vector2(screenPosition.x / Screen.width, screenPosition.y / Screen.height);
+            var cameraRotation = camera.Rotation.Value;
+            var angle = cameraRotation.eulerAngles.y;
+            return Quaternion.Euler(0, angle, 0) * moveDelta;
         }
     }
 }

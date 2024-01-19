@@ -1,5 +1,4 @@
 ﻿using Ecs.Commands.Generator;
-using UnityEngine;
 
 namespace Ecs.Commands.Command.Input
 {
@@ -7,6 +6,5 @@ namespace Ecs.Commands.Command.Input
     public struct PointerDownCommand
     {
         public int TouchId;
-        public Vector3 Position;
     }
 }

@@ -25,7 +25,7 @@ namespace Game.Ui.Input
         
         private void OnPointerDown(PointerEventData eventData)
         {
-            _commandBuffer.PointerDown(eventData.pointerId, eventData.position);
+            _commandBuffer.PointerDown(eventData.pointerId);
         }
 
         private void OnPointerUp(PointerEventData eventData)
