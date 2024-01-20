@@ -63,8 +63,11 @@ namespace Ecs.Views.Linkable.Impl.Units
 
         protected override void OnClear()
         {
-            var targetEntity = SelfEntity.Target.Value;
-            targetEntity.IsInTarget = false;
+            if (SelfEntity.HasTarget)
+            {
+                var targetEntity = SelfEntity.Target.Value;
+                targetEntity.IsInTarget = false;
+            }
             
             base.OnClear();
         }

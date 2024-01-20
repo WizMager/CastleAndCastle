@@ -32,7 +32,7 @@ namespace Ecs.Game.Systems.Initialize
 
         private void DebugSpawnUnits()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 _commandBuffer.SpawnUnit(new Vector3(-40 + i, 0.5f, 0), Quaternion.identity, EUnitType.MeleeUnit, false);
             }
@@ -42,14 +42,14 @@ namespace Ecs.Game.Systems.Initialize
                 _commandBuffer.SpawnUnit(new Vector3(-40 + i, 0.5f, 1 + i), Quaternion.identity, EUnitType.RangeUnit, false);
             }
             
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
-                _commandBuffer.SpawnUnit(new Vector3(40 - i, 0.5f, 0), Quaternion.identity, EUnitType.MeleeUnit, true);
+                _commandBuffer.SpawnUnit(new Vector3(43 - i, 0.5f, 0), Quaternion.identity, EUnitType.MeleeUnit, true);
             }
             
             for (int i = 0; i < 2; i++)
             {
-                _commandBuffer.SpawnUnit(new Vector3(40 - i, 0.5f, 1 + i), Quaternion.identity, EUnitType.RangeUnit, true);
+                _commandBuffer.SpawnUnit(new Vector3(43 - i, 0.5f, 1 + i), Quaternion.identity, EUnitType.RangeUnit, true);
             }
         }
     }
