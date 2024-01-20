@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Utils;
+using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using UnityEngine.Pool;
 
@@ -8,17 +9,39 @@ namespace Ecs.Utils.Groups.Impl
 {
     public class GameGroupUtils : IGameGroupUtils
     {
-        private readonly IGroup<GameEntity> _obstacleGroup;
+        private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _buildingSlotsGroup;
 
         public GameGroupUtils(GameContext game)
         {
-            //_obstacleGroup = game.GetGroup(GameMatcher.AllOf(GameMatcher.Obstacle));
+            _units = game.GetGroup(GameMatcher.AllOf(GameMatcher.UnitData, GameMatcher.UnitType));
         }
 
-        public IDisposable GetObstacles(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null)
+        public IDisposable GetUnits(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null, bool nonDestroyed = true)
         {
-            return GetEntities(out buffer, _obstacleGroup, e => /*e.HasObstacle && */!e.IsDestroyed, filter);
+            Func<GameEntity, bool> baseFilter = nonDestroyed
+                ? e => !e.IsDestroyed
+                : e => e.IsDestroyed;
+            
+            return GetEntities(out buffer, _units, baseFilter, filter);
+        }
+
+        public IDisposable GetOwnerUnits(out List<GameEntity> buffer, bool isPlayerUnits, Func<GameEntity, bool> filter = null)
+        {
+            Func<GameEntity, bool> baseFilter = isPlayerUnits
+                ? e => e.IsPlayerUnit && !e.IsDestroyed
+                : e => !e.IsPlayerUnit && !e.IsDestroyed;
+            
+            return GetEntities(out buffer, _units, baseFilter, filter);
+        }
+
+        public IDisposable GetOwnerUnitsWithType(out List<GameEntity> buffer, bool isPlayerUnits, EUnitType unitType, Func<GameEntity, bool> filter = null)
+        {
+            Func<GameEntity, bool> baseFilter = isPlayerUnits
+                ? e => e.IsPlayerUnit && e.UnitType.Value == unitType && !e.IsDestroyed
+                : e => !e.IsPlayerUnit && e.UnitType.Value == unitType && !e.IsDestroyed;
+            
+            return GetEntities(out buffer, _units, baseFilter, filter);
         }
 
         public IDisposable GetBuildingSlots(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null)

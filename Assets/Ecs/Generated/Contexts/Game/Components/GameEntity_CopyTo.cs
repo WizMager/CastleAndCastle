@@ -26,22 +26,6 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
-		else if (component is Ecs.Game.Components.VisibleComponent Visible)
-		{
-			IsVisible = true;
-		}
-		else if (component is Ecs.Game.Components.BusyComponent Busy)
-		{
-			IsBusy = true;
-		}
-		else if (component is Ecs.Game.Components.CoinsComponent Coins)
-		{
-			CopyCoinsTo(Coins);
-		}
-		else if (component is Ecs.Game.Components.RotationComponent Rotation)
-		{
-			CopyRotationTo(Rotation);
-		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
@@ -50,21 +34,53 @@ public partial class GameEntity
 		{
 			CopyPositionTo(Position);
 		}
-		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
+		else if (component is Ecs.Game.Components.UnitTypeComponent UnitType)
 		{
-			CopyPrefabTo(Prefab);
+			CopyUnitTypeTo(UnitType);
+		}
+		else if (component is Ecs.Game.Components.RotationComponent Rotation)
+		{
+			CopyRotationTo(Rotation);
 		}
 		else if (component is Ecs.Game.Components.TransformComponent Transform)
 		{
 			CopyTransformTo(Transform);
 		}
-		else if (component is Ecs.Game.Components.BuildingSlotComponent BuildingSlot)
+		else if (component is Ecs.Game.Components.Units.InAttackRangeComponent InAttackRange)
 		{
-			IsBuildingSlot = true;
+			IsInAttackRange = true;
 		}
-		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
+		else if (component is Ecs.Game.Components.Units.HealthComponent Health)
 		{
-			CopySelectedBuildingTo(SelectedBuilding);
+			CopyHealthTo(Health);
+		}
+		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
+		{
+			CopyAggroRadiusTo(AggroRadius);
+		}
+		else if (component is Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint)
+		{
+			CopyDestinationPointTo(DestinationPoint);
+		}
+		else if (component is Ecs.Game.Components.Units.TargetComponent Target)
+		{
+			CopyTargetTo(Target);
+		}
+		else if (component is Ecs.Game.Components.Units.UnitDataComponent UnitData)
+		{
+			CopyUnitDataTo(UnitData);
+		}
+		else if (component is Ecs.Game.Components.Units.PlayerUnitComponent PlayerUnit)
+		{
+			IsPlayerUnit = true;
+		}
+		else if (component is Ecs.Game.Components.Units.InTargetComponent InTarget)
+		{
+			IsInTarget = true;
+		}
+		else if (component is Ecs.Game.Components.Units.AttackCooldownComponent AttackCooldown)
+		{
+			CopyAttackCooldownTo(AttackCooldown);
 		}
 
 		#endif
