@@ -1,5 +1,6 @@
 ﻿using Ecs.Commands;
 using Game.Ui;
+using Game.Ui.Windows;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
@@ -17,24 +18,24 @@ namespace Ecs.Game.Systems.Initialize
     {
         private readonly SignalBus _signalBus;
         private readonly ICommandBuffer _commandBuffer;
+        private readonly GameContext _game;
 
         public GameInitializeSystem(
             SignalBus signalBus,
-            ICommandBuffer commandBuffer
+            ICommandBuffer commandBuffer,
+            GameContext game
         )
         {
             _signalBus = signalBus;
             _commandBuffer = commandBuffer;
+            _game = game;
         }
         
         public void Initialize()
         {
-            Observable.TimerFrame(100).Subscribe(_ =>
-            {
-                _signalBus.OpenWindow<GameWindow>();
-            });
-            
             DebugSpawnUnits();
+            
+            _game.ReplaceCoins(100);
         }
 
         private void DebugSpawnUnits()

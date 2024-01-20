@@ -22,7 +22,7 @@ namespace Game.Ui.Building
         )
         {
             Id = id;
-            Icon.sprite = icon;
+            //Icon.sprite = icon;
             NameText.text = title;
             PriceText.text = price;
         }

@@ -1,5 +1,6 @@
 ﻿using Db.Buildings;
 using Ecs.Commands;
+using Ecs.Commands.Commands;
 using Ecs.Utils;
 using Ecs.Utils.Groups;
 using JCMG.EntitasRedux.Commands;
@@ -8,7 +9,7 @@ using UniRx;
 
 namespace Game.Ui.Building
 {
-    public class BuildingButtonsPanelController : UiController<BuildingPanelView>, 
+    public class BuildingPanelController : UiController<BuildingPanelView>, 
         IUiInitializable
     {
         private readonly IGameGroupUtils _gameGroupUtils;
@@ -16,7 +17,7 @@ namespace Game.Ui.Building
         private readonly ICommandBuffer _commandBuffer;
         private readonly GameContext _game;
 
-        public BuildingButtonsPanelController(
+        public BuildingPanelController(
             IGameGroupUtils gameGroupUtils, 
             IBuildingSettingsBase buildingSettingsBase,
             ICommandBuffer commandBuffer,
@@ -54,7 +55,7 @@ namespace Game.Ui.Building
                     .Subscribe(_ => OnBuildingButtonClick(building.Type))
                     .AddTo(slotView.gameObject);
 
-                slotView.Btn.interactable = coins > building.Price && slots.Count > 0;
+                slotView.Btn.interactable = coins >= building.Price && slots.Count > 0;
             }
         }
 
@@ -71,7 +72,7 @@ namespace Game.Ui.Building
             {
                 var slotSettings = _buildingSettingsBase.Get(slotView.Id);
                 
-                slotView.SetIntractable(coins > slotSettings.Price);
+                slotView.SetIntractable(coins >= slotSettings.Price);
             }
         }
 

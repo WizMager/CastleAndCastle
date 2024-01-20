@@ -2,10 +2,13 @@
 using Game.Services.InputService;
 using Game.Utils.Raycast;
 using JCMG.EntitasRedux;
+using Plugins.Extensions.InstallerGenerator.Attributes;
+using Plugins.Extensions.InstallerGenerator.Enums;
 using UnityEngine;
 
 namespace Ecs.Game.Systems
 {
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 130, nameof(EFeatures.Building))]
     public class BuildingModePointerSystem : IUpdateSystem
     {
         private readonly IRayCastProvider _rayCastProvider;
@@ -44,6 +47,8 @@ namespace Ecs.Game.Systems
                 return;
 
             var buildingHash = hit.transform.GetHashCode();
+            
+            Debug.Log($"buildingHash: {buildingHash}, obj: {hit.transform.name}");
 
         }
     }

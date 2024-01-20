@@ -107,7 +107,6 @@ namespace Game.Utils.Raycast.Impl
 		// 	return true;
 		// }
 		
-		p
 
 		public bool Raycast(
 			Vector3 origin,

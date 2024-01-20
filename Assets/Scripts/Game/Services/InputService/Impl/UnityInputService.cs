@@ -8,7 +8,9 @@ namespace Game.Services.InputService.Impl
     public class UnityInputService : IInputService, ITickable
     {
         public event Action<int> MouseButtonDown;
-        
+
+        public Vector3 MousePosition => Input.mousePosition;
+
         public void Tick()
         {
             if (Input.GetMouseButtonDown(0))

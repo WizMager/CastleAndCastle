@@ -1,6 +1,6 @@
 using Db.Buildings;
 
-namespace Ecs.Commands
+namespace Ecs.Commands.Commands
 {
     public readonly struct EnterBuildingModeCommand
     {

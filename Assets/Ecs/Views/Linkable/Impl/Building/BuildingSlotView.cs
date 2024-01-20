@@ -14,6 +14,8 @@ namespace Ecs.Views.Linkable.Impl.Building
             var slotEntity = (GameEntity)entity;
             slotEntity.SubscribeVisible(OnSlotVisibleAdded).AddTo(unsubscribe);
             slotEntity.SubscribeVisibleRemoved(OnSlotVisibleRemoved).AddTo(unsubscribe);
+
+            OnSlotVisibleRemoved(slotEntity);
             
             base.Subscribe(entity, unsubscribe);
         }

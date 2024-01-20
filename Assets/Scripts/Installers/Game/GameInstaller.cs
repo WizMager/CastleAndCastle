@@ -1,7 +1,9 @@
 ﻿using Ecs.Utils.LinkedEntityRepository.Impl;
 using Ecs.Utils.SpawnService.Impl;
+using Game.Services.InputService.Impl;
 using Game.Services.PrefabPoolService.Impl;
 using Game.Ui;
+using Game.Ui.Windows;
 using Zenject;
 
 namespace Installers.Game
@@ -18,11 +20,13 @@ namespace Installers.Game
         private void DeclareSignals()
         {
             Container.DeclareSignal<GameWindow>();
+            Container.DeclareSignal<GameHudWindow>();
         }
 
         private void BindWindows()
         {
             Container.BindInterfacesAndSelfTo<GameWindow>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameHudWindow>().AsSingle();
         }
         
         private void BindServices()
@@ -30,6 +34,7 @@ namespace Installers.Game
             Container.BindInterfacesTo<SpawnService>().AsSingle();
             Container.BindInterfacesTo<LinkedEntityRepository>().AsSingle();
             Container.BindInterfacesTo<PrefabPoolService>().AsSingle();
+            Container.BindInterfacesTo<UnityInputService>().AsSingle();
         }
     }
 }
