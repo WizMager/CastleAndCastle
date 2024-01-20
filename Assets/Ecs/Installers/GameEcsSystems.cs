@@ -40,12 +40,14 @@ namespace Ecs.Installers {
 
 			// Common 0100
 			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
+			SystemInstallHelper.Install<BuildingInputSystem>(container);	// 0100 Building
 			SystemInstallHelper.Install<EnterBuildingModeSystem>(container);	// 0100 Building
 			SystemInstallHelper.Install<SpawnUnitSystem>(container);	// 0100 Units
 
 			// Building 0120
 			SystemInstallHelper.Install<ExitBuildingModeSystem>(container);	// 0120 Building
 			SystemInstallHelper.Install<BuildingModePointerSystem>(container);	// 0130 Building
+			SystemInstallHelper.Install<BuildBuildingSystem>(container);	// 0130 Building
 
 			// Units 0300
 			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
@@ -59,6 +61,9 @@ namespace Ecs.Installers {
 
 			// Units 0500
 			SystemInstallHelper.Install<AttackSystem>(container);	// 0500 Units
+
+			// Input 1000
+			SystemInstallHelper.Install<MouseDownCleanupSystem>(container);	// 1000 Input
 		 }
 
 	}

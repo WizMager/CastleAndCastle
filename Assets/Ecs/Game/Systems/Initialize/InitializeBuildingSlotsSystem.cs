@@ -1,8 +1,10 @@
+using Ecs.Utils.LinkedEntityRepository;
 using Game.Providers.GameFieldProvider;
 using Game.Services.GameLevelViewProvider;
 using JCMG.EntitasRedux;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
+using UnityEngine;
 
 namespace Ecs.Game.Systems.Initialize
 {
@@ -11,14 +13,17 @@ namespace Ecs.Game.Systems.Initialize
     {
         private readonly IGameFieldProvider _gameLevelViewProvider;
         private readonly GameContext _game;
+        private readonly ILinkedEntityRepository _linkedEntityRepository;
 
         public InitializeBuildingSlotsSystem(
             IGameFieldProvider gameLevelViewProvider, 
-            GameContext game
+            GameContext game,
+            ILinkedEntityRepository linkedEntityRepository
         )
         {
             _gameLevelViewProvider = gameLevelViewProvider;
             _game = game;
+            _linkedEntityRepository = linkedEntityRepository;
         }
         
         public void Initialize()
@@ -34,9 +39,12 @@ namespace Ecs.Game.Systems.Initialize
                 
                 slotEntity.AddPosition(slot.transform.position);
                 slotEntity.AddRotation(slot.transform.rotation);
+                Debug.Log($"InitializeBuildingSlotsSystem: {slot.transform.rotation.eulerAngles}");
                 slot.Link(slotEntity);
 
                 slotEntity.IsVisible = false;
+                
+                _linkedEntityRepository.Add(slot.transform.GetHashCode(), slotEntity);
             }
         }
     }

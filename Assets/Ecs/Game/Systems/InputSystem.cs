@@ -37,6 +37,7 @@ namespace Ecs.Game.Systems
             cmd.Button = mouseButton;
             
             _commandBuffer.Create(cmd);
+            
         }
         
     }

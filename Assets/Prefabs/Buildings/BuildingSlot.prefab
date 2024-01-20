@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8531487515578173911}
   - component: {fileID: 8531487515578173909}
   - component: {fileID: 8549280702350108027}
-  m_Layer: 0
+  - component: {fileID: 5297710672074201548}
+  m_Layer: 7
   m_Name: BuildingSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,6 +61,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityLink: {fileID: 8531487515578173909}
   slotGo: {fileID: 8837337215352863200}
+--- !u!65 &5297710672074201548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8531487515578173912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.299201, y: 0.6053062, z: 5.7909946}
+  m_Center: {x: 0, y: 0.2689993, z: -0.032901764}
 --- !u!1 &8837337215352863200
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +85,7 @@ GameObject:
   - component: {fileID: 8209877181883622234}
   - component: {fileID: 5062200298631408895}
   - component: {fileID: 7035883827580753973}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}

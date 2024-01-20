@@ -37,18 +37,25 @@ namespace Ecs.Game.Systems
 
             var rayOrigin = camera.ScreenPointToRay(_inputService.MousePosition);
             
-            if (!_rayCastProvider.Raycast(rayOrigin.origin, 
-                    rayOrigin.direction, 
-                    out var hit, 
-                    10000f, 
-                    LayerMask.NameToLayer("Building"), 
-                    QueryTriggerInteraction.Collide))
-                
-                return;
-
-            var buildingHash = hit.transform.GetHashCode();
+            // if (!_rayCastProvider.Raycast(rayOrigin.origin, 
+            //         rayOrigin.direction, 
+            //         out var hit, 
+            //         1000, 
+            //         LayerMask.NameToLayer("Building"), 
+            //         QueryTriggerInteraction.Ignore))
+            //     
+            //     return;
             
-            Debug.Log($"buildingHash: {buildingHash}, obj: {hit.transform.name}");
+            if (!Physics.Raycast(rayOrigin, out var hitInfo, float.MaxValue,  LayerMask.GetMask("Building"), QueryTriggerInteraction.Ignore))
+            {
+                return;
+            }
+
+            var buildingHash = hitInfo.transform.GetHashCode();
+            
+            _game.ReplaceHoveredObject(buildingHash);
+            
+            Debug.Log($"buildingHash: {buildingHash}, obj: {hitInfo.transform.name}");
 
         }
     }

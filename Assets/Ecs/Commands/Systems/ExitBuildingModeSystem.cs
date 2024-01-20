@@ -11,7 +11,7 @@ using Zenject;
 namespace Ecs.Commands.Systems
 {
     [Install(ExecutionType.Game, ExecutionPriority.Normal, 120, nameof(EFeatures.Building))]
-    public class ExitBuildingModeSystem : ForEachCommandUpdateSystem<MouseDownCommand>
+    public class ExitBuildingModeSystem : ForEachCommandUpdateSystem<ExitBuildingModeCommand>
     {
         private readonly IGameGroupUtils _gameGroupUtils;
         private readonly SignalBus _signalBus;
@@ -28,11 +28,8 @@ namespace Ecs.Commands.Systems
             _game = game;
         }
 
-        protected override void Execute(ref MouseDownCommand command)
+        protected override void Execute(ref ExitBuildingModeCommand command)
         {
-            if (command.Button != 1)
-                return;
-            
             if (!_game.HasSelectedBuilding)
                 return;
             
@@ -40,7 +37,7 @@ namespace Ecs.Commands.Systems
             
             _signalBus.OpenWindow<GameHudWindow>();
             
-            using var d = _gameGroupUtils.GetBuildingSlots(out var slots, entity => !entity.IsBusy);
+            using var d = _gameGroupUtils.GetBuildingSlots(out var slots);
 
             foreach (var slot in slots)
             {

@@ -26,6 +26,10 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
+		{
+			CopyHoveredObjectTo(HoveredObject);
+		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
