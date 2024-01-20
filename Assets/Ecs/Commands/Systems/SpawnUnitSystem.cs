@@ -13,8 +13,6 @@ namespace Ecs.Commands.Systems
         private readonly GameContext _game;
         private readonly IGameFieldProvider _gameFieldProvider;
 
-        //protected override bool CleanUp => false; use it if you need don't destroy command after use
-
         public SpawnUnitSystem(
             ICommandBuffer commandBuffer,
             GameContext game,

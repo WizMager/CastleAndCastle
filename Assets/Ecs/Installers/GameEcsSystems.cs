@@ -2,6 +2,7 @@ using Ecs.Game.Systems;
 using Ecs.Game.Systems.Units;
 using Ecs.Game.Systems.Initialize;
 using Ecs.Commands.Systems;
+using Ecs.Commands.Systems.Buildings;
 using Ecs.Commands.Systems.Input;
 
 using Zenject; 
@@ -26,24 +27,39 @@ namespace Ecs.Installers {
  
 			// Initialization 0050
 			SystemInstallHelper.Install<GameInitializeSystem>(container);	// 0050 Initialization
+			SystemInstallHelper.Install<CameraInitializeSystem>(container);	// 0060 Initialization
+			SystemInstallHelper.Install<InitializeBuildingSlotsSystem>(container);	// 0070 Initialization
+
+			// Initialization 3000
+			SystemInstallHelper.Install<InitializeUiSystem>(container);	// 3000 Initialization
 		 }
 
 		private static void Normal(DiContainer container, bool isDebug) {
  
-			// Common 0100
+			// Input 0020
+			SystemInstallHelper.Install<InputSystem>(container);	// 0020 Input
+
+			// Building 0100
+			SystemInstallHelper.Install<BuildingInputSystem>(container);	// 0100 Building
 			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
 			SystemInstallHelper.Install<SpawnUnitSystem>(container);	// 0100 Units
+			SystemInstallHelper.Install<EnterBuildingModeSystem>(container);	// 0100 Building
+
+			// Building 0120
+			SystemInstallHelper.Install<ExitBuildingModeSystem>(container);	// 0120 Building
+			SystemInstallHelper.Install<BuildBuildingSystem>(container);	// 0130 Building
+			SystemInstallHelper.Install<BuildingModePointerSystem>(container);	// 0130 Building
 
 			// Input 0150
-			SystemInstallHelper.Install<PointerDownSystem>(container);	// 0150 Input
 			SystemInstallHelper.Install<PointerDragSystem>(container);	// 0150 Input
+			SystemInstallHelper.Install<PointerDownSystem>(container);	// 0150 Input
 
 			// Input 0170
 			SystemInstallHelper.Install<PointerUpSystem>(container);	// 0170 Input
 
 			// Units 0300
-			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
 			SystemInstallHelper.Install<ReceiveDamageSystem>(container);	// 0300 Units
+			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
 
 			// Units 0350
 			SystemInstallHelper.Install<MoveToTargetSystem>(container);	// 0350 Units
@@ -53,6 +69,9 @@ namespace Ecs.Installers {
 
 			// Units 0500
 			SystemInstallHelper.Install<AttackSystem>(container);	// 0500 Units
+
+			// Input 1000
+			SystemInstallHelper.Install<MouseDownCleanupSystem>(container);	// 1000 Input
 		 }
 
 	}

@@ -26,6 +26,34 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
+		{
+			CopyHoveredObjectTo(HoveredObject);
+		}
+		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
+		{
+			CopyPrefabTo(Prefab);
+		}
+		else if (component is Ecs.Game.Components.VisibleComponent Visible)
+		{
+			IsVisible = true;
+		}
+		else if (component is Ecs.Game.Components.BusyComponent Busy)
+		{
+			IsBusy = true;
+		}
+		else if (component is Ecs.Game.Components.CoinsComponent Coins)
+		{
+			CopyCoinsTo(Coins);
+		}
+		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
+		{
+			CopySelectedBuildingTo(SelectedBuilding);
+		}
+		else if (component is Ecs.Game.Components.BuildingSlotComponent BuildingSlot)
+		{
+			IsBuildingSlot = true;
+		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
@@ -41,10 +69,6 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.TransformComponent Transform)
 		{
 			CopyTransformTo(Transform);
-		}
-		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
-		{
-			CopyPrefabTo(Prefab);
 		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{

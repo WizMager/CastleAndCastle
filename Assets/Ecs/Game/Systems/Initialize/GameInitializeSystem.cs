@@ -1,66 +1,33 @@
-﻿using System.Collections.Generic;
-using Ecs.Commands;
-using Ecs.Game.Extensions;
-using Ecs.Utils.Interfaces;
-using Game.Providers.GameFieldProvider;
-using Game.Ui;
+﻿using Ecs.Commands;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
-using SimpleUi.Signals;
-using UniRx;
 using UnityEngine;
-using Zenject;
 
 namespace Ecs.Game.Systems.Initialize
 {
     [Install(ExecutionType.Game, ExecutionPriority.High, 50, nameof(EFeatures.Initialization))]
     public class GameInitializeSystem : IInitializeSystem
     {
-        private readonly GameContext _game;
-        private readonly SignalBus _signalBus;
         private readonly ICommandBuffer _commandBuffer;
-        private readonly List<IUiInitialize> _uiInitializes;
-        private readonly IGameFieldProvider _gameFieldProvider;
+        private readonly GameContext _game;
 
         public GameInitializeSystem(
-            GameContext game,
-            SignalBus signalBus,
             ICommandBuffer commandBuffer,
-            List<IUiInitialize> uiInitializes,
-            IGameFieldProvider gameFieldProvider)
+            GameContext game
+        )
         {
-            _game = game;
-            _signalBus = signalBus;
             _commandBuffer = commandBuffer;
-            _uiInitializes = uiInitializes;
-            _gameFieldProvider = gameFieldProvider;
+            _game = game;
         }
         
         public void Initialize()
         {
-            var gameField = _gameFieldProvider.GameField;
-            
-            InitializeUi(_uiInitializes);
-
-            _game.CreateCamera(gameField.StartCameraPosition);
-            
-            Observable.TimerFrame(100).Subscribe(_ =>
-            {
-                _signalBus.OpenWindow<GameWindow>();
-            });
-            
             DebugSpawnUnits();
-        }
-
-        private void InitializeUi(List<IUiInitialize> uiInitializes)
-        {
-            foreach (var ui in uiInitializes)
-            {
-                ui.Initialize();
-            }
+            
+            _game.ReplaceCoins(100);
         }
 
         private void DebugSpawnUnits()

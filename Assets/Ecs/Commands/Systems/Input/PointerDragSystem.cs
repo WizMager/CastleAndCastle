@@ -41,6 +41,7 @@ namespace Ecs.Commands.Systems.Input
             
             var position = cameraTransform.right * (dragDelta.x * -moveSensitive);
             position += cameraTransform.up * (dragDelta.y * -moveSensitive);
+            position.y = 0;
             
             camera.ReplacePosition(cameraPosition + position * Time.deltaTime);
         }

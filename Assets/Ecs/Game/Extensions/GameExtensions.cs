@@ -32,16 +32,14 @@ namespace Ecs.Game.Extensions
         
         public static GameEntity CreateCamera(
             this GameContext game, 
-            Transform spawnPosition
+            Transform cameraTransform
         )
         {
             var entity = game.CreateEntity();
             entity.AddUid(UidGenerator.Next());
-            entity.AddPrefab("GameCamera");
-            entity.AddPosition(spawnPosition.position);
-            entity.AddRotation(spawnPosition.rotation);
+            entity.AddPosition(cameraTransform.position);
+            entity.AddRotation(cameraTransform.rotation);
             entity.IsCamera = true;
-            entity.IsInstantiate = true;
             
             return entity;
         }

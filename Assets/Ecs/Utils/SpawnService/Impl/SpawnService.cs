@@ -31,15 +31,16 @@ namespace Ecs.Utils.SpawnService.Impl
             
             var prefabName = entity.Prefab.Value;
             var position = entity.HasPosition ? entity.Position.Value : Vector3.zero;
+            var rotation = entity.HasRotation ? entity.Rotation.Value : Quaternion.identity;
             
-            return _prefabPoolService.Spawn(prefabName, position, Quaternion.identity, out var linkable)
+            return _prefabPoolService.Spawn(prefabName, position,rotation, out var linkable)
                 ? linkable
-                : InstantiateLinkable(position, _prefabsBase.Get(prefabName));
+                : InstantiateLinkable(position, rotation, _prefabsBase.Get(prefabName));
         }
 
-        private IObjectLinkable InstantiateLinkable(Vector3 position, GameObject prefab)
+        private IObjectLinkable InstantiateLinkable(Vector3 position, Quaternion rotation, GameObject prefab)
         {
-            var gameObject = _container.InstantiatePrefab(prefab, position, Quaternion.identity, null);
+            var gameObject = _container.InstantiatePrefab(prefab, position, rotation, null);
             return gameObject.GetComponent<IObjectLinkable>();
         }
     }

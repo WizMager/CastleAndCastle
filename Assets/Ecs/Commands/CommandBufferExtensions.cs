@@ -8,8 +8,10 @@
 //------------------------------------------------------------------------------
 using JCMG.EntitasRedux.Commands;
 using Ecs.Commands.Command;
-using Ecs.Extensions.UidGenerator;
+using Db.Buildings;
 using System;
+using Ecs.Commands.Command.Buildings;
+using Ecs.Extensions.UidGenerator;
 using UnityEngine;
 using Game.Utils.Units;
 using Ecs.Commands.Command.Input;
@@ -18,6 +20,23 @@ namespace Ecs.Commands
 {
     public static partial class CommandBufferExtensions
     {
+        public static void EnterBuildingMode(this ICommandBuffer commandBuffer, EBuildingType buildingType)
+        {
+            ref var command = ref commandBuffer.Create<EnterBuildingModeCommand>();
+            command.BuildingType = buildingType;
+        }
+
+        public static void ExitBuildingMode(this ICommandBuffer commandBuffer)
+        {
+            ref var command = ref commandBuffer.Create<ExitBuildingModeCommand>();
+        }
+
+        public static void MouseDown(this ICommandBuffer commandBuffer, Int32 button)
+        {
+            ref var command = ref commandBuffer.Create<MouseDownCommand>();
+            command.Button = button;
+        }
+
         public static void ReceiveDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
         {
             ref var command = ref commandBuffer.Create<ReceiveDamageCommand>();

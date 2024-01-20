@@ -17,5 +17,7 @@ MonoBehaviour:
     gameObject: {fileID: 7315357447069603492, guid: 3afc84665cb822e4aa46d8f5bd497f15, type: 3}
   - name: RangeUnit
     gameObject: {fileID: 7069842999300141378, guid: ef6b8a1b63ff9d34b9234cefd4e00b3f, type: 3}
+  - name: Farm
+    gameObject: {fileID: 9181108842223827112, guid: 01787d2f3a7bb69409f563139603e575, type: 3}
   - name: GameCamera
     gameObject: {fileID: 6011203080817150541, guid: 8ad8069dc996a1842b44a3c945831459, type: 3}
