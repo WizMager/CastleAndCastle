@@ -1,4 +1,7 @@
-﻿using Game.Ui;
+﻿using Ecs.Utils.LinkedEntityRepository.Impl;
+using Ecs.Utils.SpawnService.Impl;
+using Game.Services.PrefabPoolService.Impl;
+using Game.Ui;
 using Zenject;
 
 namespace Installers.Game
@@ -24,7 +27,9 @@ namespace Installers.Game
         
         private void BindServices()
         {
-            
+            Container.BindInterfacesTo<SpawnService>().AsSingle();
+            Container.BindInterfacesTo<LinkedEntityRepository>().AsSingle();
+            Container.BindInterfacesTo<PrefabPoolService>().AsSingle();
         }
     }
 }

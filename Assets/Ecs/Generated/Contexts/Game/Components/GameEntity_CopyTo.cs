@@ -26,6 +26,46 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.VisibleComponent Visible)
+		{
+			IsVisible = true;
+		}
+		else if (component is Ecs.Game.Components.BusyComponent Busy)
+		{
+			IsBusy = true;
+		}
+		else if (component is Ecs.Game.Components.CoinsComponent Coins)
+		{
+			CopyCoinsTo(Coins);
+		}
+		else if (component is Ecs.Game.Components.RotationComponent Rotation)
+		{
+			CopyRotationTo(Rotation);
+		}
+		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
+		{
+			IsInstantiate = true;
+		}
+		else if (component is Ecs.Game.Components.PositionComponent Position)
+		{
+			CopyPositionTo(Position);
+		}
+		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
+		{
+			CopyPrefabTo(Prefab);
+		}
+		else if (component is Ecs.Game.Components.TransformComponent Transform)
+		{
+			CopyTransformTo(Transform);
+		}
+		else if (component is Ecs.Game.Components.BuildingSlotComponent BuildingSlot)
+		{
+			IsBuildingSlot = true;
+		}
+		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
+		{
+			CopySelectedBuildingTo(SelectedBuilding);
+		}
 
 		#endif
 	}

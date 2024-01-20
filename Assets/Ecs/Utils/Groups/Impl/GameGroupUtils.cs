@@ -9,6 +9,7 @@ namespace Ecs.Utils.Groups.Impl
     public class GameGroupUtils : IGameGroupUtils
     {
         private readonly IGroup<GameEntity> _obstacleGroup;
+        private readonly IGroup<GameEntity> _buildingSlotsGroup;
 
         public GameGroupUtils(GameContext game)
         {
@@ -18,6 +19,11 @@ namespace Ecs.Utils.Groups.Impl
         public IDisposable GetObstacles(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null)
         {
             return GetEntities(out buffer, _obstacleGroup, e => /*e.HasObstacle && */!e.IsDestroyed, filter);
+        }
+
+        public IDisposable GetBuildingSlots(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null)
+        {
+            return GetEntities(out buffer, _buildingSlotsGroup, e => e.IsBuildingSlot && !e.IsDestroyed, filter);
         }
         
 
