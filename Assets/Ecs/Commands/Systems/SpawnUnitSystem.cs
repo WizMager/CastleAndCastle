@@ -30,9 +30,9 @@ namespace Ecs.Commands.Systems
             var destinationPoint = command.IsPlayerUnit
                 ? _gameFieldProvider.GameField.EnemyCastlePosition
                 : _gameFieldProvider.GameField.PlayerCastlePosition;
-            
-            var unit = _game.CreateUnit(command.Position, command.Rotation, command.UnitType, command.IsPlayerUnit);
-            unit.ReplaceDestinationPoint(destinationPoint);
+            //
+            // var unit = _game.CreateUnit(command.Position, command.Rotation, command.UnitType, command.IsPlayerUnit);
+            // unit.ReplaceDestinationPoint(destinationPoint);
         }
     }
 }

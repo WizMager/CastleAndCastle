@@ -1,4 +1,6 @@
-﻿using Db.Prefabs;
+﻿using Db.Buildings;
+using Db.Buildings.Impl;
+using Db.Prefabs;
 using Db.Prefabs.Impl;
 using UnityEngine;
 using Zenject;
@@ -9,10 +11,12 @@ namespace Installers.Game
     public class GameSettingsInstaller : ScriptableObjectInstaller
     {
         [SerializeField] private PrefabsBase prefabsBase;
+        [SerializeField] private BuildingSettingsBase buildingSettingsBase;
 
         public override void InstallBindings()
         {
             Container.Bind<IPrefabsBase>().FromInstance(prefabsBase);
+            Container.Bind<IBuildingSettingsBase>().FromInstance(buildingSettingsBase);
         }
     }
 }
