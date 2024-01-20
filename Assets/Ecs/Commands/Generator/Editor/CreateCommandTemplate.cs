@@ -5,6 +5,7 @@ using Ecs.Commands.Generator.Editor.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using UnityEngine;
 
 namespace Ecs.Commands.Generator.Editor
 {
@@ -40,9 +41,9 @@ namespace Ecs.Commands.Generator.Editor
 
 				var nullable = Nullable.GetUnderlyingType(field.FieldType) != null;
 				var typeName = field.FieldType.Name;
-				if (typeName == "Action")
+				if (typeName == "Commands")
 				{
-					typeName = "System.Action";
+					typeName = "Commands.Systems";
 				}
 				if (nullable)
 				{
@@ -57,9 +58,9 @@ namespace Ecs.Commands.Generator.Editor
 					var args = field.FieldType.GetGenericArguments();
 					var mainType = genericType.Name.Split("`")[0];
 					typeName = mainType;
-					if (mainType == "Action")
+					if (mainType == "Commands")
 					{
-						typeName = "System.Action";
+						typeName = "Commands.Systems";
 					}
 
 					if (args.Length > 0)

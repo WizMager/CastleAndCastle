@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Ecs.Utils;
+using Ecs.Utils.Interfaces;
 using Game.Ui.Windows;
 using JCMG.EntitasRedux;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
 using SimpleUi.Signals;
-using UniRx;
 using Zenject;
 
 namespace Ecs.Game.Systems.Initialize
@@ -13,20 +12,20 @@ namespace Ecs.Game.Systems.Initialize
     [Install(ExecutionType.Game, ExecutionPriority.High, 3000, nameof(EFeatures.Initialization))]
     public class InitializeUiSystem : IInitializeSystem
     {
-        private readonly List<IUiInitializable> _uiInitializables;
+        private readonly List<IUiInitialize> _uiInitializes;
         private readonly SignalBus _signalBus;
 
-        public InitializeUiSystem(List<IUiInitializable> uiInitializables, SignalBus signalBus)
+        public InitializeUiSystem(List<IUiInitialize> uiInitializes, SignalBus signalBus)
         {
-            _uiInitializables = uiInitializables;
+            _uiInitializes = uiInitializes;
             _signalBus = signalBus;
         }
         
         public void Initialize()
         {
-            foreach (var uiInitializable in _uiInitializables)
+            foreach (var uiInitialize in _uiInitializes)
             {
-                uiInitializable.Initialize();
+                uiInitialize.Initialize();
             }
             
             _signalBus.OpenWindow<GameHudWindow>();

@@ -16,6 +16,7 @@ namespace Ecs.Game.Extensions
         {
             var entity = game.CreateEntity();
             entity.AddUid(UidGenerator.Next());
+            entity.AddPrefab(unitType.ToString());
             entity.AddUnitType(unitType);
             entity.AddPosition(position);
             entity.AddRotation(rotation);
@@ -25,6 +26,20 @@ namespace Ecs.Game.Extensions
             {
                 entity.IsPlayerUnit = true;
             }
+            
+            return entity;
+        }
+        
+        public static GameEntity CreateCamera(
+            this GameContext game, 
+            Transform cameraTransform
+        )
+        {
+            var entity = game.CreateEntity();
+            entity.AddUid(UidGenerator.Next());
+            entity.AddPosition(cameraTransform.position);
+            entity.AddRotation(cameraTransform.rotation);
+            entity.IsCamera = true;
             
             return entity;
         }

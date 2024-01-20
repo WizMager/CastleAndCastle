@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 public partial interface IUnitTypeEntity
 {
-	Ecs.Game.Components.UnitTypeComponent UnitType { get; }
+	Ecs.Game.Components.Units.UnitTypeComponent UnitType { get; }
 	bool HasUnitType { get; }
 
 	void AddUnitType(Game.Utils.Units.EUnitType newValue);

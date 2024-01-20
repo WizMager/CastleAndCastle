@@ -1,5 +1,5 @@
-﻿using Game.Ui.Building;
-using Game.Ui.StartGame;
+using Game.Ui.Building;
+using Game.Ui.Input;
 using SimpleUi;
 using UnityEngine;
 using Zenject;
@@ -11,16 +11,16 @@ namespace Installers.Game
     {
         [SerializeField] private Canvas canvas;
         
-        [SerializeField] private StartGameView startGameView;
         [SerializeField] private BuildingPanelView buildingPanelView;
+        [SerializeField] private InputView inputView;
         
         public override void InstallBindings()
         {
             var canvasView = Container.InstantiatePrefabForComponent<Canvas>(canvas);
             var canvasTransform = canvasView.transform;
             
-            Container.BindUiView<StartGameController, StartGameView>(startGameView, canvasTransform);
             Container.BindUiView<BuildingPanelController, BuildingPanelView>(buildingPanelView, canvasTransform);
+            Container.BindUiView<InputController, InputView>(inputView, canvasTransform);
         }
     }
 }

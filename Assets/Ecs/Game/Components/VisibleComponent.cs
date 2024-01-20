@@ -7,6 +7,5 @@ namespace Ecs.Game.Components
     [Event(EventTarget.Self, EventType.Removed)]
     public class VisibleComponent : IComponent
     {
-        
     }
 }

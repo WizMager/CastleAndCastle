@@ -15,3 +15,4 @@ MonoBehaviour:
   canvas: {fileID: 6446658493801087274, guid: efc453e07e4002442a304a671b3cb6b4, type: 3}
   startGameView: {fileID: 2278410313276003826, guid: 0d7e8a150f3dbc54890c03d23e54cda9, type: 3}
   buildingPanelView: {fileID: 7408985115500914508, guid: 042d038311386bf4da522e7f3f854744, type: 3}
+  inputView: {fileID: 4519934396468508028, guid: b03335e0d165a464d8dce3be5f5eb2c7, type: 3}
