@@ -33,11 +33,12 @@ namespace Ecs.Game.Systems
 
         private void OnMouseDown(int mouseButton)
         {
-            var cmd = new MouseDownCommand();
-            cmd.Button = mouseButton;
-            
+            var cmd = new MouseDownCommand
+            {
+                Button = mouseButton
+            };
+
             _commandBuffer.Create(cmd);
-            
         }
         
     }

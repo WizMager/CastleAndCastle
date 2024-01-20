@@ -3,7 +3,6 @@ using Ecs.Utils.LinkedEntityRepository;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
-using UnityEngine;
 
 namespace Ecs.Commands.Systems
 {
@@ -50,7 +49,7 @@ namespace Ecs.Commands.Systems
             building.AddPrefab(selectedBuilding.ToString());
             building.AddPosition(buildingSlot.Position.Value);
             building.AddRotation(buildingSlot.Rotation.Value);
-            Debug.Log($"BuildBuildingSystem: {buildingSlot.Rotation.Value}");
+        
             building.IsInstantiate = true;
             
             _commandBuffer.Create(new ExitBuildingModeCommand());

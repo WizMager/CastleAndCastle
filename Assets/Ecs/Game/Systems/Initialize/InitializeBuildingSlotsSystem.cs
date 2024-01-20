@@ -1,10 +1,8 @@
 using Ecs.Utils.LinkedEntityRepository;
 using Game.Providers.GameFieldProvider;
-using Game.Services.GameLevelViewProvider;
 using JCMG.EntitasRedux;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
-using UnityEngine;
 
 namespace Ecs.Game.Systems.Initialize
 {
@@ -39,7 +37,7 @@ namespace Ecs.Game.Systems.Initialize
                 
                 slotEntity.AddPosition(slot.transform.position);
                 slotEntity.AddRotation(slot.transform.rotation);
-                Debug.Log($"InitializeBuildingSlotsSystem: {slot.transform.rotation.eulerAngles}");
+               
                 slot.Link(slotEntity);
 
                 slotEntity.IsVisible = false;
