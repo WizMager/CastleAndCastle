@@ -18,3 +18,8 @@ MonoBehaviour:
     Icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     Price: 100
     Income: 10
+  - Type: 1
+    Name: House
+    Icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    Price: 100
+    Income: 10

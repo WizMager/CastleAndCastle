@@ -54,7 +54,7 @@ namespace Ecs.Views.Linkable.Impl.Units
             {
                 if (i > corners.Length - 2) return;
 
-                var color = SelfEntity.IsPlayerUnit ? Color.red : Color.green;
+                var color = SelfEntity.IsPlayer ? Color.red : Color.green;
                 
                 Debug.DrawLine(corners[i], corners[i + 1], color );
             }

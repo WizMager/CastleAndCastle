@@ -1,5 +1,6 @@
 ﻿using Ecs.Commands.Command;
 using Ecs.Commands.Command.Buildings;
+using Ecs.Game.Extensions;
 using Ecs.Utils.LinkedEntityRepository;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
@@ -45,13 +46,8 @@ namespace Ecs.Commands.Systems.Buildings
             buildingSlot.IsBusy = true;
 
             var selectedBuilding = _game.SelectedBuilding.BuildingType;
-            
-            var building = _game.CreateEntity();
-            building.AddPrefab(selectedBuilding.ToString());
-            building.AddPosition(buildingSlot.Position.Value);
-            building.AddRotation(buildingSlot.Rotation.Value);
-        
-            building.IsInstantiate = true;
+
+            _game.CreateBuilding(buildingSlot.Position.Value, buildingSlot.Rotation.Value, selectedBuilding, true);
             
             _commandBuffer.ExitBuildingMode();
         }

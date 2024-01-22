@@ -7,12 +7,12 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface IAttackCooldownEntity
+public partial interface ITimeEntity
 {
-	Ecs.Game.Components.Units.AttackCooldownComponent AttackCooldown { get; }
-	bool HasAttackCooldown { get; }
+	Ecs.Game.Components.TimeComponent Time { get; }
+	bool HasTime { get; }
 
-	void AddAttackCooldown(float newValue);
-	void ReplaceAttackCooldown(float newValue);
-	void RemoveAttackCooldown();
+	void AddTime(float newValue);
+	void ReplaceTime(float newValue);
+	void RemoveTime();
 }

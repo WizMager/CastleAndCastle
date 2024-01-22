@@ -26,41 +26,33 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
-		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
+		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
-			CopyHoveredObjectTo(HoveredObject);
-		}
-		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
-		{
-			CopyPrefabTo(Prefab);
-		}
-		else if (component is Ecs.Game.Components.VisibleComponent Visible)
-		{
-			IsVisible = true;
-		}
-		else if (component is Ecs.Game.Components.BusyComponent Busy)
-		{
-			IsBusy = true;
-		}
-		else if (component is Ecs.Game.Components.CoinsComponent Coins)
-		{
-			CopyCoinsTo(Coins);
-		}
-		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
-		{
-			CopySelectedBuildingTo(SelectedBuilding);
+			IsInstantiate = true;
 		}
 		else if (component is Ecs.Game.Components.BuildingSlotComponent BuildingSlot)
 		{
 			IsBuildingSlot = true;
 		}
-		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
-		{
-			IsInstantiate = true;
-		}
 		else if (component is Ecs.Game.Components.PositionComponent Position)
 		{
 			CopyPositionTo(Position);
+		}
+		else if (component is Ecs.Game.Components.BusyComponent Busy)
+		{
+			IsBusy = true;
+		}
+		else if (component is Ecs.Game.Components.TimeComponent Time)
+		{
+			CopyTimeTo(Time);
+		}
+		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
+		{
+			CopyPrefabTo(Prefab);
+		}
+		else if (component is Ecs.Game.Components.CoinsComponent Coins)
+		{
+			CopyCoinsTo(Coins);
 		}
 		else if (component is Ecs.Game.Components.RotationComponent Rotation)
 		{
@@ -69,6 +61,30 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.TransformComponent Transform)
 		{
 			CopyTransformTo(Transform);
+		}
+		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
+		{
+			CopySelectedBuildingTo(SelectedBuilding);
+		}
+		else if (component is Ecs.Game.Components.VisibleComponent Visible)
+		{
+			IsVisible = true;
+		}
+		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
+		{
+			CopyHoveredObjectTo(HoveredObject);
+		}
+		else if (component is Ecs.Game.Components.PlayerComponent Player)
+		{
+			IsPlayer = true;
+		}
+		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
+		{
+			CopySpawnParametersTo(SpawnParameters);
+		}
+		else if (component is Ecs.Game.Components.Buildings.BuildingTypeComponent BuildingType)
+		{
+			CopyBuildingTypeTo(BuildingType);
 		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{
@@ -85,10 +101,6 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint)
 		{
 			CopyDestinationPointTo(DestinationPoint);
-		}
-		else if (component is Ecs.Game.Components.Units.AttackCooldownComponent AttackCooldown)
-		{
-			CopyAttackCooldownTo(AttackCooldown);
 		}
 		else if (component is Ecs.Game.Components.Units.UnitTypeComponent UnitType)
 		{
@@ -109,10 +121,6 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Units.HealthComponent Health)
 		{
 			CopyHealthTo(Health);
-		}
-		else if (component is Ecs.Game.Components.Units.PlayerUnitComponent PlayerUnit)
-		{
-			IsPlayerUnit = true;
 		}
 		else if (component is Ecs.Game.Components.Units.InTargetComponent InTarget)
 		{
