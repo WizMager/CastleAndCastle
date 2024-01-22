@@ -7,7 +7,12 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface IPlayerUnitEntity
+public partial interface ISpawnParametersEntity
 {
-	bool IsPlayerUnit { get; set; }
+	Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters { get; }
+	bool HasSpawnParameters { get; }
+
+	void AddSpawnParameters(Game.Utils.Buildings.SpawnParameters newValue);
+	void ReplaceSpawnParameters(Game.Utils.Buildings.SpawnParameters newValue);
+	void RemoveSpawnParameters();
 }
