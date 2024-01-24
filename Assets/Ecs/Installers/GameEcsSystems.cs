@@ -1,7 +1,10 @@
 using Ecs.Game.Systems;
 using Ecs.Game.Systems.Units;
 using Ecs.Game.Systems.Initialize;
+using Ecs.Game.Systems.Buildings;
 using Ecs.Commands.Systems;
+using Ecs.Commands.Systems.Input;
+using Ecs.Commands.Systems.Buildings;
 
 using Zenject; 
 using Plugins.Extensions.InstallerGenerator.Utils;
@@ -25,8 +28,7 @@ namespace Ecs.Installers {
  
 			// Initialization 0050
 			SystemInstallHelper.Install<GameInitializeSystem>(container);	// 0050 Initialization
-
-			// Initialization 0070
+			SystemInstallHelper.Install<CameraInitializeSystem>(container);	// 0060 Initialization
 			SystemInstallHelper.Install<InitializeBuildingSlotsSystem>(container);	// 0070 Initialization
 
 			// Initialization 3000
@@ -41,13 +43,20 @@ namespace Ecs.Installers {
 			// Common 0100
 			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
 			SystemInstallHelper.Install<BuildingInputSystem>(container);	// 0100 Building
-			SystemInstallHelper.Install<EnterBuildingModeSystem>(container);	// 0100 Building
 			SystemInstallHelper.Install<SpawnUnitSystem>(container);	// 0100 Units
+			SystemInstallHelper.Install<EnterBuildingModeSystem>(container);	// 0100 Building
 
 			// Building 0120
 			SystemInstallHelper.Install<ExitBuildingModeSystem>(container);	// 0120 Building
-			SystemInstallHelper.Install<BuildingModePointerSystem>(container);	// 0130 Building
 			SystemInstallHelper.Install<BuildBuildingSystem>(container);	// 0130 Building
+			SystemInstallHelper.Install<BuildingModePointerSystem>(container);	// 0130 Building
+
+			// Input 0150
+			SystemInstallHelper.Install<PointerDownSystem>(container);	// 0150 Input
+			SystemInstallHelper.Install<PointerDragSystem>(container);	// 0150 Input
+
+			// Input 0170
+			SystemInstallHelper.Install<PointerUpSystem>(container);	// 0170 Input
 
 			// Units 0300
 			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
@@ -59,7 +68,9 @@ namespace Ecs.Installers {
 			// Units 0400
 			SystemInstallHelper.Install<AttackCooldownSystem>(container);	// 0400 Units
 
-			// Units 0500
+			// Building 0490
+			SystemInstallHelper.Install<SpawnCooldownCounterSystem>(container);	// 0490 Building
+			SystemInstallHelper.Install<SpawnUnitsSystem>(container);	// 0500 Building
 			SystemInstallHelper.Install<AttackSystem>(container);	// 0500 Units
 
 			// Input 1000

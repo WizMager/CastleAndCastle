@@ -7,9 +7,12 @@ namespace Game.Utils
     {
         [SerializeField] private Transform playerCastlePosition;
         [SerializeField] private Transform enemyCastlePosition;
+        [SerializeField] private Transform startCameraPosition;
+        [SerializeField] private BuildingSlotView[] buildingSlotViews;
 
         public Vector3 PlayerCastlePosition => playerCastlePosition.position;
         public Vector3 EnemyCastlePosition => enemyCastlePosition.position;
-        public BuildingSlotView[] BuildingSlotViews;
+        public BuildingSlotView[] BuildingSlotViews => buildingSlotViews;
+        public Transform StartCameraPosition => startCameraPosition;
     }
 }

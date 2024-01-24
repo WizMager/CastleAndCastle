@@ -18,22 +18,22 @@ namespace Ecs.Game.Systems.Units
         
         public void Update()
         {
-            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.HasAttackCooldown);
+            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.HasTime);
 
             var deltaTime = Time.deltaTime;
             
             foreach (var unit in units)
             {
-                var currentAttackCooldown = unit.AttackCooldown.Value;
+                var currentAttackCooldown = unit.Time.Value;
                 currentAttackCooldown -= deltaTime;
 
                 if (currentAttackCooldown > 0)
                 {
-                    unit.ReplaceAttackCooldown(currentAttackCooldown);
+                    unit.ReplaceTime(currentAttackCooldown);
                 }
                 else
                 {
-                    unit.RemoveAttackCooldown();
+                    unit.RemoveTime();
                 }
             }
         }

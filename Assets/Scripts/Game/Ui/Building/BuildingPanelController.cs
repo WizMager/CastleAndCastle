@@ -1,8 +1,7 @@
 ﻿using Db.Buildings;
 using Ecs.Commands;
-using Ecs.Commands.Commands;
-using Ecs.Utils;
 using Ecs.Utils.Groups;
+using Ecs.Utils.Interfaces;
 using JCMG.EntitasRedux.Commands;
 using SimpleUi.Abstracts;
 using UniRx;
@@ -10,7 +9,7 @@ using UniRx;
 namespace Game.Ui.Building
 {
     public class BuildingPanelController : UiController<BuildingPanelView>, 
-        IUiInitializable
+        IUiInitialize
     {
         private readonly IGameGroupUtils _gameGroupUtils;
         private readonly IBuildingSettingsBase _buildingSettingsBase;
@@ -61,9 +60,7 @@ namespace Game.Ui.Building
 
         private void OnBuildingButtonClick(EBuildingType type)
         {
-            var cmd = new EnterBuildingModeCommand(type);
-            
-            _commandBuffer.Create(cmd);
+            _commandBuffer.EnterBuildingMode(type);
         }
 
         private void OnCoinsAdded(GameEntity _, int coins)

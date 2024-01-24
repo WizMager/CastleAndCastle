@@ -1,4 +1,5 @@
 ﻿using Game.Ui.Building;
+using Game.Ui.Input;
 using SimpleUi;
 
 namespace Game.Ui.Windows
@@ -10,6 +11,7 @@ namespace Game.Ui.Windows
         protected override void AddControllers()
         {
             AddController<BuildingPanelController>();
+            AddController<InputController>();
         }
     }
 }

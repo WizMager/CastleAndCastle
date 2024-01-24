@@ -19,35 +19,39 @@ public static class GameComponentsLookup
 	public const int DestinationPointListener = 3;
 	public const int Destroyed = 4;
 	public const int Uid = 5;
-	public const int BuildingSlot = 6;
-	public const int Busy = 7;
-	public const int Coins = 8;
-	public const int HoveredObject = 9;
-	public const int Instantiate = 10;
-	public const int Position = 11;
-	public const int Prefab = 12;
-	public const int Rotation = 13;
-	public const int SelectedBuilding = 14;
-	public const int Transform = 15;
-	public const int AggroRadius = 16;
-	public const int AttackCooldown = 17;
-	public const int DestinationPoint = 18;
-	public const int Health = 19;
-	public const int InAttackRange = 20;
-	public const int InTarget = 21;
-	public const int PlayerUnit = 22;
-	public const int Target = 23;
-	public const int UnitData = 24;
-	public const int UnitType = 25;
-	public const int Visible = 26;
-	public const int GameDestroyedListener = 27;
-	public const int PositionListener = 28;
-	public const int RotationListener = 29;
-	public const int TargetListener = 30;
-	public const int VisibleListener = 31;
-	public const int VisibleRemovedListener = 32;
+	public const int BuildingType = 6;
+	public const int SpawnParameters = 7;
+	public const int BuildingSlot = 8;
+	public const int Busy = 9;
+	public const int Camera = 10;
+	public const int CameraMove = 11;
+	public const int Coins = 12;
+	public const int HoveredObject = 13;
+	public const int Instantiate = 14;
+	public const int Player = 15;
+	public const int Position = 16;
+	public const int Prefab = 17;
+	public const int Rotation = 18;
+	public const int SelectedBuilding = 19;
+	public const int Time = 20;
+	public const int Transform = 21;
+	public const int AggroRadius = 22;
+	public const int DestinationPoint = 23;
+	public const int Health = 24;
+	public const int InAttackRange = 25;
+	public const int InTarget = 26;
+	public const int Target = 27;
+	public const int UnitData = 28;
+	public const int UnitType = 29;
+	public const int Visible = 30;
+	public const int GameDestroyedListener = 31;
+	public const int PositionListener = 32;
+	public const int RotationListener = 33;
+	public const int TargetListener = 34;
+	public const int VisibleListener = 35;
+	public const int VisibleRemovedListener = 36;
 
-	public const int TotalComponents = 33;
+	public const int TotalComponents = 37;
 
 	public static readonly string[] ComponentNames =
 	{
@@ -57,23 +61,27 @@ public static class GameComponentsLookup
 		"DestinationPointListener",
 		"Destroyed",
 		"Uid",
+		"BuildingType",
+		"SpawnParameters",
 		"BuildingSlot",
 		"Busy",
+		"Camera",
+		"CameraMove",
 		"Coins",
 		"HoveredObject",
 		"Instantiate",
+		"Player",
 		"Position",
 		"Prefab",
 		"Rotation",
 		"SelectedBuilding",
+		"Time",
 		"Transform",
 		"AggroRadius",
-		"AttackCooldown",
 		"DestinationPoint",
 		"Health",
 		"InAttackRange",
 		"InTarget",
-		"PlayerUnit",
 		"Target",
 		"UnitData",
 		"UnitType",
@@ -94,26 +102,30 @@ public static class GameComponentsLookup
 		typeof(DestinationPointListenerComponent),
 		typeof(Ecs.Common.Components.DestroyedComponent),
 		typeof(Ecs.Common.Components.UidComponent),
+		typeof(Ecs.Game.Components.Buildings.BuildingTypeComponent),
+		typeof(Ecs.Game.Components.Buildings.SpawnParametersComponent),
 		typeof(Ecs.Game.Components.BuildingSlotComponent),
 		typeof(Ecs.Game.Components.BusyComponent),
+		typeof(Ecs.Game.Components.Camera.CameraComponent),
+		typeof(Ecs.Game.Components.Camera.CameraMoveComponent),
 		typeof(Ecs.Game.Components.CoinsComponent),
 		typeof(Ecs.Game.Components.HoveredObjectComponent),
 		typeof(Ecs.Game.Components.InstantiateComponent),
+		typeof(Ecs.Game.Components.PlayerComponent),
 		typeof(Ecs.Game.Components.PositionComponent),
 		typeof(Ecs.Game.Components.PrefabComponent),
 		typeof(Ecs.Game.Components.RotationComponent),
 		typeof(Ecs.Game.Components.SelectedBuildingComponent),
+		typeof(Ecs.Game.Components.TimeComponent),
 		typeof(Ecs.Game.Components.TransformComponent),
 		typeof(Ecs.Game.Components.Units.AggroRadiusComponent),
-		typeof(Ecs.Game.Components.Units.AttackCooldownComponent),
 		typeof(Ecs.Game.Components.Units.DestinationPointComponent),
 		typeof(Ecs.Game.Components.Units.HealthComponent),
 		typeof(Ecs.Game.Components.Units.InAttackRangeComponent),
 		typeof(Ecs.Game.Components.Units.InTargetComponent),
-		typeof(Ecs.Game.Components.Units.PlayerUnitComponent),
 		typeof(Ecs.Game.Components.Units.TargetComponent),
 		typeof(Ecs.Game.Components.Units.UnitDataComponent),
-		typeof(Ecs.Game.Components.UnitTypeComponent),
+		typeof(Ecs.Game.Components.Units.UnitTypeComponent),
 		typeof(Ecs.Game.Components.VisibleComponent),
 		typeof(GameDestroyedListenerComponent),
 		typeof(PositionListenerComponent),
@@ -131,33 +143,37 @@ public static class GameComponentsLookup
 		{ typeof(DestinationPointListenerComponent), 3 },
 		{ typeof(Ecs.Common.Components.DestroyedComponent), 4 },
 		{ typeof(Ecs.Common.Components.UidComponent), 5 },
-		{ typeof(Ecs.Game.Components.BuildingSlotComponent), 6 },
-		{ typeof(Ecs.Game.Components.BusyComponent), 7 },
-		{ typeof(Ecs.Game.Components.CoinsComponent), 8 },
-		{ typeof(Ecs.Game.Components.HoveredObjectComponent), 9 },
-		{ typeof(Ecs.Game.Components.InstantiateComponent), 10 },
-		{ typeof(Ecs.Game.Components.PositionComponent), 11 },
-		{ typeof(Ecs.Game.Components.PrefabComponent), 12 },
-		{ typeof(Ecs.Game.Components.RotationComponent), 13 },
-		{ typeof(Ecs.Game.Components.SelectedBuildingComponent), 14 },
-		{ typeof(Ecs.Game.Components.TransformComponent), 15 },
-		{ typeof(Ecs.Game.Components.Units.AggroRadiusComponent), 16 },
-		{ typeof(Ecs.Game.Components.Units.AttackCooldownComponent), 17 },
-		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 18 },
-		{ typeof(Ecs.Game.Components.Units.HealthComponent), 19 },
-		{ typeof(Ecs.Game.Components.Units.InAttackRangeComponent), 20 },
-		{ typeof(Ecs.Game.Components.Units.InTargetComponent), 21 },
-		{ typeof(Ecs.Game.Components.Units.PlayerUnitComponent), 22 },
-		{ typeof(Ecs.Game.Components.Units.TargetComponent), 23 },
-		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 24 },
-		{ typeof(Ecs.Game.Components.UnitTypeComponent), 25 },
-		{ typeof(Ecs.Game.Components.VisibleComponent), 26 },
-		{ typeof(GameDestroyedListenerComponent), 27 },
-		{ typeof(PositionListenerComponent), 28 },
-		{ typeof(RotationListenerComponent), 29 },
-		{ typeof(TargetListenerComponent), 30 },
-		{ typeof(VisibleListenerComponent), 31 },
-		{ typeof(VisibleRemovedListenerComponent), 32 }
+		{ typeof(Ecs.Game.Components.Buildings.BuildingTypeComponent), 6 },
+		{ typeof(Ecs.Game.Components.Buildings.SpawnParametersComponent), 7 },
+		{ typeof(Ecs.Game.Components.BuildingSlotComponent), 8 },
+		{ typeof(Ecs.Game.Components.BusyComponent), 9 },
+		{ typeof(Ecs.Game.Components.Camera.CameraComponent), 10 },
+		{ typeof(Ecs.Game.Components.Camera.CameraMoveComponent), 11 },
+		{ typeof(Ecs.Game.Components.CoinsComponent), 12 },
+		{ typeof(Ecs.Game.Components.HoveredObjectComponent), 13 },
+		{ typeof(Ecs.Game.Components.InstantiateComponent), 14 },
+		{ typeof(Ecs.Game.Components.PlayerComponent), 15 },
+		{ typeof(Ecs.Game.Components.PositionComponent), 16 },
+		{ typeof(Ecs.Game.Components.PrefabComponent), 17 },
+		{ typeof(Ecs.Game.Components.RotationComponent), 18 },
+		{ typeof(Ecs.Game.Components.SelectedBuildingComponent), 19 },
+		{ typeof(Ecs.Game.Components.TimeComponent), 20 },
+		{ typeof(Ecs.Game.Components.TransformComponent), 21 },
+		{ typeof(Ecs.Game.Components.Units.AggroRadiusComponent), 22 },
+		{ typeof(Ecs.Game.Components.Units.DestinationPointComponent), 23 },
+		{ typeof(Ecs.Game.Components.Units.HealthComponent), 24 },
+		{ typeof(Ecs.Game.Components.Units.InAttackRangeComponent), 25 },
+		{ typeof(Ecs.Game.Components.Units.InTargetComponent), 26 },
+		{ typeof(Ecs.Game.Components.Units.TargetComponent), 27 },
+		{ typeof(Ecs.Game.Components.Units.UnitDataComponent), 28 },
+		{ typeof(Ecs.Game.Components.Units.UnitTypeComponent), 29 },
+		{ typeof(Ecs.Game.Components.VisibleComponent), 30 },
+		{ typeof(GameDestroyedListenerComponent), 31 },
+		{ typeof(PositionListenerComponent), 32 },
+		{ typeof(RotationListenerComponent), 33 },
+		{ typeof(TargetListenerComponent), 34 },
+		{ typeof(VisibleListenerComponent), 35 },
+		{ typeof(VisibleRemovedListenerComponent), 36 }
 	};
 
 	/// <summary>

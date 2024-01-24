@@ -24,7 +24,7 @@ namespace Ecs.Game.Systems.Units
         
         public void Update()
         {
-            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.IsInAttackRange && !e.HasAttackCooldown);
+            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.IsInAttackRange && !e.HasTime);
 
             foreach (var unit in units)
             {
@@ -32,9 +32,9 @@ namespace Ecs.Game.Systems.Units
                 var damage = unitData.Damage;
                 var attackSpeed = unitData.AttackSpeed;
                 
-                unit.ReplaceAttackCooldown(attackSpeed);
+                unit.ReplaceTime(attackSpeed);
                 
-                _commandBuffer.ReceiveDamage(unit, damage);
+                _commandBuffer.ReceiveDamage(unit.Uid.Value, damage);
             }
         }
     }

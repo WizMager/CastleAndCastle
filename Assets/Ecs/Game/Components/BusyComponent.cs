@@ -7,6 +7,5 @@ namespace Ecs.Game.Components
     [Event(EventTarget.Any, EventType.Removed)]
     public class BusyComponent : IComponent
     {
-        
     }
 }

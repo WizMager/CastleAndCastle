@@ -1,5 +1,5 @@
 ﻿using System;
-using Ecs.Commands.Commands;
+using Ecs.Commands;
 using Game.Services.InputService;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
@@ -33,12 +33,7 @@ namespace Ecs.Game.Systems
 
         private void OnMouseDown(int mouseButton)
         {
-            var cmd = new MouseDownCommand
-            {
-                Button = mouseButton
-            };
-
-            _commandBuffer.Create(cmd);
+            _commandBuffer.MouseDown(mouseButton);
         }
         
     }

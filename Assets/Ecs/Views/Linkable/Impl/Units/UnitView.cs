@@ -54,7 +54,7 @@ namespace Ecs.Views.Linkable.Impl.Units
             {
                 if (i > corners.Length - 2) return;
 
-                var color = SelfEntity.IsPlayerUnit ? Color.red : Color.green;
+                var color = SelfEntity.IsPlayer ? Color.red : Color.green;
                 
                 Debug.DrawLine(corners[i], corners[i + 1], color );
             }
@@ -63,8 +63,11 @@ namespace Ecs.Views.Linkable.Impl.Units
 
         protected override void OnClear()
         {
-            var targetEntity = SelfEntity.Target.Value;
-            targetEntity.IsInTarget = false;
+            if (SelfEntity.HasTarget)
+            {
+                var targetEntity = SelfEntity.Target.Value;
+                targetEntity.IsInTarget = false;
+            }
             
             base.OnClear();
         }

@@ -1,4 +1,4 @@
-﻿using Ecs.Commands.Commands;
+﻿using Ecs.Commands.Command.Buildings;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
