@@ -1,5 +1,6 @@
 ﻿using Ecs.Commands;
 using Ecs.Utils.Groups;
+using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
@@ -24,7 +25,7 @@ namespace Ecs.Game.Systems.Units
         
         public void Update()
         {
-            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.IsInAttackRange && !e.HasTime);
+            using var _ = _gameGroupUtils.GetNotDestroyedUnits(out var units, e => e.IsInAttackRange && !e.HasTime);
 
             foreach (var unit in units)
             {
@@ -33,6 +34,7 @@ namespace Ecs.Game.Systems.Units
                 var attackSpeed = unitData.AttackSpeed;
                 
                 unit.ReplaceTime(attackSpeed);
+                unit.ReplaceUnitState(EUnitState.Attack);
                 
                 _commandBuffer.ReceiveDamage(unit.Uid.Value, damage);
             }

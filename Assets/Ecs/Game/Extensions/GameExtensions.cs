@@ -22,6 +22,7 @@ namespace Ecs.Game.Extensions
             entity.AddPosition(position);
             entity.AddRotation(rotation);
             entity.IsInstantiate = true;
+            entity.ReplaceUnitState(EUnitState.Walk);
 
             if (isPlayerUnit)
             {

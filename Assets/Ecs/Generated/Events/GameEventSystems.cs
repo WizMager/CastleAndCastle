@@ -21,6 +21,7 @@ public sealed class GameEventSystems : Feature
 		Add(new PositionEventSystem(context)); // priority: 0
 		Add(new RotationEventSystem(context)); // priority: 0
 		Add(new TargetEventSystem(context)); // priority: 0
+		Add(new UnitStateEventSystem(context)); // priority: 0
 		Add(new VisibleEventSystem(context)); // priority: 0
 		Add(new VisibleRemovedEventSystem(context)); // priority: 0
 	}

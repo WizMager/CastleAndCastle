@@ -70,21 +70,17 @@ public partial class GameEntity
 		{
 			IsVisible = true;
 		}
-		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
-		{
-			CopyHoveredObjectTo(HoveredObject);
-		}
 		else if (component is Ecs.Game.Components.PlayerComponent Player)
 		{
 			IsPlayer = true;
 		}
-		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
+		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
 		{
-			CopySpawnParametersTo(SpawnParameters);
+			CopyHoveredObjectTo(HoveredObject);
 		}
-		else if (component is Ecs.Game.Components.Buildings.BuildingTypeComponent BuildingType)
+		else if (component is Ecs.Game.Components.DeadComponent Dead)
 		{
-			CopyBuildingTypeTo(BuildingType);
+			IsDead = true;
 		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{
@@ -93,6 +89,18 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Camera.CameraComponent Camera)
 		{
 			IsCamera = true;
+		}
+		else if (component is Ecs.Game.Components.Buildings.BuildingTypeComponent BuildingType)
+		{
+			CopyBuildingTypeTo(BuildingType);
+		}
+		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
+		{
+			CopySpawnParametersTo(SpawnParameters);
+		}
+		else if (component is Ecs.Game.Components.Units.UnitStateComponent UnitState)
+		{
+			CopyUnitStateTo(UnitState);
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{

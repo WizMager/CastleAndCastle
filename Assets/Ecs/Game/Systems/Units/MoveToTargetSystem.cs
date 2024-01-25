@@ -1,4 +1,5 @@
 ﻿using Ecs.Utils.Groups;
+using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
@@ -17,7 +18,7 @@ namespace Ecs.Game.Systems.Units
 
         public void Update()
         {
-            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.HasTarget);
+            using var _ = _gameGroupUtils.GetNotDestroyedUnits(out var units, e => e.HasTarget);
             
             foreach (var unit in units)
             {
@@ -41,6 +42,7 @@ namespace Ecs.Game.Systems.Units
                     ChangeIsAttackRange(unit, false);
                     
                     unit.ReplaceDestinationPoint(targetPosition);
+                    unit.ReplaceUnitState(EUnitState.Walk);
                 }
                 else
                 {
@@ -51,6 +53,7 @@ namespace Ecs.Game.Systems.Units
                     if (destinationPoint == selfPosition) continue;
                     
                     unit.ReplaceDestinationPoint(selfPosition);
+                    unit.ReplaceUnitState(EUnitState.Idle);
                 }
             }
         }
