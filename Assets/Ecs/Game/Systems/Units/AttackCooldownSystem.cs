@@ -18,7 +18,7 @@ namespace Ecs.Game.Systems.Units
         
         public void Update()
         {
-            using var _ = _gameGroupUtils.GetUnits(out var units, e => e.HasTime);
+            using var _ = _gameGroupUtils.GetNotDestroyedUnits(out var units, e => e.HasTime);
 
             var deltaTime = Time.deltaTime;
             
