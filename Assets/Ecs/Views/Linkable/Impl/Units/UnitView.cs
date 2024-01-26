@@ -19,6 +19,7 @@ namespace Ecs.Views.Linkable.Impl.Units
         [SerializeField] private float attackSpeed;
         [SerializeField] private float attackRange;
         [SerializeField] private float aggroRadius;
+        [SerializeField] private float liveBeforeDestroyDuration = 2;
 
         [Space] 
         [Header("Components")] 
@@ -79,8 +80,14 @@ namespace Ecs.Views.Linkable.Impl.Units
         private void OnDeathEnd()
         {
             _deathBehaviour.Dispose();
+
+            //This is second variant - just destroy GO after time. TODO: delete if not will be need
+            // Observable.Timer(TimeSpan.FromSeconds(liveBeforeDestroyDuration)).Subscribe(_ =>
+            // {
+            //     SelfEntity.IsDestroyed = true;
+            // }).AddTo(this);
             
-            transform.DOMoveY(-5, 2).OnComplete(() =>
+            transform.DOMoveY(-5, liveBeforeDestroyDuration).OnComplete(() =>
             {
                 SelfEntity.IsDestroyed = true;
             });
