@@ -26,6 +26,14 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.DeadComponent Dead)
+		{
+			IsDead = true;
+		}
+		else if (component is Ecs.Game.Components.IncomeTimer IncomeTimer)
+		{
+			CopyIncomeTimerTo(IncomeTimer);
+		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
@@ -62,6 +70,10 @@ public partial class GameEntity
 		{
 			CopyTransformTo(Transform);
 		}
+		else if (component is Ecs.Game.Components.BuildingComponent Building)
+		{
+			IsBuilding = true;
+		}
 		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
 		{
 			CopySelectedBuildingTo(SelectedBuilding);
@@ -78,9 +90,9 @@ public partial class GameEntity
 		{
 			CopyHoveredObjectTo(HoveredObject);
 		}
-		else if (component is Ecs.Game.Components.DeadComponent Dead)
+		else if (component is Ecs.Game.Components.IncomeComponent Income)
 		{
-			IsDead = true;
+			CopyIncomeTo(Income);
 		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{

@@ -10,6 +10,7 @@ namespace Db.Buildings
         public string Name;
         public Sprite Icon;
         public int Price;
-        public int Income;
+        public int BaseIncome;
+        public float IncomeTimer;
     }
 }

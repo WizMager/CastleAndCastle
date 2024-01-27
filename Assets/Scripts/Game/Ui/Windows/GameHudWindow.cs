@@ -1,4 +1,5 @@
 ﻿using Game.Ui.Building;
+using Game.Ui.Income;
 using Game.Ui.Input;
 using SimpleUi;
 
@@ -12,6 +13,7 @@ namespace Game.Ui.Windows
         {
             AddController<BuildingPanelController>();
             AddController<InputController>();
+            AddController<CoinsController>();
         }
     }
 }
