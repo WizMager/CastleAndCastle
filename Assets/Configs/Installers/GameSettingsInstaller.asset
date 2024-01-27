@@ -15,3 +15,4 @@ MonoBehaviour:
   prefabsBase: {fileID: 11400000, guid: f4ee8c4e413ab1d4aaecbe14de1fc22a, type: 2}
   buildingSettingsBase: {fileID: 11400000, guid: 6dd58dbfb19f331419f8e18a61384e16, type: 2}
   cameraBase: {fileID: 11400000, guid: f7a3e81b87488e54db5bc00f204aeba7, type: 2}
+  dropCoinsFromUnitBase: {fileID: 11400000, guid: 81df5580c3862ae47994c4f144d2e063, type: 2}

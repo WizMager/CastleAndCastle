@@ -39,7 +39,7 @@ namespace Ecs.Commands
 
         public static void ReceiveDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
         {
-            ref var command = ref commandBuffer.Create<ReceiveDamageCommand>();
+            ref var command = ref commandBuffer.Create<DealDamageCommand>();
             command.TargetUid = targetUid;
             command.Damage = damage;
         }

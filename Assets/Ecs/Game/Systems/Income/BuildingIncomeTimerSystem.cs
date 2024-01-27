@@ -1,4 +1,5 @@
-﻿using Db.Buildings;
+﻿using System.Collections.Generic;
+using Db.Buildings;
 using Ecs.Core.Interfaces;
 using Ecs.Utils.Groups;
 using Generated.Commands;
@@ -8,7 +9,7 @@ using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
 using UnityEngine;
 
-namespace Ecs.Commands.Systems.Income
+namespace Ecs.Game.Systems.Income
 {
     [Install(ExecutionType.Game, ExecutionPriority.Normal, 150, nameof(EFeatures.Building))]
     public class BuildingIncomeTimerSystem : IUpdateSystem
@@ -32,10 +33,16 @@ namespace Ecs.Commands.Systems.Income
         
         public void Update()
         {
-            using var buildings = _gameGroupUtils.GetBuildingsIncome(out var buffer, 
-                e => e.HasIncome && e.HasBuildingType && e.HasIncomeTimer);
+            using var disposable1 = _gameGroupUtils.GetBuildingsIncome(out var playerBuildings, true, e => e.HasIncomeTimer);
+            using var disposable2 = _gameGroupUtils.GetBuildingsIncome(out var enemyBuildings, false, e => e.HasIncomeTimer);
 
-            foreach (var entity in buffer)
+            CheckIncome(playerBuildings, true);
+            CheckIncome(enemyBuildings, false);
+        }
+
+        private void CheckIncome(List<GameEntity> buildings, bool isPlayerBuildings)
+        {
+            foreach (var entity in buildings)
             {
                 var incomeTimer = entity.IncomeTimer.Value;
                 var income = entity.Income.Value;
@@ -44,10 +51,10 @@ namespace Ecs.Commands.Systems.Income
                 incomeTimer -= _timeProvider.DeltaTime;
                 entity.ReplaceIncomeTimer(incomeTimer);
                 
-                Debug.Log($"BuildingIncomeTimerSystem incomeTimer: {incomeTimer}, _timeProvider.DeltaTime : {_timeProvider.DeltaTime}");
+                Debug.Log($"BuildingIncomeTimerSystem incomeTimer: {incomeTimer}, _timeProvider.DeltaTime : {_timeProvider.DeltaTime}, isPlayer {isPlayerBuildings}");
                 if (incomeTimer <= 0)
                 {
-                    _commandBuffer.AddCoins(income);
+                    _commandBuffer.AddCoins(income, isPlayerBuildings);
                     entity.ReplaceIncomeTimer(settings.IncomeTimer);
                 }
             }

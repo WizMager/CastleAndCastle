@@ -31,7 +31,7 @@ public sealed class CoinsEventSystem : JCMG.EntitasRedux.ReactiveSystem<GameEnti
 		foreach (var e in entities)
 		{
 			var component = e.Coins;
-			e.CoinsListener.Invoke(e, component.Value);
+			e.CoinsListener.Invoke(e, component.PlayerCoins, component.EnemyCoins);
 		}
 	}
 }

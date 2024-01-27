@@ -70,9 +70,13 @@ namespace Ecs.Utils.Groups.Impl
             return GetEntities(out buffer, _buildingsGroup, baseFilter, filter);
         }
 
-        public IDisposable GetBuildingsIncome(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null)
+        public IDisposable GetBuildingsIncome(out List<GameEntity> buffer, bool isPlayerBuilding, Func<GameEntity, bool> filter = null)
         {
-            return GetEntities(out buffer, _buildingsGroup, e => e.IsBuilding && e.HasIncome);
+            Func<GameEntity, bool> baseFilter = isPlayerBuilding
+                ? e => e.IsBuilding && e.HasIncome && e.IsPlayer
+                : e => e.IsBuilding && e.HasIncome && !e.IsPlayer;
+            
+            return GetEntities(out buffer, _buildingsGroup, baseFilter, filter);
         }
 
 

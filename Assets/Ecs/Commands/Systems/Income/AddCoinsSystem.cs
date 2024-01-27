@@ -20,10 +20,21 @@ namespace Ecs.Commands.Systems.Income
 
         protected override void Execute(ref AddCoinsCommand command)
         {
-            var coins = _game.Coins.Value;
-            coins += command.Value;
+            var isPlayerCoins = command.IsPlayer;
+            var coins = _game.Coins;
+            var playerCoins = coins.PlayerCoins;
+            var enemyCoins = coins.EnemyCoins;
+
+            if (isPlayerCoins)
+            {
+                playerCoins += command.Value;
+            }
+            else
+            {
+                enemyCoins += command.Value;
+            }
             
-            _game.ReplaceCoins(coins);
+            _game.ReplaceCoins(playerCoins, enemyCoins);
         }
     }
 }

@@ -21,9 +21,9 @@ namespace Generated.Commands
 {
     public static partial class CommandBufferExtensions
     {
-        public static void ReceiveDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
+        public static void DealDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
         {
-            ref var command = ref commandBuffer.Create<ReceiveDamageCommand>();
+            ref var command = ref commandBuffer.Create<DealDamageCommand>();
             command.TargetUid = targetUid;
             command.Damage = damage;
         }
@@ -56,10 +56,11 @@ namespace Generated.Commands
             command.TouchId = touchId;
         }
 
-        public static void AddCoins(this ICommandBuffer commandBuffer, Int32 value)
+        public static void AddCoins(this ICommandBuffer commandBuffer, Int32 value, Boolean isPlayer)
         {
             ref var command = ref commandBuffer.Create<AddCoinsCommand>();
             command.Value = value;
+            command.IsPlayer = isPlayer;
         }
 
         public static void EnterBuildingMode(this ICommandBuffer commandBuffer, EBuildingType buildingType)

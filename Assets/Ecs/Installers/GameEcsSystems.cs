@@ -4,6 +4,7 @@ using Ecs.Commands.Systems.Income;
 using Ecs.Commands.Systems.Input;
 using Ecs.Game.Systems;
 using Ecs.Game.Systems.Buildings;
+using Ecs.Game.Systems.Income;
 using Ecs.Game.Systems.Initialize;
 using Ecs.Game.Systems.Units;
 using Plugins.Extensions.InstallerGenerator.Utils;
@@ -62,7 +63,7 @@ namespace Ecs.Installers {
 
 			// Units 0300
 			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
-			SystemInstallHelper.Install<ReceiveDamageSystem>(container);	// 0300 Units
+			SystemInstallHelper.Install<DealDamageSystem>(container);	// 0300 Units
 
 			// Units 0350
 			SystemInstallHelper.Install<MoveToTargetSystem>(container);	// 0350 Units

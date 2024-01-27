@@ -26,13 +26,17 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
-		else if (component is Ecs.Game.Components.DeadComponent Dead)
-		{
-			IsDead = true;
-		}
 		else if (component is Ecs.Game.Components.IncomeTimer IncomeTimer)
 		{
 			CopyIncomeTimerTo(IncomeTimer);
+		}
+		else if (component is Ecs.Game.Components.IncomeComponent Income)
+		{
+			CopyIncomeTo(Income);
+		}
+		else if (component is Ecs.Game.Components.BuildingComponent Building)
+		{
+			IsBuilding = true;
 		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
@@ -45,6 +49,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.PositionComponent Position)
 		{
 			CopyPositionTo(Position);
+		}
+		else if (component is Ecs.Game.Components.DeadComponent Dead)
+		{
+			IsDead = true;
 		}
 		else if (component is Ecs.Game.Components.BusyComponent Busy)
 		{
@@ -70,10 +78,6 @@ public partial class GameEntity
 		{
 			CopyTransformTo(Transform);
 		}
-		else if (component is Ecs.Game.Components.BuildingComponent Building)
-		{
-			IsBuilding = true;
-		}
 		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
 		{
 			CopySelectedBuildingTo(SelectedBuilding);
@@ -90,10 +94,6 @@ public partial class GameEntity
 		{
 			CopyHoveredObjectTo(HoveredObject);
 		}
-		else if (component is Ecs.Game.Components.IncomeComponent Income)
-		{
-			CopyIncomeTo(Income);
-		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{
 			IsCameraMove = true;
@@ -109,10 +109,6 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
 		{
 			CopySpawnParametersTo(SpawnParameters);
-		}
-		else if (component is Ecs.Game.Components.Units.UnitStateComponent UnitState)
-		{
-			CopyUnitStateTo(UnitState);
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{
@@ -141,6 +137,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Units.HealthComponent Health)
 		{
 			CopyHealthTo(Health);
+		}
+		else if (component is Ecs.Game.Components.Units.UnitStateComponent UnitState)
+		{
+			CopyUnitStateTo(UnitState);
 		}
 		else if (component is Ecs.Game.Components.Units.InTargetComponent InTarget)
 		{
