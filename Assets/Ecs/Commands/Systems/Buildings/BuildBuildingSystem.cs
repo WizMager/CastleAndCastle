@@ -1,4 +1,4 @@
-﻿using Ecs.Commands.Command;
+﻿using Db.Buildings;
 using Ecs.Commands.Command.Buildings;
 using Ecs.Game.Extensions;
 using Ecs.Utils.LinkedEntityRepository;
@@ -12,16 +12,19 @@ namespace Ecs.Commands.Systems.Buildings
     public class BuildBuildingSystem : ForEachCommandUpdateSystem<MouseDownCommand>
     {
         private readonly ICommandBuffer _commandBuffer;
-        private readonly GameContext _game;
+        private readonly IBuildingSettingsBase _buildingSettingsBase;
         private readonly ILinkedEntityRepository _linkedEntityRepository;
+        private readonly GameContext _game;
 
         public BuildBuildingSystem(
             ICommandBuffer commandBuffer, 
-            GameContext game, 
-            ILinkedEntityRepository linkedEntityRepository
+            IBuildingSettingsBase buildingSettingsBase,
+            ILinkedEntityRepository linkedEntityRepository,
+            GameContext game
         ) : base(commandBuffer)
         {
             _commandBuffer = commandBuffer;
+            _buildingSettingsBase = buildingSettingsBase;
             _game = game;
             _linkedEntityRepository = linkedEntityRepository;
         }
@@ -35,10 +38,16 @@ namespace Ecs.Commands.Systems.Buildings
             
             if (command.Button != 0)
                 return;
+            
+            if (!_game.HasHoveredObject)
+                return;
 
             var hoveredObjHash = _game.HoveredObject.Hash;
 
-            _linkedEntityRepository.TryGet(hoveredObjHash, out var buildingSlot);
+            var hasSlot = _linkedEntityRepository.TryGet(hoveredObjHash, out var buildingSlot);
+            
+            if (!hasSlot)
+                return;
             
             if (!buildingSlot.IsBuildingSlot)
                 return;
@@ -47,7 +56,8 @@ namespace Ecs.Commands.Systems.Buildings
 
             var selectedBuilding = _game.SelectedBuilding.BuildingType;
 
-            _game.CreateBuilding(buildingSlot.Position.Value, buildingSlot.Rotation.Value, selectedBuilding, true);
+            var settings = _buildingSettingsBase.Get(selectedBuilding);
+            _game.CreateBuilding(buildingSlot.Position.Value, buildingSlot.Rotation.Value, selectedBuilding, settings, true);
             
             _commandBuffer.ExitBuildingMode();
         }

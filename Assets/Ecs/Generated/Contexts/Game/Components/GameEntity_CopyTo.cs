@@ -26,6 +26,10 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.IncomeTimer IncomeTimer)
+		{
+			CopyIncomeTimerTo(IncomeTimer);
+		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
@@ -62,6 +66,10 @@ public partial class GameEntity
 		{
 			CopyTransformTo(Transform);
 		}
+		else if (component is Ecs.Game.Components.BuildingComponent Building)
+		{
+			IsBuilding = true;
+		}
 		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
 		{
 			CopySelectedBuildingTo(SelectedBuilding);
@@ -70,21 +78,17 @@ public partial class GameEntity
 		{
 			IsVisible = true;
 		}
-		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
-		{
-			CopyHoveredObjectTo(HoveredObject);
-		}
 		else if (component is Ecs.Game.Components.PlayerComponent Player)
 		{
 			IsPlayer = true;
 		}
-		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
+		else if (component is Ecs.Game.Components.HoveredObjectComponent HoveredObject)
 		{
-			CopySpawnParametersTo(SpawnParameters);
+			CopyHoveredObjectTo(HoveredObject);
 		}
-		else if (component is Ecs.Game.Components.Buildings.BuildingTypeComponent BuildingType)
+		else if (component is Ecs.Game.Components.IncomeComponent Income)
 		{
-			CopyBuildingTypeTo(BuildingType);
+			CopyIncomeTo(Income);
 		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{
@@ -93,6 +97,14 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Camera.CameraComponent Camera)
 		{
 			IsCamera = true;
+		}
+		else if (component is Ecs.Game.Components.Buildings.BuildingTypeComponent BuildingType)
+		{
+			CopyBuildingTypeTo(BuildingType);
+		}
+		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
+		{
+			CopySpawnParametersTo(SpawnParameters);
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{

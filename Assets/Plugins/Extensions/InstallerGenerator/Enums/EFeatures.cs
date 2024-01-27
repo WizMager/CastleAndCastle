@@ -6,6 +6,7 @@
         Common,
         Units,
         Building,
+        Coins,
         Input
     }
 }

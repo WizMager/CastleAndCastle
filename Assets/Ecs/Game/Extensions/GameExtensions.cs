@@ -50,6 +50,7 @@ namespace Ecs.Game.Extensions
             Vector3 buildingSlotPosition,
             Quaternion buildingSlotRotation,
             EBuildingType buildingType,
+            BuildingSettings buildingSettings,
             bool isPlayerBuilding
         )
         {
@@ -58,12 +59,16 @@ namespace Ecs.Game.Extensions
             building.AddPosition(buildingSlotPosition);
             building.AddRotation(buildingSlotRotation);
             building.AddBuildingType(buildingType);
-            building.IsInstantiate = true;
+            building.IsBuilding = true;
+            building.AddIncome(buildingSettings.BaseIncome);
+            building.AddIncomeTimer(buildingSettings.IncomeTimer);
 
             if (isPlayerBuilding)
             {
                 building.IsPlayer = true;
             }
+            
+            building.IsInstantiate = true;
             
             return building;
         }
