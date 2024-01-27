@@ -14,7 +14,7 @@ public sealed class CoinsListenerComponent : JCMG.EntitasRedux.IComponent, Syste
 
 	public bool IsEmpty => Delegate == null;
 
-	public void Invoke(GameEntity entity, int value) => Delegate(entity, value);
+	public void Invoke(GameEntity entity, int playerCoins, int enemyCoins) => Delegate(entity, playerCoins, enemyCoins);
 
 	void System.IDisposable.Dispose() => Delegate = null;
 }

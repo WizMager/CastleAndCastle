@@ -12,7 +12,7 @@ public partial interface ICoinsEntity
 	Ecs.Game.Components.CoinsComponent Coins { get; }
 	bool HasCoins { get; }
 
-	void AddCoins(int newValue);
-	void ReplaceCoins(int newValue);
+	void AddCoins(int newPlayerCoins, int newEnemyCoins);
+	void ReplaceCoins(int newPlayerCoins, int newEnemyCoins);
 	void RemoveCoins();
 }

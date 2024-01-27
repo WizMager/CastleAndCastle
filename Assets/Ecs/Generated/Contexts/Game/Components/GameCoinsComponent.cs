@@ -13,7 +13,7 @@ public partial class GameContext {
 	public Ecs.Game.Components.CoinsComponent Coins { get { return CoinsEntity.Coins; } }
 	public bool HasCoins { get { return CoinsEntity != null; } }
 
-	public GameEntity SetCoins(int newValue)
+	public GameEntity SetCoins(int newPlayerCoins, int newEnemyCoins)
 	{
 		if (HasCoins)
 		{
@@ -25,22 +25,22 @@ public partial class GameContext {
 		}
 		var entity = CreateEntity();
 		#if !ENTITAS_REDUX_NO_IMPL
-		entity.AddCoins(newValue);
+		entity.AddCoins(newPlayerCoins, newEnemyCoins);
 		#endif
 		return entity;
 	}
 
-	public void ReplaceCoins(int newValue)
+	public void ReplaceCoins(int newPlayerCoins, int newEnemyCoins)
 	{
 		#if !ENTITAS_REDUX_NO_IMPL
 		var entity = CoinsEntity;
 		if (entity == null)
 		{
-			entity = SetCoins(newValue);
+			entity = SetCoins(newPlayerCoins, newEnemyCoins);
 		}
 		else
 		{
-			entity.ReplaceCoins(newValue);
+			entity.ReplaceCoins(newPlayerCoins, newEnemyCoins);
 		}
 		#endif
 	}
@@ -65,22 +65,24 @@ public partial class GameEntity
 	public Ecs.Game.Components.CoinsComponent Coins { get { return (Ecs.Game.Components.CoinsComponent)GetComponent(GameComponentsLookup.Coins); } }
 	public bool HasCoins { get { return HasComponent(GameComponentsLookup.Coins); } }
 
-	public void AddCoins(int newValue)
+	public void AddCoins(int newPlayerCoins, int newEnemyCoins)
 	{
 		var index = GameComponentsLookup.Coins;
 		var component = (Ecs.Game.Components.CoinsComponent)CreateComponent(index, typeof(Ecs.Game.Components.CoinsComponent));
 		#if !ENTITAS_REDUX_NO_IMPL
-		component.Value = newValue;
+		component.PlayerCoins = newPlayerCoins;
+		component.EnemyCoins = newEnemyCoins;
 		#endif
 		AddComponent(index, component);
 	}
 
-	public void ReplaceCoins(int newValue)
+	public void ReplaceCoins(int newPlayerCoins, int newEnemyCoins)
 	{
 		var index = GameComponentsLookup.Coins;
 		var component = (Ecs.Game.Components.CoinsComponent)CreateComponent(index, typeof(Ecs.Game.Components.CoinsComponent));
 		#if !ENTITAS_REDUX_NO_IMPL
-		component.Value = newValue;
+		component.PlayerCoins = newPlayerCoins;
+		component.EnemyCoins = newEnemyCoins;
 		#endif
 		ReplaceComponent(index, component);
 	}
@@ -90,7 +92,8 @@ public partial class GameEntity
 		var index = GameComponentsLookup.Coins;
 		var component = (Ecs.Game.Components.CoinsComponent)CreateComponent(index, typeof(Ecs.Game.Components.CoinsComponent));
 		#if !ENTITAS_REDUX_NO_IMPL
-		component.Value = copyComponent.Value;
+		component.PlayerCoins = copyComponent.PlayerCoins;
+		component.EnemyCoins = copyComponent.EnemyCoins;
 		#endif
 		ReplaceComponent(index, component);
 	}

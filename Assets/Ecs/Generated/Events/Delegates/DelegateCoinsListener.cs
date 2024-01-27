@@ -7,4 +7,4 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public delegate void OnGameCoins(GameEntity entity, int value);
+public delegate void OnGameCoins(GameEntity entity, int playerCoins, int enemyCoins);

@@ -6,5 +6,6 @@ namespace Ecs.Commands.Command.Income
     public struct AddCoinsCommand
     {
         public int Value;
+        public bool IsPlayer;
     }
 }

@@ -7,6 +7,7 @@ namespace Ecs.Game.Components
     [Event(EventTarget.Self)]
     public class CoinsComponent : IComponent
     {
-        public int Value;
+        public int PlayerCoins;
+        public int EnemyCoins;
     }
 }

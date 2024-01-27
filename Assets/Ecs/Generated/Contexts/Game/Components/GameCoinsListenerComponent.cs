@@ -80,7 +80,7 @@ public partial class GameEntity
 		if(invokeOnSubscribe && HasComponent(GameComponentsLookup.Coins))
 		{
 			var component = Coins;
-			value(this, component.Value);
+			value(this, component.PlayerCoins, component.EnemyCoins);
 		}
 
 		return new JCMG.EntitasRedux.Events.EventDisposable<OnGameCoins>(CreationIndex, value, UnsubscribeCoins);
