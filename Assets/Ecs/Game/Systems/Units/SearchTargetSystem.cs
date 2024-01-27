@@ -82,6 +82,7 @@ namespace Ecs.Game.Systems.Units
                         ? gameField.EnemyCastlePosition 
                         : gameField.PlayerCastlePosition;
                     seekerUnit.ReplaceDestinationPoint(destinationPosition);
+                    seekerUnit.ReplaceUnitState(EUnitState.Walk);
                 }
                 else
                 {
@@ -89,6 +90,7 @@ namespace Ecs.Game.Systems.Units
                     var nearestUnit = checkedUnits[nearestUnitIndex];
                     nearestUnit.IsInTarget = true;
                     seekerUnit.ReplaceTarget(nearestUnit);
+                    seekerUnit.ReplaceUnitState(EUnitState.Walk);
                 }
             }
         }

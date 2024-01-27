@@ -26,6 +26,10 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
+		else if (component is Ecs.Game.Components.DeadComponent Dead)
+		{
+			IsDead = true;
+		}
 		else if (component is Ecs.Game.Components.IncomeTimer IncomeTimer)
 		{
 			CopyIncomeTimerTo(IncomeTimer);
@@ -105,6 +109,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
 		{
 			CopySpawnParametersTo(SpawnParameters);
+		}
+		else if (component is Ecs.Game.Components.Units.UnitStateComponent UnitState)
+		{
+			CopyUnitStateTo(UnitState);
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{

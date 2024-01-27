@@ -1,4 +1,5 @@
 ﻿using Ecs.Commands.Command;
+using Game.Utils.Units;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
@@ -42,7 +43,8 @@ namespace Ecs.Commands.Systems
 
             if (health <= 0)
             {
-                targetEntity.IsDestroyed = true;
+                targetEntity.IsDead = true;
+                targetEntity.ReplaceUnitState(EUnitState.Death);
                 unitEntity.RemoveTarget();
             }
             else
