@@ -9,29 +9,29 @@
 //------------------------------------------------------------------------------
 using JCMG.EntitasRedux;
 
-public sealed class CoinsEventSystem : JCMG.EntitasRedux.ReactiveSystem<GameEntity>
+public sealed class PlayerCoinsEventSystem : JCMG.EntitasRedux.ReactiveSystem<GameEntity>
 {
 
-	public CoinsEventSystem(IContext<GameEntity> context) : base(context)
+	public PlayerCoinsEventSystem(IContext<GameEntity> context) : base(context)
 	{
 	}
 
 	protected override JCMG.EntitasRedux.ICollector<GameEntity> GetTrigger(JCMG.EntitasRedux.IContext<GameEntity> context)
 	{
-		return new SlimCollector<GameEntity>(context, GameComponentsLookup.Coins, EventType.Added);
+		return new SlimCollector<GameEntity>(context, GameComponentsLookup.PlayerCoins, EventType.Added);
 	}
 
 	protected override bool Filter(GameEntity entity)
 	{
-		return entity.HasCoins && entity.HasCoinsListener;
+		return entity.HasPlayerCoins && entity.HasPlayerCoinsListener;
 	}
 
 	protected override void Execute(System.Collections.Generic.IEnumerable<GameEntity> entities)
 	{
 		foreach (var e in entities)
 		{
-			var component = e.Coins;
-			e.CoinsListener.Invoke(e, component.PlayerCoins, component.EnemyCoins);
+			var component = e.PlayerCoins;
+			e.PlayerCoinsListener.Invoke(e, component.Value);
 		}
 	}
 }

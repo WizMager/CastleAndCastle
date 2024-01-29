@@ -7,4 +7,7 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public delegate void OnGameCoins(GameEntity entity, int playerCoins, int enemyCoins);
+public partial interface IPlayerCastleEntity
+{
+	bool IsPlayerCastle { get; set; }
+}

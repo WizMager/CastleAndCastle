@@ -37,7 +37,7 @@ namespace Ecs.Commands
             command.Button = button;
         }
 
-        public static void ReceiveDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
+        public static void DealDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
         {
             ref var command = ref commandBuffer.Create<DealDamageCommand>();
             command.TargetUid = targetUid;

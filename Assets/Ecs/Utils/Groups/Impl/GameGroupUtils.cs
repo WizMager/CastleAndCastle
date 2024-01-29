@@ -79,7 +79,6 @@ namespace Ecs.Utils.Groups.Impl
             return GetEntities(out buffer, _buildingsGroup, baseFilter, filter);
         }
 
-
         private IDisposable GetEntities(
             out List<GameEntity> buffer,  
             IGroup<GameEntity> group,

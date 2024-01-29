@@ -73,5 +73,28 @@ namespace Ecs.Game.Extensions
             
             return building;
         }
+        
+        public static GameEntity CreateCastle(
+            this GameContext game, 
+            Vector3 buildingPosition,
+            Quaternion buildingRotation,
+            bool isPlayerCastle
+        )
+        {
+            var building = game.CreateEntity();
+            building.AddPosition(buildingPosition);
+            building.AddRotation(buildingRotation);
+
+            if (isPlayerCastle)
+            {
+                building.IsPlayerCastle = true;
+            }
+            else
+            {
+                building.IsEnemyCastle = true;
+            }
+            
+            return building;
+        }
     }
 }

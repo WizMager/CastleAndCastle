@@ -15,9 +15,9 @@ public sealed class GameEventSystems : Feature
 	{
 		Add(new AnyBusyEventSystem(context)); // priority: 0
 		Add(new AnyBusyRemovedEventSystem(context)); // priority: 0
-		Add(new CoinsEventSystem(context)); // priority: 0
 		Add(new DestinationPointEventSystem(context)); // priority: 0
 		Add(new GameDestroyedEventSystem(context)); // priority: 0
+		Add(new PlayerCoinsEventSystem(context)); // priority: 0
 		Add(new PositionEventSystem(context)); // priority: 0
 		Add(new RotationEventSystem(context)); // priority: 0
 		Add(new TargetEventSystem(context)); // priority: 0

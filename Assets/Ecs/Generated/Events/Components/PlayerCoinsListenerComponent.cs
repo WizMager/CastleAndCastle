@@ -8,13 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 [JCMG.EntitasRedux.DontGenerate(false)]
-public sealed class CoinsListenerComponent : JCMG.EntitasRedux.IComponent, System.IDisposable
+public sealed class PlayerCoinsListenerComponent : JCMG.EntitasRedux.IComponent, System.IDisposable
 {
-	public event OnGameCoins Delegate;
+	public event OnGamePlayerCoins Delegate;
 
 	public bool IsEmpty => Delegate == null;
 
-	public void Invoke(GameEntity entity, int playerCoins, int enemyCoins) => Delegate(entity, playerCoins, enemyCoins);
+	public void Invoke(GameEntity entity, int value) => Delegate(entity, value);
 
 	void System.IDisposable.Dispose() => Delegate = null;
 }

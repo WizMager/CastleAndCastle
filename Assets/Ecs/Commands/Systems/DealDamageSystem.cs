@@ -4,6 +4,7 @@ using Game.Utils.Units;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
+using UnityEngine;
 
 namespace Ecs.Commands.Systems
 {
@@ -27,13 +28,26 @@ namespace Ecs.Commands.Systems
         {
             var unitEntity = _game.GetEntityWithUid(command.TargetUid);
 
-            if (!unitEntity.HasTarget)
+            if (!unitEntity.HasTarget || !unitEntity.HasMainTarget)
             {
                 unitEntity.IsInAttackRange = false;
                 
                 return;
             }
-            
+            Debug.Log($"targ: {unitEntity.HasTarget}");
+            if (unitEntity.HasTarget)
+            {
+                DealDamageTarget(unitEntity, command.Damage);
+            }
+            else
+            {
+                DealDamageMainTarget(unitEntity, command.Damage);
+            }
+        }
+
+        private void DealDamageTarget(GameEntity unitEntity, float damage)
+        {
+            Debug.Log($"dam targ");
             var targetEntity = unitEntity.Target.Value;
 
             if (!targetEntity.HasHealth)
@@ -44,31 +58,61 @@ namespace Ecs.Commands.Systems
             }
             
             var health = targetEntity.Health.Value;
-            health -= command.Damage;
+            health -= damage;
 
             if (health <= 0)
             {
                 var isPlayer = targetEntity.IsPlayer;
                 var unitType = targetEntity.UnitType.Value;
                 var dropCoins = _dropCoinsFromUnitsBase.GetCoinsForUnitType(unitType);
-                
-                var coins = _game.Coins;
-                var playerCoins = coins.PlayerCoins;
-                var enemyCoins = coins.EnemyCoins;
 
                 if (isPlayer)
                 {
+                    var enemyCoins = _game.EnemyCoins.Value;
                     enemyCoins += dropCoins;
+                    
+                    _game.ReplaceEnemyCoins(enemyCoins);
                 }
                 else
                 {
+                    var playerCoins = _game.PlayerCoins.Value;
                     playerCoins += dropCoins;
+                    
+                    _game.ReplacePlayerCoins(playerCoins);
                 }
                 
-                _game.ReplaceCoins(playerCoins, enemyCoins);
                 targetEntity.IsDead = true;
                 targetEntity.ReplaceUnitState(EUnitState.Death);
                 unitEntity.RemoveTarget();
+            }
+            else
+            {
+                targetEntity.ReplaceHealth(health);
+            }
+        }
+        
+        private void DealDamageMainTarget(GameEntity unitEntity, float damage)
+        {
+            Debug.Log($"dam cast");
+            var targetEntity = unitEntity.MainTarget.Value;
+
+            if (!targetEntity.HasHealth)
+            {
+                unitEntity.RemoveMainTarget();
+                
+                return;
+            }
+            
+            var health = targetEntity.Health.Value;
+            health -= damage;
+
+            if (health <= 0)
+            {
+                var isPlayer = targetEntity.IsPlayerCastle;
+                
+                //TODO: send command for lose or win after check which castle is it was
+                
+                unitEntity.RemoveMainTarget();
             }
             else
             {

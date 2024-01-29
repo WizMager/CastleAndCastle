@@ -15,10 +15,10 @@ namespace Game.Ui.Income
 
         public void Initialize()
         {
-            _game.CoinsEntity.SubscribeCoins(OnCoinsChanged).AddTo(View.gameObject);
+            _game.PlayerCoinsEntity.SubscribePlayerCoins(OnCoinsChanged).AddTo(View.gameObject);
         }
 
-        private void OnCoinsChanged(GameEntity _, int playerCoins, int enemyCoins)
+        private void OnCoinsChanged(GameEntity _, int playerCoins)
         {
             View.CoinsText.text = $"{playerCoins}";
         }

@@ -36,7 +36,7 @@ namespace Ecs.Game.Systems.Units
                 unit.ReplaceTime(attackSpeed);
                 unit.ReplaceUnitState(EUnitState.Attack);
                 
-                _commandBuffer.ReceiveDamage(unit.Uid.Value, damage);
+                _commandBuffer.DealDamage(unit.Uid.Value, damage);
             }
         }
     }

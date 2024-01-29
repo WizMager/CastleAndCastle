@@ -7,12 +7,12 @@
 //		the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface ICoinsEntity
+public partial interface IMainTargetEntity
 {
-	Ecs.Game.Components.CoinsComponent Coins { get; }
-	bool HasCoins { get; }
+	Ecs.Game.Components.Units.MainTargetComponent MainTarget { get; }
+	bool HasMainTarget { get; }
 
-	void AddCoins(int newPlayerCoins, int newEnemyCoins);
-	void ReplaceCoins(int newPlayerCoins, int newEnemyCoins);
-	void RemoveCoins();
+	void AddMainTarget(GameEntity newValue);
+	void ReplaceMainTarget(GameEntity newValue);
+	void RemoveMainTarget();
 }
