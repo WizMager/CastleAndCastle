@@ -31,8 +31,8 @@ namespace Game.Ui.Building
         
         public void Initialize()
         {
-            var coins = _game.Coins.PlayerCoins;
-            _game.CoinsEntity.SubscribeCoins(OnCoinsAdded).AddTo(View);
+            var coins = _game.PlayerCoins.Value;
+            _game.PlayerCoinsEntity.SubscribePlayerCoins(OnCoinsAdded).AddTo(View);
             
             using var slotDisposable = _gameGroupUtils.GetBuildingSlots(out var slots, entity => !entity.IsBusy);
 
@@ -63,7 +63,7 @@ namespace Game.Ui.Building
             _commandBuffer.EnterBuildingMode(type);
         }
 
-        private void OnCoinsAdded(GameEntity _, int playerCoins, int enemyCoins)
+        private void OnCoinsAdded(GameEntity _, int playerCoins)
         {
             foreach (var slotView in View.BuildingButtonsCollectionView)
             {

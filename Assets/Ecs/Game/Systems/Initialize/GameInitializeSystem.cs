@@ -1,10 +1,13 @@
 ﻿using Ecs.Commands;
+using Ecs.Game.Extensions;
+using Game.Providers.GameFieldProvider;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
 using UnityEngine;
+using Zenject;
 
 namespace Ecs.Game.Systems.Initialize
 {
@@ -27,9 +30,10 @@ namespace Ecs.Game.Systems.Initialize
         {
             DebugSpawnUnits();
             
-            _game.ReplaceCoins(100, 0);
+            _game.ReplacePlayerCoins(100);
+            _game.ReplaceEnemyCoins(0);
         }
-
+        
         private void DebugSpawnUnits()
         {
             for (int i = 0; i < 3; i++)

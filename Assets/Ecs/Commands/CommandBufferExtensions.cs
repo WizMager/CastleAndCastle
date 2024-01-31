@@ -8,42 +8,26 @@
 //------------------------------------------------------------------------------
 using JCMG.EntitasRedux.Commands;
 using Ecs.Commands.Command;
-using Db.Buildings;
-using System;
-using Ecs.Commands.Command.Buildings;
 using Ecs.Extensions.UidGenerator;
+using System;
 using UnityEngine;
 using Game.Utils.Units;
 using Ecs.Commands.Command.Input;
+using Ecs.Commands.Command.Income;
+using Ecs.Commands.Command.Buildings;
+using Db.Buildings;
 
 namespace Ecs.Commands
 {
     public static partial class CommandBufferExtensions
     {
-        public static void EnterBuildingMode(this ICommandBuffer commandBuffer, EBuildingType buildingType)
-        {
-            ref var command = ref commandBuffer.Create<EnterBuildingModeCommand>();
-            command.BuildingType = buildingType;
-        }
-
-        public static void ExitBuildingMode(this ICommandBuffer commandBuffer)
-        {
-            ref var command = ref commandBuffer.Create<ExitBuildingModeCommand>();
-        }
-
-        public static void MouseDown(this ICommandBuffer commandBuffer, Int32 button)
-        {
-            ref var command = ref commandBuffer.Create<MouseDownCommand>();
-            command.Button = button;
-        }
-
-        public static void ReceiveDamage(this ICommandBuffer commandBuffer, Uid targetUid, Single damage)
+        public static void DealDamage(this ICommandBuffer commandBuffer, Uid damageFromUnitWithUid, Single damage)
         {
             ref var command = ref commandBuffer.Create<DealDamageCommand>();
-            command.TargetUid = targetUid;
+            command.DamageFromUnitWithUid = damageFromUnitWithUid;
             command.Damage = damage;
         }
-
+        
         public static void SpawnUnit(this ICommandBuffer commandBuffer, Vector3 position, Quaternion rotation, EUnitType unitType, Boolean isPlayerUnit)
         {
             ref var command = ref commandBuffer.Create<SpawnUnitCommand>();
@@ -70,6 +54,30 @@ namespace Ecs.Commands
         {
             ref var command = ref commandBuffer.Create<PointerUpCommand>();
             command.TouchId = touchId;
+        }
+
+        public static void AddCoins(this ICommandBuffer commandBuffer, Int32 value, Boolean isPlayer)
+        {
+            ref var command = ref commandBuffer.Create<AddCoinsCommand>();
+            command.Value = value;
+            command.IsPlayer = isPlayer;
+        }
+
+        public static void EnterBuildingMode(this ICommandBuffer commandBuffer, EBuildingType buildingType)
+        {
+            ref var command = ref commandBuffer.Create<EnterBuildingModeCommand>();
+            command.BuildingType = buildingType;
+        }
+
+        public static void ExitBuildingMode(this ICommandBuffer commandBuffer)
+        {
+            ref var command = ref commandBuffer.Create<ExitBuildingModeCommand>();
+        }
+
+        public static void MouseDown(this ICommandBuffer commandBuffer, Int32 button)
+        {
+            ref var command = ref commandBuffer.Create<MouseDownCommand>();
+            command.Button = button;
         }
     }
 }

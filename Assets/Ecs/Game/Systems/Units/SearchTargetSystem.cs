@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Ecs.Utils.Groups;
-using Game.Providers.GameFieldProvider;
 using Game.Utils.Units;
 using JCMG.EntitasRedux;
 using Plugins.Extensions.InstallerGenerator.Attributes;
@@ -12,15 +11,10 @@ namespace Ecs.Game.Systems.Units
     public class SearchTargetSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;
-        private readonly IGameFieldProvider _gameFieldProvider;
 
-        public SearchTargetSystem(
-            IGameGroupUtils gameGroupUtils,
-            IGameFieldProvider gameFieldProvider
-        )
+        public SearchTargetSystem(IGameGroupUtils gameGroupUtils)
         {
             _gameGroupUtils = gameGroupUtils;
-            _gameFieldProvider = gameFieldProvider;
         }
         
         public void Update()
@@ -41,11 +35,11 @@ namespace Ecs.Game.Systems.Units
             {
                 using var group3 = gameGroupUtils.GetOwnerUnits(out var targetedPlayerUnits, !isPlayerUnit);
                 
-                CheckAggroRadius(enemyUnits, targetedPlayerUnits, isPlayerUnit);
+                CheckAggroRadius(enemyUnits, targetedPlayerUnits);
             }
             else
             {
-                CheckAggroRadius(enemyUnits, notTargetedPlayer, isPlayerUnit);
+                CheckAggroRadius(enemyUnits, notTargetedPlayer);
             }
         }
         
@@ -54,10 +48,10 @@ namespace Ecs.Game.Systems.Units
             using var group1 = gameGroupUtils.GetOwnerUnitsWithType(out var seekerUnits, isPlayerUnit, EUnitType.RangeUnit, e => !e.HasTarget);
             using var group2 = gameGroupUtils.GetOwnerUnits(out var checkedUnits, !isPlayerUnit);
 
-            CheckAggroRadius(seekerUnits, checkedUnits, isPlayerUnit);
+            CheckAggroRadius(seekerUnits, checkedUnits);
         }
 
-        private void CheckAggroRadius(List<GameEntity> seekerUnits, IReadOnlyList<GameEntity> checkedUnits, bool isPlayerSeeker)
+        private void CheckAggroRadius(List<GameEntity> seekerUnits, IReadOnlyList<GameEntity> checkedUnits)
         {
             foreach (var seekerUnit in seekerUnits)
             {
@@ -75,23 +69,13 @@ namespace Ecs.Game.Systems.Units
                     enemiesInRange.Add(i, distanceToEnemy);
                 }
                 
-                if (enemiesInRange.Count == 0)
-                {
-                    var gameField = _gameFieldProvider.GameField;
-                    var destinationPosition = isPlayerSeeker 
-                        ? gameField.EnemyCastlePosition 
-                        : gameField.PlayerCastlePosition;
-                    seekerUnit.ReplaceDestinationPoint(destinationPosition);
-                    seekerUnit.ReplaceUnitState(EUnitState.Walk);
-                }
-                else
-                {
-                    var nearestUnitIndex = CheckNearestUnit(enemiesInRange);
-                    var nearestUnit = checkedUnits[nearestUnitIndex];
-                    nearestUnit.IsInTarget = true;
-                    seekerUnit.ReplaceTarget(nearestUnit);
-                    seekerUnit.ReplaceUnitState(EUnitState.Walk);
-                }
+                if (enemiesInRange.Count == 0) continue;
+                
+                var nearestUnitIndex = CheckNearestUnit(enemiesInRange);
+                var nearestUnit = checkedUnits[nearestUnitIndex];
+                nearestUnit.IsInTarget = true;
+                seekerUnit.ReplaceTarget(nearestUnit);
+                seekerUnit.ReplaceUnitState(EUnitState.Walk);
             }
         }
         

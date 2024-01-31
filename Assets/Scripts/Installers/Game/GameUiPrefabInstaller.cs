@@ -1,4 +1,5 @@
 using Game.Ui.Building;
+using Game.Ui.EndLevel;
 using Game.Ui.Income;
 using Game.Ui.Input;
 using SimpleUi;
@@ -15,6 +16,7 @@ namespace Installers.Game
         [SerializeField] private BuildingPanelView buildingPanelView;
         [SerializeField] private InputView inputView;
         [SerializeField] private CoinsView coinsView;
+        [SerializeField] private EndLevelView endLevelView;
         
         public override void InstallBindings()
         {
@@ -24,6 +26,7 @@ namespace Installers.Game
             Container.BindUiView<BuildingPanelController, BuildingPanelView>(buildingPanelView, canvasTransform);
             Container.BindUiView<InputController, InputView>(inputView, canvasTransform);
             Container.BindUiView<CoinsController, CoinsView>(coinsView, canvasTransform);
+            Container.BindUiView<EndLevelController, EndLevelView>(endLevelView, canvasTransform);
         }
     }
 }

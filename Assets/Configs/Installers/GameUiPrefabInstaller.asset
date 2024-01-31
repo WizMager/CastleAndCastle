@@ -16,3 +16,4 @@ MonoBehaviour:
   buildingPanelView: {fileID: 7408985115500914508, guid: 042d038311386bf4da522e7f3f854744, type: 3}
   inputView: {fileID: 4519934396468508028, guid: b03335e0d165a464d8dce3be5f5eb2c7, type: 3}
   coinsView: {fileID: 3813507020369387252, guid: ed89e5d37d68343468684b4da0845f54, type: 3}
+  endLevelView: {fileID: 430780930391346556, guid: aa8d615032e3f4643a96eaab769bcfa8, type: 3}

@@ -26,17 +26,13 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
-		else if (component is Ecs.Game.Components.IncomeTimer IncomeTimer)
+		else if (component is Ecs.Game.Components.PlayerCoinsComponent PlayerCoins)
 		{
-			CopyIncomeTimerTo(IncomeTimer);
+			CopyPlayerCoinsTo(PlayerCoins);
 		}
-		else if (component is Ecs.Game.Components.IncomeComponent Income)
+		else if (component is Ecs.Game.Components.EnemyCoinsComponent EnemyCoins)
 		{
-			CopyIncomeTo(Income);
-		}
-		else if (component is Ecs.Game.Components.BuildingComponent Building)
-		{
-			IsBuilding = true;
+			CopyEnemyCoinsTo(EnemyCoins);
 		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
@@ -62,13 +58,13 @@ public partial class GameEntity
 		{
 			CopyTimeTo(Time);
 		}
+		else if (component is Ecs.Game.Components.IncomeTimer IncomeTimer)
+		{
+			CopyIncomeTimerTo(IncomeTimer);
+		}
 		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
 		{
 			CopyPrefabTo(Prefab);
-		}
-		else if (component is Ecs.Game.Components.CoinsComponent Coins)
-		{
-			CopyCoinsTo(Coins);
 		}
 		else if (component is Ecs.Game.Components.RotationComponent Rotation)
 		{
@@ -77,6 +73,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.TransformComponent Transform)
 		{
 			CopyTransformTo(Transform);
+		}
+		else if (component is Ecs.Game.Components.BuildingComponent Building)
+		{
+			IsBuilding = true;
 		}
 		else if (component is Ecs.Game.Components.SelectedBuildingComponent SelectedBuilding)
 		{
@@ -94,6 +94,10 @@ public partial class GameEntity
 		{
 			CopyHoveredObjectTo(HoveredObject);
 		}
+		else if (component is Ecs.Game.Components.IncomeComponent Income)
+		{
+			CopyIncomeTo(Income);
+		}
 		else if (component is Ecs.Game.Components.Camera.CameraMoveComponent CameraMove)
 		{
 			IsCameraMove = true;
@@ -102,6 +106,14 @@ public partial class GameEntity
 		{
 			IsCamera = true;
 		}
+		else if (component is Ecs.Game.Components.Buildings.PlayerCastleComponent PlayerCastle)
+		{
+			IsPlayerCastle = true;
+		}
+		else if (component is Ecs.Game.Components.Buildings.EnemyCastleComponent EnemyCastle)
+		{
+			IsEnemyCastle = true;
+		}
 		else if (component is Ecs.Game.Components.Buildings.BuildingTypeComponent BuildingType)
 		{
 			CopyBuildingTypeTo(BuildingType);
@@ -109,6 +121,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
 		{
 			CopySpawnParametersTo(SpawnParameters);
+		}
+		else if (component is Ecs.Game.Components.Units.MainTargetComponent MainTarget)
+		{
+			CopyMainTargetTo(MainTarget);
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{

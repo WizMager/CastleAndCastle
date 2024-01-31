@@ -4,6 +4,7 @@
     {
         Farm,
         House,
-        MageTower
+        MageTower,
+        Castle
     }
 }

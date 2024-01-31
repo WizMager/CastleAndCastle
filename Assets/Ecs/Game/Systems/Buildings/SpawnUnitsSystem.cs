@@ -39,7 +39,11 @@ namespace Ecs.Game.Systems.Buildings
                     EBuildingType.House => EUnitType.RangeUnit
                 };
                 
-                _game.CreateUnit(parameters.SpawnPosition, parameters.SpawnRotation, unitType, isPlayerBuilding);
+                var unit = _game.CreateUnit(parameters.SpawnPosition, parameters.SpawnRotation, unitType, isPlayerBuilding);
+                var mainTarget = isPlayerBuilding
+                    ? _game.EnemyCastleEntity
+                    : _game.PlayerCastleEntity;
+                unit.ReplaceMainTarget(mainTarget);
                 
                 building.AddTime(parameters.SpawnCooldown);
             }

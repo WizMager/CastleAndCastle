@@ -7,7 +7,7 @@ namespace Ecs.Commands.Generator.Editor
 {
 	public class CommandsGeneratorWindow : EditorWindow
 	{
-		private const string DefaultPath = "Generated/Commands";
+		private const string DefaultPath = "Ecs/Commands";
 		private const string GenerationPathKey = "CommandsGenerationPath";
 
 		private static string _generationPathKey;
