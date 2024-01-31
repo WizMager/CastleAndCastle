@@ -25,7 +25,7 @@ namespace Ecs.Game.Systems.Units
                 var selfPosition = unit.Position.Value;
                 var target = unit.Target.Value;
 
-                if (!target.HasPosition)
+                if (target.IsDead)
                 {
                     unit.RemoveTarget();
                     
@@ -42,6 +42,7 @@ namespace Ecs.Game.Systems.Units
                     ChangeIsAttackRange(unit, false);
                     
                     unit.ReplaceDestinationPoint(targetPosition);
+                    
                     unit.ReplaceUnitState(EUnitState.Walk);
                 }
                 else
@@ -53,6 +54,7 @@ namespace Ecs.Game.Systems.Units
                     if (destinationPoint == selfPosition) continue;
                     
                     unit.ReplaceDestinationPoint(selfPosition);
+                    
                     unit.ReplaceUnitState(EUnitState.Idle);
                 }
             }

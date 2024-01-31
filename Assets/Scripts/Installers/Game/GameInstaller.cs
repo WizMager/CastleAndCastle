@@ -25,11 +25,13 @@ namespace Installers.Game
         private void DeclareSignals()
         {
             Container.DeclareSignal<GameHudWindow>();
+            Container.DeclareSignal<EndLevelWindow>();
         }
 
         private void BindWindows()
         {
             Container.BindInterfacesAndSelfTo<GameHudWindow>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EndLevelWindow>().AsSingle();
         }
         
         private void BindServices()

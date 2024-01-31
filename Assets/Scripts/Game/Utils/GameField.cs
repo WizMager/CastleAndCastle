@@ -9,9 +9,7 @@ namespace Game.Utils
         [SerializeField] private BuildingSlotView[] buildingSlotViews;
         [SerializeField] private CastleView playerCastle;
         [SerializeField] private CastleView enemyCastle;
-
-        public Vector3 PlayerCastlePosition => playerCastle.transform.position;
-        public Vector3 EnemyCastlePosition => enemyCastle.transform.position;
+        
         public BuildingSlotView[] BuildingSlotViews => buildingSlotViews;
         public Transform StartCameraPosition => startCameraPosition;
         public CastleView PlayerCastle => playerCastle;

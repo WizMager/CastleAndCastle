@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Db.Buildings;
+using Ecs.Commands;
 using Ecs.Core.Interfaces;
 using Ecs.Utils.Groups;
-using Generated.Commands;
 using JCMG.EntitasRedux;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;

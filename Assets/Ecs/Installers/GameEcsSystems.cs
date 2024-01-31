@@ -43,9 +43,9 @@ namespace Ecs.Installers {
 			// Input 0020
 			SystemInstallHelper.Install<InputSystem>(container);	// 0020 Input
 
-			// Common 0100
-			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
+			// Building 0100
 			SystemInstallHelper.Install<BuildingInputSystem>(container);	// 0100 Building
+			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
 			SystemInstallHelper.Install<SpawnUnitSystem>(container);	// 0100 Units
 			SystemInstallHelper.Install<EnterBuildingModeSystem>(container);	// 0100 Building
 
@@ -55,31 +55,30 @@ namespace Ecs.Installers {
 			SystemInstallHelper.Install<AddCoinsSystem>(container);	// 0130 Coins
 			SystemInstallHelper.Install<BuildingModePointerSystem>(container);	// 0130 Building
 
-			// Input 0150
+			// Building 0150
+			SystemInstallHelper.Install<BuildingIncomeTimerSystem>(container);	// 0150 Building
 			SystemInstallHelper.Install<PointerDownSystem>(container);	// 0150 Input
 			SystemInstallHelper.Install<PointerDragSystem>(container);	// 0150 Input
-			SystemInstallHelper.Install<BuildingIncomeTimerSystem>(container);	// 0150 Building
 
 			// Input 0170
 			SystemInstallHelper.Install<PointerUpSystem>(container);	// 0170 Input
 
 			// Units 0300
-			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
 			SystemInstallHelper.Install<DealDamageSystem>(container);	// 0300 Units
+			SystemInstallHelper.Install<SearchTargetSystem>(container);	// 0300 Units
 
 			// Units 0350
 			SystemInstallHelper.Install<MoveToTargetSystem>(container);	// 0350 Units
 
-			// Units 0370
-			SystemInstallHelper.Install<MoveToMainTargetSystem>(container);	// 0370 Units
-
 			// Units 0400
 			SystemInstallHelper.Install<AttackCooldownSystem>(container);	// 0400 Units
+			SystemInstallHelper.Install<DisableInRangeWhenRemoveTargetSystem>(container);	// 0400 Units
 
 			// Building 0490
 			SystemInstallHelper.Install<SpawnCooldownCounterSystem>(container);	// 0490 Building
 			SystemInstallHelper.Install<AttackSystem>(container);	// 0500 Units
 			SystemInstallHelper.Install<SpawnUnitsSystem>(container);	// 0500 Building
+			SystemInstallHelper.Install<MoveToMainTargetSystem>(container);	// 0510 Units
 
 			// Input 1000
 			SystemInstallHelper.Install<MouseDownCleanupSystem>(container);	// 1000 Input

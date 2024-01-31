@@ -6,7 +6,7 @@ using Plugins.Extensions.InstallerGenerator.Enums;
 
 namespace Ecs.Game.Systems.Units
 {
-    [Install(ExecutionType.Game, ExecutionPriority.Normal, 370, nameof(EFeatures.Units))]
+    [Install(ExecutionType.Game, ExecutionPriority.Normal, 510, nameof(EFeatures.Units))]
     public class MoveToMainTargetSystem : IUpdateSystem
     {
         private readonly IGameGroupUtils _gameGroupUtils;
@@ -26,14 +26,14 @@ namespace Ecs.Game.Systems.Units
                 var selfPosition = unit.Position.Value;
                 var target = unit.MainTarget.Value;
 
-                if (!target.HasPosition)
+                if (!target.HasDestinationPoint)
                 {
                     unit.RemoveMainTarget();
                     
                     continue;
                 }
                 
-                var targetPosition = target.Position.Value;
+                var targetPosition = target.DestinationPoint.Value;
                 var attackRange = unit.UnitData.Value.AttackRange;
 
                 var distanceSqr = (targetPosition - selfPosition).sqrMagnitude;
@@ -43,6 +43,7 @@ namespace Ecs.Game.Systems.Units
                     ChangeIsAttackRange(unit, false);
                     
                     unit.ReplaceDestinationPoint(targetPosition);
+                    
                     unit.ReplaceUnitState(EUnitState.Walk);
                 }
                 else

@@ -1,10 +1,12 @@
 ﻿using Db.Coins;
 using Ecs.Commands.Command;
+using Game.Ui.Windows;
 using Game.Utils.Units;
 using JCMG.EntitasRedux.Commands;
 using Plugins.Extensions.InstallerGenerator.Attributes;
 using Plugins.Extensions.InstallerGenerator.Enums;
-using UnityEngine;
+using SimpleUi.Signals;
+using Zenject;
 
 namespace Ecs.Commands.Systems
 {
@@ -13,44 +15,46 @@ namespace Ecs.Commands.Systems
     {
         private readonly GameContext _game;
         private readonly IDropCoinsFromUnitsBase _dropCoinsFromUnitsBase;
+        private readonly SignalBus _signalBus;
         
         public DealDamageSystem(
             ICommandBuffer commandBuffer,
             GameContext game,
-            IDropCoinsFromUnitsBase dropCoinsFromUnitsBase
+            IDropCoinsFromUnitsBase dropCoinsFromUnitsBase,
+            SignalBus signalBus
         ) : base(commandBuffer)
         {
             _game = game;
             _dropCoinsFromUnitsBase = dropCoinsFromUnitsBase;
+            _signalBus = signalBus;
         }
 
         protected override void Execute(ref DealDamageCommand command)
         {
-            var unitEntity = _game.GetEntityWithUid(command.TargetUid);
-
-            if (!unitEntity.HasTarget || !unitEntity.HasMainTarget)
+            var unitEntity = _game.GetEntityWithUid(command.DamageFromUnitWithUid);
+            
+            if (!unitEntity.HasTarget && !unitEntity.HasMainTarget)
             {
                 unitEntity.IsInAttackRange = false;
                 
                 return;
             }
-            Debug.Log($"targ: {unitEntity.HasTarget}");
+            
             if (unitEntity.HasTarget)
             {
                 DealDamageTarget(unitEntity, command.Damage);
+                
+                return;
             }
-            else
-            {
-                DealDamageMainTarget(unitEntity, command.Damage);
-            }
+            
+            DealDamageMainTarget(unitEntity, command.Damage);
         }
 
         private void DealDamageTarget(GameEntity unitEntity, float damage)
         {
-            Debug.Log($"dam targ");
             var targetEntity = unitEntity.Target.Value;
 
-            if (!targetEntity.HasHealth)
+            if (targetEntity.IsDead)
             {
                 unitEntity.RemoveTarget();
                 
@@ -84,6 +88,7 @@ namespace Ecs.Commands.Systems
                 targetEntity.IsDead = true;
                 targetEntity.ReplaceUnitState(EUnitState.Death);
                 unitEntity.RemoveTarget();
+                unitEntity.IsInAttackRange = false;
             }
             else
             {
@@ -93,7 +98,6 @@ namespace Ecs.Commands.Systems
         
         private void DealDamageMainTarget(GameEntity unitEntity, float damage)
         {
-            Debug.Log($"dam cast");
             var targetEntity = unitEntity.MainTarget.Value;
 
             if (!targetEntity.HasHealth)
@@ -108,9 +112,9 @@ namespace Ecs.Commands.Systems
 
             if (health <= 0)
             {
-                var isPlayer = targetEntity.IsPlayerCastle;
+                targetEntity.IsDead = true;
                 
-                //TODO: send command for lose or win after check which castle is it was
+                _signalBus.OpenWindow<EndLevelWindow>();
                 
                 unitEntity.RemoveMainTarget();
             }
