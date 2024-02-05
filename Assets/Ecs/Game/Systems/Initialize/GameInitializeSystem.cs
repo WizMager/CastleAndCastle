@@ -31,7 +31,7 @@ namespace Ecs.Game.Systems.Initialize
             DebugSpawnUnits();
             
             _game.ReplacePlayerCoins(100);
-            _game.ReplaceEnemyCoins(0);
+            _game.ReplaceEnemyCoins(1000);
         }
         
         private void DebugSpawnUnits()

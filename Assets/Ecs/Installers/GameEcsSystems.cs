@@ -48,17 +48,16 @@ namespace Ecs.Installers {
 			SystemInstallHelper.Install<InstantiateSystem>(container);	// 0100 Common
 			SystemInstallHelper.Install<SpawnUnitSystem>(container);	// 0100 Units
 			SystemInstallHelper.Install<EnterBuildingModeSystem>(container);	// 0100 Building
-
-			// Building 0120
+			SystemInstallHelper.Install<EnemyBuildTimeSystem>(container);	// 0110 Building
 			SystemInstallHelper.Install<ExitBuildingModeSystem>(container);	// 0120 Building
 			SystemInstallHelper.Install<BuildBuildingSystem>(container);	// 0130 Building
 			SystemInstallHelper.Install<AddCoinsSystem>(container);	// 0130 Coins
 			SystemInstallHelper.Install<BuildingModePointerSystem>(container);	// 0130 Building
-
-			// Building 0150
+			SystemInstallHelper.Install<CheckEnemyCoinsSystem>(container);	// 0140 Building
 			SystemInstallHelper.Install<BuildingIncomeTimerSystem>(container);	// 0150 Building
 			SystemInstallHelper.Install<PointerDownSystem>(container);	// 0150 Input
 			SystemInstallHelper.Install<PointerDragSystem>(container);	// 0150 Input
+			SystemInstallHelper.Install<BuildEnemyBuildingSystem>(container);	// 0150 Building
 
 			// Input 0170
 			SystemInstallHelper.Install<PointerUpSystem>(container);	// 0170 Input
@@ -76,8 +75,8 @@ namespace Ecs.Installers {
 
 			// Building 0490
 			SystemInstallHelper.Install<SpawnCooldownCounterSystem>(container);	// 0490 Building
-			SystemInstallHelper.Install<AttackSystem>(container);	// 0500 Units
 			SystemInstallHelper.Install<SpawnUnitsSystem>(container);	// 0500 Building
+			SystemInstallHelper.Install<AttackSystem>(container);	// 0500 Units
 			SystemInstallHelper.Install<MoveToMainTargetSystem>(container);	// 0510 Units
 
 			// Input 1000

@@ -51,6 +51,12 @@ namespace Ecs.Commands.Systems.Buildings
             
             if (!buildingSlot.IsBuildingSlot)
                 return;
+            
+            if (!buildingSlot.IsPlayer)
+                return;
+            
+            if (buildingSlot.IsBusy)
+                return;
 
             buildingSlot.IsBusy = true;
 

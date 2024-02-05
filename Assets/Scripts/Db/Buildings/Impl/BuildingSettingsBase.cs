@@ -11,6 +11,9 @@ namespace Db.Buildings.Impl
     {
         [KeyValue(nameof(BuildingSettings.Type))]
         [SerializeField] private BuildingSettings[] settingsArray;
+        [SerializeField] private float enemyBuildCooldown = 5f;
+
+        public float EnemyBuildCooldown => enemyBuildCooldown;
         
         public IReadOnlyCollection<BuildingSettings> GetAll()
         {

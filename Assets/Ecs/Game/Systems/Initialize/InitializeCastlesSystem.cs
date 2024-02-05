@@ -1,4 +1,5 @@
-﻿using Ecs.Game.Extensions;
+﻿using Db.Buildings;
+using Ecs.Game.Extensions;
 using Ecs.Views.Linkable.Impl.Building;
 using Game.Providers.GameFieldProvider;
 using JCMG.EntitasRedux;
@@ -14,16 +15,19 @@ namespace Ecs.Game.Systems.Initialize
         private readonly GameContext _game;
         private readonly DiContainer _diContainer;
         private readonly IGameFieldProvider _gameFieldProvider;
+        private readonly IBuildingSettingsBase _buildingSettingsBase;
 
         public InitializeCastlesSystem(
             GameContext game,
             DiContainer diContainer,
-            IGameFieldProvider gameFieldProvider
+            IGameFieldProvider gameFieldProvider,
+            IBuildingSettingsBase buildingSettingsBase
         )
         {
             _game = game;
             _diContainer = diContainer;
             _gameFieldProvider = gameFieldProvider;
+            _buildingSettingsBase = buildingSettingsBase;
         }
         
         public void Initialize()
@@ -42,6 +46,17 @@ namespace Ecs.Game.Systems.Initialize
             var castleTransform = castleView.transform;
             var castleEntity = _game.CreateCastle(castleTransform.position, castleTransform.rotation, isPlayerCastle);
             castleView.Link(castleEntity);
+
+            if (isPlayerCastle) return;
+            
+            var minimalBuildPrice = int.MaxValue;
+            foreach (var building in _buildingSettingsBase.GetAll())
+            {
+                if (building.Price >= minimalBuildPrice) continue;
+
+                minimalBuildPrice = building.Price;
+            }
+            castleEntity.AddMinimalPrice(minimalBuildPrice);
         }
     }
 }

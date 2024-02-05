@@ -13,5 +13,6 @@ namespace Ecs.Utils.Groups
         IDisposable GetBuildingSlots(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null);
         IDisposable GetSpawnableBuilding(out List<GameEntity> buffer, bool withCooldown, Func<GameEntity, bool> filter = null);
         IDisposable GetBuildingsIncome(out List<GameEntity> buffer, bool isPlayerBuilding, Func<GameEntity, bool> filter = null);
+        IDisposable GetEmptyEnemyBuildingSlots(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null);
     }
 }
