@@ -12,12 +12,14 @@ namespace Ecs.Utils.Groups.Impl
         private readonly IGroup<GameEntity> _unitsGroup;
         private readonly IGroup<GameEntity> _buildingSlotsGroup;
         private readonly IGroup<GameEntity> _buildingsGroup;
+        private readonly IGroup<GameEntity> _enemyBuildingSlot;
 
         public GameGroupUtils(GameContext game)
         {
             _unitsGroup = game.GetGroup(GameMatcher.AllOf(GameMatcher.UnitData, GameMatcher.UnitType));
             _buildingSlotsGroup = game.GetGroup(GameMatcher.AllOf(GameMatcher.BuildingSlot));
             _buildingsGroup = game.GetGroup(GameMatcher.AllOf(GameMatcher.BuildingType));
+            _enemyBuildingSlot = game.GetGroup(GameMatcher.AllOf(GameMatcher.BuildingSlot).NoneOf(GameMatcher.Player));
         }
 
         public IDisposable GetUnits(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null, bool nonDestroyed = true)
@@ -77,6 +79,11 @@ namespace Ecs.Utils.Groups.Impl
                 : e => e.IsBuilding && e.HasIncome && !e.IsPlayer;
             
             return GetEntities(out buffer, _buildingsGroup, baseFilter, filter);
+        }
+        
+        public IDisposable GetEmptyEnemyBuildingSlots(out List<GameEntity> buffer, Func<GameEntity, bool> filter = null)
+        {
+            return GetEntities(out buffer, _enemyBuildingSlot, e => !e.IsBusy, filter);
         }
 
         private IDisposable GetEntities(

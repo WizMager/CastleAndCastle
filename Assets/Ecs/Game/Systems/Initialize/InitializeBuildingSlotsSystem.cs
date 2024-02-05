@@ -1,4 +1,6 @@
+using Ecs.Extensions.UidGenerator;
 using Ecs.Utils.LinkedEntityRepository;
+using Ecs.Views.Linkable.Impl.Building;
 using Game.Providers.GameFieldProvider;
 using JCMG.EntitasRedux;
 using Plugins.Extensions.InstallerGenerator.Attributes;
@@ -26,21 +28,38 @@ namespace Ecs.Game.Systems.Initialize
         
         public void Initialize()
         {
-            var slots = _gameLevelViewProvider.GameField.BuildingSlotViews;
-            
-            for (int i = 0; i < slots.Length; i++)
+            var playerSlots = _gameLevelViewProvider.GameField.PlayerBuildingSlotViews;
+            var enemySlots = _gameLevelViewProvider.GameField.EnemyBuildingSlotViews;
+
+            InitializeSlots(playerSlots, false, true);
+            InitializeSlots(enemySlots, true, false);
+        }
+
+        private void InitializeSlots(BuildingSlotView[] slots, bool isVisible, bool isPlayer)
+        {
+            foreach (var slot in slots)
             {
-                var slot = slots[i];
-                
                 var slotEntity = _game.CreateEntity();
                 slotEntity.IsBuildingSlot = true;
+
+                if (isPlayer)
+                {
+                    slotEntity.IsPlayer = true; 
+                }
+                else
+                {
+                    slotEntity.AddUid(UidGenerator.Next());
+                }
                 
                 slotEntity.AddPosition(slot.transform.position);
                 slotEntity.AddRotation(slot.transform.rotation);
                
                 slot.Link(slotEntity);
 
-                slotEntity.IsVisible = false;
+                if (!isVisible)
+                {
+                    slotEntity.IsVisible = false;
+                }
                 
                 _linkedEntityRepository.Add(slot.transform.GetHashCode(), slotEntity);
             }

@@ -27,7 +27,7 @@ namespace Ecs.Commands
             command.DamageFromUnitWithUid = damageFromUnitWithUid;
             command.Damage = damage;
         }
-        
+
         public static void SpawnUnit(this ICommandBuffer commandBuffer, Vector3 position, Quaternion rotation, EUnitType unitType, Boolean isPlayerUnit)
         {
             ref var command = ref commandBuffer.Create<SpawnUnitCommand>();
@@ -61,6 +61,13 @@ namespace Ecs.Commands
             ref var command = ref commandBuffer.Create<AddCoinsCommand>();
             command.Value = value;
             command.IsPlayer = isPlayer;
+        }
+
+        public static void BuildEnemyBuilding(this ICommandBuffer commandBuffer, Uid buildingSlotUid, EBuildingType buildingType)
+        {
+            ref var command = ref commandBuffer.Create<BuildEnemyBuildingCommand>();
+            command.BuildingSlotUid = buildingSlotUid;
+            command.BuildingType = buildingType;
         }
 
         public static void EnterBuildingMode(this ICommandBuffer commandBuffer, EBuildingType buildingType)

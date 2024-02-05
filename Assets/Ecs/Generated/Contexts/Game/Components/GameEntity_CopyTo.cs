@@ -26,14 +26,6 @@ public partial class GameEntity
 		{
 			IsDestroyed = true;
 		}
-		else if (component is Ecs.Game.Components.PlayerCoinsComponent PlayerCoins)
-		{
-			CopyPlayerCoinsTo(PlayerCoins);
-		}
-		else if (component is Ecs.Game.Components.EnemyCoinsComponent EnemyCoins)
-		{
-			CopyEnemyCoinsTo(EnemyCoins);
-		}
 		else if (component is Ecs.Game.Components.InstantiateComponent Instantiate)
 		{
 			IsInstantiate = true;
@@ -45,6 +37,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.PositionComponent Position)
 		{
 			CopyPositionTo(Position);
+		}
+		else if (component is Ecs.Game.Components.PlayerCoinsComponent PlayerCoins)
+		{
+			CopyPlayerCoinsTo(PlayerCoins);
 		}
 		else if (component is Ecs.Game.Components.DeadComponent Dead)
 		{
@@ -65,6 +61,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.PrefabComponent Prefab)
 		{
 			CopyPrefabTo(Prefab);
+		}
+		else if (component is Ecs.Game.Components.EnemyCoinsComponent EnemyCoins)
+		{
+			CopyEnemyCoinsTo(EnemyCoins);
 		}
 		else if (component is Ecs.Game.Components.RotationComponent Rotation)
 		{
@@ -106,9 +106,9 @@ public partial class GameEntity
 		{
 			IsCamera = true;
 		}
-		else if (component is Ecs.Game.Components.Buildings.PlayerCastleComponent PlayerCastle)
+		else if (component is Ecs.Game.Components.Buildings.MinimalPriceComponent MinimalPrice)
 		{
-			IsPlayerCastle = true;
+			CopyMinimalPriceTo(MinimalPrice);
 		}
 		else if (component is Ecs.Game.Components.Buildings.EnemyCastleComponent EnemyCastle)
 		{
@@ -118,13 +118,13 @@ public partial class GameEntity
 		{
 			CopyBuildingTypeTo(BuildingType);
 		}
+		else if (component is Ecs.Game.Components.Buildings.PlayerCastleComponent PlayerCastle)
+		{
+			IsPlayerCastle = true;
+		}
 		else if (component is Ecs.Game.Components.Buildings.SpawnParametersComponent SpawnParameters)
 		{
 			CopySpawnParametersTo(SpawnParameters);
-		}
-		else if (component is Ecs.Game.Components.Units.MainTargetComponent MainTarget)
-		{
-			CopyMainTargetTo(MainTarget);
 		}
 		else if (component is Ecs.Game.Components.Units.AggroRadiusComponent AggroRadius)
 		{
@@ -133,6 +133,10 @@ public partial class GameEntity
 		else if (component is Ecs.Game.Components.Units.DestinationPointComponent DestinationPoint)
 		{
 			CopyDestinationPointTo(DestinationPoint);
+		}
+		else if (component is Ecs.Game.Components.Units.MainTargetComponent MainTarget)
+		{
+			CopyMainTargetTo(MainTarget);
 		}
 		else if (component is Ecs.Game.Components.Units.UnitTypeComponent UnitType)
 		{
